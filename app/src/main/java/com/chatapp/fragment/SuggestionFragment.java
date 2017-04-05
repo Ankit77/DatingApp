@@ -15,6 +15,7 @@ import com.chatapp.adapter.SuggetionAdapter;
 import com.chatapp.model.SuggetionModel;
 import com.chatapp.swipeview.CardStackView;
 import com.chatapp.swipeview.Direction;
+import com.chatapp.util.WriteLog;
 
 import java.util.ArrayList;
 
@@ -45,15 +46,27 @@ public class SuggestionFragment extends Fragment implements CardStackView.CardSt
 
     private void loadData() {
         list = new ArrayList<>();
-        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, ""));
-        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, ""));
-        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, ""));
-        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, ""));
-        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, ""));
-        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, ""));
-        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, ""));
-        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, ""));
-        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, ""));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+        list.add(new SuggetionModel("Änkit Khatri", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
+
+
         suggetionAdapter = new SuggetionAdapter(getActivity(), list);
         cardStackView.setAdapter(suggetionAdapter);
     }
@@ -65,7 +78,7 @@ public class SuggestionFragment extends Fragment implements CardStackView.CardSt
 
     @Override
     public void onBeginSwipe(int index, Direction direction) {
-
+        WriteLog.E(SuggestionFragment.class.getSimpleName(), direction.name());
     }
 
     @Override
@@ -75,12 +88,11 @@ public class SuggestionFragment extends Fragment implements CardStackView.CardSt
 
     @Override
     public void onSwiping(float positionX) {
-
     }
 
     @Override
     public void onDiscarded(int index, Direction direction) {
-
+        WriteLog.E(SuggestionFragment.class.getSimpleName(), direction.name());
     }
 
     @Override

@@ -2,15 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F5F8"
-    android:padding="@dimen/_10sdp">
+    android:background="#F4F5F8">
 
 
     <com.chatapp.swipeview.CardStackView
         android:id="@+id/activity_main_card_stack_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false" />
+        android:clipChildren="true"
+        android:clipToPadding="true" />
 
 </RelativeLayout>
