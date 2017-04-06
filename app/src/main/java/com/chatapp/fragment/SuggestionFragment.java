@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import com.chatapp.model.SuggetionModel;
 import com.chatapp.swipeview.CardStackView;
 import com.chatapp.swipeview.Direction;
 import com.chatapp.util.WriteLog;
+import com.chatapp.view.HomeActivity;
 
 import java.util.ArrayList;
 
@@ -28,11 +28,13 @@ public class SuggestionFragment extends Fragment implements CardStackView.CardSt
     private CardStackView cardStackView;
     private SuggetionAdapter suggetionAdapter;
     private ArrayList<SuggetionModel> list;
+    private HomeActivity homeActivity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_suggetion, null);
+        homeActivity = (HomeActivity) getActivity();
         cardStackView = (CardStackView) view.findViewById(R.id.activity_main_card_stack_view);
         cardStackView.setCardStackEventListener(this);
         init(view);
@@ -40,6 +42,8 @@ public class SuggestionFragment extends Fragment implements CardStackView.CardSt
     }
 
     private void init(View view) {
+        homeActivity.setUpToolbar("DashBoard", false);
+        homeActivity.setDrawerState(true);
         cardStackView = (CardStackView) view.findViewById(R.id.activity_main_card_stack_view);
         loadData();
     }
