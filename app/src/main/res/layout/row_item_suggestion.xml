@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingBottom="@dimen/_20sdp"
     android:paddingLeft="@dimen/_10sdp"
     android:paddingRight="@dimen/_10sdp"
-    android:paddingBottom="@dimen/_20sdp"
-    android:paddingTop="@dimen/_20sdp">
+    android:paddingTop="@dimen/_40sdp">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        card_view:cardBackgroundColor="@android:color/white"
         card_view:cardCornerRadius="15dp">
 
 
@@ -28,7 +29,7 @@
 
                 android:id="@+id/row_item_suggestion_img_profile"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_270sdp"
+                android:layout_height="@dimen/_250sdp"
 
                 android:scaleType="fitXY"
                 android:src="@drawable/like" />
@@ -57,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/_24sdp"
+                    android:textSize="@dimen/_22sdp"
                     tools:text="Abbey Johnson,27" />
 
                 <com.chatapp.common.CustomTextView
@@ -67,7 +68,7 @@
                     android:layout_marginTop="@dimen/_3sdp"
                     android:fontFamily="sans-serif-condensed"
                     android:textColor="@color/dark_grey"
-                    android:textSize="@dimen/_16sdp"
+                    android:textSize="@dimen/_14sdp"
                     tools:text="Fashion Designer" />
 
                 <RelativeLayout
@@ -75,36 +76,42 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp">
 
-                    <ImageView
-                        android:id="@+id/row_item_suggetion_img_location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_3sdp"
-                        android:src="@drawable/location" />
-
-                    <com.chatapp.common.CustomTextView
-                        android:id="@+id/row_item_suggetion_tv_address"
+                    <LinearLayout
+                        android:id="@+id/row_item_suggetion_ll_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:layout_toRightOf="@+id/row_item_suggetion_img_location"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center|left"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_16sdp"
-                        tools:text="Lives in Boston" />
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/row_item_suggetion_img_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/location" />
+
+                        <com.chatapp.common.CustomTextView
+                            android:id="@+id/row_item_suggetion_tv_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_toRightOf="@+id/row_item_suggetion_img_location"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center|left"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_14sdp"
+                            tools:text="Lives in Boston" />
+                    </LinearLayout>
 
                     <com.chatapp.common.CustomTextView
                         android:id="@+id/row_item_suggetion_tv_distance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/row_item_suggetion_tv_address"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:layout_toRightOf="@+id/row_item_suggetion_img_location"
+                        android:layout_below="@+id/row_item_suggetion_ll_address"
+                        android:layout_marginLeft="@dimen/_12sdp"
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center|left"
                         android:textColor="@color/dark_grey"
-                        android:textSize="@dimen/_14sdp"
+                        android:textSize="@dimen/_13sdp"
                         tools:text="23 Kilometer away" />
                 </RelativeLayout>
             </LinearLayout>
