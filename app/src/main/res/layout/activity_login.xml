@@ -7,7 +7,6 @@
     android:padding="@dimen/_10sdp">
 
     <com.chatapp.common.CustomTextView
-
         style="@style/title_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,6 +52,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <com.chatapp.common.CustomTextView
+        android:id="@+id/activity_login_tv_forgotpassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
@@ -104,13 +104,47 @@
             android:background="@color/dark_grey"></View>
     </RelativeLayout>
 
-    <com.chatapp.common.CustomButton
-        android:id="@+id/activity_login_btn_signup_google"
-        style="@style/pinkbutton"
+    <RelativeLayout
+        android:id="@+id/activity_login_rl_login_facebook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/activity_welcome_tv_login_email"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="@string/labrl_signup_with_google" />
+        android:background="@drawable/drawble_fb_bg_round"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_30sdp"
+            android:src="@drawable/ic_facebook" />
+
+        <com.chatapp.common.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="right"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/lbl_login_with_facebook"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <!--<com.chatapp.common.CustomButton-->
+    <!--android:id="@+id/activity_login_btn_signup_google"-->
+    <!--style="@style/pinkbutton"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="@dimen/_10sdp"-->
+    <!--android:text="@string/labrl_signup_with_google" />-->
 
     <com.chatapp.common.CustomButton
         android:id="@+id/activity_login_btn_signup"

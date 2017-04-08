@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_backgrond"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/layout_margin">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_40sdp">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/fragment_userprofile_img_userphoto"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_110sdp"
+            android:src="@drawable/like"
+            app:civ_border_color="#00000000"
+            app:civ_border_width="2dp" />
+
+        <LinearLayout
+            android:id="@+id/fragment_userprofile_ll_edit"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="bottom|right"
+            android:background="@drawable/ring"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <com.chatapp.common.CustomTextView
+        android:id="@+id/fragment_userprofile_tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_22sdp"
+        android:textStyle="bold"
+        tools:text="Ankit,28" />
+
+    <com.chatapp.common.CustomTextView
+        android:id="@+id/fragment_userprofile_tv_job_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_14sdp"
+        tools:text="Android Developer at Indianic Infotech Limited" />
+
+    <com.chatapp.common.CustomTextView
+        android:id="@+id/fragment_userprofile_tv_edu_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_14sdp"
+        tools:text="Android Developer at Indianic Infotech Limited" />
+
+    <com.chatapp.common.CustomButton
+        android:id="@+id/activity_userprofile_btn_viewmore"
+        style="@style/pinkbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="@string/lbl_viewmore" />
+
+    <com.chatapp.common.CustomButton
+        android:id="@+id/activity_userprofile_btn_setting"
+        style="@style/pinkbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="@string/lbl_settings" />
+</LinearLayout>

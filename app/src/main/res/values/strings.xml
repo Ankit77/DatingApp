@@ -18,4 +18,7 @@
     <string name="hint_email">Email</string>
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>
+    <string name="lbl_login_with_facebook">Login with facebook</string>
+    <string name="lbl_viewmore">View More</string>
+    <string name="lbl_settings">Settings</string>
 </resources>
