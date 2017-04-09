@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 
 import com.chatapp.R;
 import com.chatapp.adapter.ProfileImageAdapter;
+import com.chatapp.model.UserModel;
 import com.chatapp.util.Utils;
 import com.chatapp.webservice.WSGetProfileImage;
+import com.chatapp.webservice.WSGetUserHistory;
 import com.facebook.AccessToken;
 
 import java.util.ArrayList;
@@ -39,8 +41,10 @@ public class ProfileDetailFragment extends Fragment {
     private void init(View view) {
         viewPager = (ViewPager) view.findViewById(R.id.pager);
 //        if (Utils.isNetworkAvailable(getActivity())) {
-            asyncLoadImage = new AsyncLoadImage();
-            asyncLoadImage.execute();
+//        asyncLoadImage = new AsyncLoadImage();
+//        asyncLoadImage.execute();
+
+        new AsyncLoadBasic().execute();
 //        }
     }
 
@@ -70,6 +74,22 @@ public class ProfileDetailFragment extends Fragment {
                     imageList = strings;
                     loadImage();
                 }
+            }
+        }
+    }
+
+    private class AsyncLoadBasic extends AsyncTask<Void, Void, UserModel> {
+        @Override
+        protected UserModel doInBackground(Void... voids) {
+            WSGetUserHistory wsGetUserHistory = new WSGetUserHistory();
+            return wsGetUserHistory.executeWebservice(AccessToken.getCurrentAccessToken().getToken());
+        }
+
+        @Override
+        protected void onPostExecute(UserModel userModel) {
+            super.onPostExecute(userModel);
+            if (!isCancelled()) {
+
             }
         }
     }
