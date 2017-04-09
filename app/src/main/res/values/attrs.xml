@@ -7,5 +7,14 @@
         <attr name="min_adapter_stack" format="integer"/>
         <attr name="max_visible" format="integer"/>
     </declare-styleable>
-
+    <declare-styleable name="ChipView">
+        <attr name="chip_spacing" format="dimension" />
+        <attr name="chip_line_spacing" format="dimension" />
+        <attr name="chip_padding" format="dimension" />
+        <attr name="chip_side_padding" format="dimension" />
+        <attr name="chip_corner_radius" format="dimension" />
+        <attr name="chip_background" format="reference" />
+        <attr name="chip_background_selected" format="reference" />
+        <attr name="chip_background_res" format="reference" />
+    </declare-styleable>
 </resources>

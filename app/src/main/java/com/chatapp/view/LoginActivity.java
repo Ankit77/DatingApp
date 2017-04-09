@@ -1,33 +1,36 @@
 package com.chatapp.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chatapp.DatingApp;
 import com.chatapp.R;
+import com.chatapp.model.InterestModel;
+import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
 import com.chatapp.util.WriteLog;
+import com.chatapp.webservice.WSGetInterest;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
-import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
-import org.json.JSONObject;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -88,34 +91,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onSuccess(LoginResult loginResult) {
                 updateFacebookButtonUI();
-                GraphRequestAsyncTask request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject user, GraphResponse graphResponse) {
-                        Log.d(TAG, user.optString("email"));
-                        Log.d(TAG, user.optString("name"));
-                        Log.d(TAG, user.optString("id"));
-                        new GraphRequest(
-                                AccessToken.getCurrentAccessToken(),
-                                "/" + user.optString("id")+"/likes",
-                                null,
-                                HttpMethod.GET,
-                                new GraphRequest.Callback() {
-                                    public void onCompleted(GraphResponse response) {
-
-                                        WriteLog.E(TAG, response.getRawResponse());
-                                    }
-                                }
-                        ).executeAsync();
-                    }
-                }).executeAsync();
-
-//                SharedPreferences.Editor editor = DatingApp.getsInstance().getSharedPreferences().edit();
-//                editor.putBoolean(PREF.PREF_IS_LOGGED_IN, true);
-//                editor.commit();
-//                Intent intent_home = new Intent(LoginActivity.this, HomeActivity.class);
-//                startActivity(intent_home);
-//                overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
-//                finish();
+//                new GraphRequest(
+//                        AccessToken.getCurrentAccessToken(),
+//                        "...?fields={fieldname_of_type_CoverPhoto}",
+//                        null,
+//                        HttpMethod.GET,
+//                        new GraphRequest.Callback() {
+//                            public void onCompleted(GraphResponse response) {
+//                                WriteLog.E(TAG, response.getRawResponse().toString());
+//            /* handle the result */
+//                            }
+//                        }
+//                ).executeAsync();
+//                new AsyncGetInterest().execute();
+                SharedPreferences.Editor editor = DatingApp.getsInstance().getSharedPreferences().edit();
+                editor.putBoolean(PREF.PREF_IS_LOGGED_IN, true);
+                editor.commit();
+                Intent intent_home = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent_home);
+                overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
+                finish();
 
             }
 
@@ -144,7 +139,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mLoginManager.logOut();
         } else {
             mAccessTokenTracker.startTracking();
-            mLoginManager.logInWithReadPermissions(LoginActivity.this,  Arrays.asList("user_friends", "email", "public_profile"));
+            mLoginManager.logInWithReadPermissions(LoginActivity.this, Utils.getFacebookPermision());
         }
 
     }
@@ -164,6 +159,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         } else if (view == rlFacebook) {
             handleFacebookLogin();
+        }
+    }
+
+    private class AsyncGetInterest extends AsyncTask<String, Void, ArrayList<InterestModel>> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected ArrayList<InterestModel> doInBackground(String... strings) {
+            WSGetInterest wsGetInterest = new WSGetInterest(LoginActivity.this);
+            return wsGetInterest.executeWebservice(AccessToken.getCurrentAccessToken().getToken());
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<InterestModel> interestModels) {
+            super.onPostExecute(interestModels);
+            if (interestModels != null && interestModels.size() > 0) {
+
+            }
         }
     }
 }

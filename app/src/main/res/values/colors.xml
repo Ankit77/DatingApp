@@ -5,4 +5,8 @@
     <color name="colorAccent">#4A90E2</color>
     <color name="dark_grey">#A4A5A5</color>
     <color name="color_backgrond">#F4F5F8</color>
+
+
+    <color name="chip_background">#BDBDBD</color>
+    <color name="chip_background_selected">#9E9E9E</color>
 </resources>

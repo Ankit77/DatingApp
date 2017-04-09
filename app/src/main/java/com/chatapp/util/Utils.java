@@ -43,6 +43,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -829,5 +830,30 @@ public class Utils {
             Log.e("exception", e.toString());
         }
         return null;
+    }
+
+    public static ArrayList<String> getFacebookPermision() {
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("public_profile");
+        arrayList.add("user_friends");
+        arrayList.add("email");
+        arrayList.add("user_about_me");
+        arrayList.add("user_birthday");
+        arrayList.add("user_education_history");
+        arrayList.add("user_events");
+        arrayList.add("user_games_activity");
+        arrayList.add("user_hometown");
+        arrayList.add("user_likes");
+        arrayList.add("user_location");
+        arrayList.add("user_photos");
+        arrayList.add("user_posts");
+        arrayList.add("user_relationships");
+        arrayList.add("user_relationship_details");
+        arrayList.add("user_religion_politics");
+        arrayList.add("user_tagged_places");
+        arrayList.add("user_work_history");
+        arrayList.add("read_custom_friendlists");
+        arrayList.add("pages_show_list");
+        return arrayList;
     }
 }
