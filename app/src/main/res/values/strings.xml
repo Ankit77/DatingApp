@@ -29,4 +29,5 @@
     <string name="lbl_natioanlity">NATIOANLITY</string>
     <string name="lbl_summary">Summary</string>
     <string name="lbl_interest">Interest</string>
+    <string name="alert_permision_need">Permision are needed</string>
 </resources>
