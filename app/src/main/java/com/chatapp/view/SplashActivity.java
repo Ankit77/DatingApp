@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
+import com.chatapp.service.LocationService;
 import com.chatapp.util.PREF;
 import com.chatapp.util.WriteLog;
 import com.google.android.gms.common.ConnectionResult;
@@ -195,6 +196,8 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
     }
 
     private void runSplash() {
+        Intent intent = new Intent(SplashActivity.this, LocationService.class);
+        startService(intent);
         handler.postDelayed(runnable, 3000);
 
     }
