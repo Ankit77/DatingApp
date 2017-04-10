@@ -53,6 +53,7 @@ public abstract class ChipViewAdapter extends Observable {
     private int mChipCornerRadius;
     private int mChipSidePadding;
     private int mChipTextSize;
+    private int mChipTextColor;
     private int mChipRes;
     private int mChipBackgroundColor;
     private int mChipBackgroundColorSelected;
@@ -60,7 +61,7 @@ public abstract class ChipViewAdapter extends Observable {
     private boolean mHasBackground = true;
     private boolean mToleratingDuplicate = false;
     private LayoutInflater mInflater;
-    private List<Chip> mChipList;
+    private List<String> mChipList;
 
     /**
      * Return the Chip layout res id
@@ -116,7 +117,8 @@ public abstract class ChipViewAdapter extends Observable {
         mChipPadding = mContext.getResources().getDimensionPixelSize(R.dimen.chip_padding);
         mChipSidePadding = mContext.getResources().getDimensionPixelSize(R.dimen.chip_side_padding);
         mChipCornerRadius = mContext.getResources().getDimensionPixelSize(R.dimen.chip_corner_radius);
-        mChipBackgroundColor = getColor(R.color.chip_background);
+        mChipBackgroundColor = getBackgroundRes(R.drawable.roundedborder_pinkbutton);
+        mChipTextColor = getColor(R.color.colorPrimary);
         mChipBackgroundColorSelected = getColor(R.color.chip_background_selected);
 
         if (mAttributeSet != null) {
@@ -128,7 +130,8 @@ public abstract class ChipViewAdapter extends Observable {
                 mChipPadding = (int) typedArray.getDimension(R.styleable.ChipView_chip_padding, mChipPadding);
                 mChipSidePadding = (int) typedArray.getDimension(R.styleable.ChipView_chip_side_padding, mChipSidePadding);
                 mChipCornerRadius = (int) typedArray.getDimension(R.styleable.ChipView_chip_corner_radius, mChipCornerRadius);
-                mChipBackgroundColor = typedArray.getColor(R.styleable.ChipView_chip_background, mChipBackgroundColor);
+                mChipBackgroundColor = typedArray.getResourceId(R.styleable.ChipView_chip_background, mChipBackgroundColor);
+                mChipTextColor = typedArray.getColor(R.styleable.ChipView_chip_textcolor, mChipTextColor);
                 mChipBackgroundColorSelected = typedArray.getColor(R.styleable.ChipView_chip_background_selected, mChipBackgroundColorSelected);
                 mChipBackgroundRes = typedArray.getResourceId(R.styleable.ChipView_chip_background_res, 0);
             } finally {
@@ -139,7 +142,7 @@ public abstract class ChipViewAdapter extends Observable {
 
     public View getView(ViewGroup parent, int position) {
         View view = null;
-        Chip chip = getChip(position);
+        String chip = getChip(position);
 
         if (chip != null) {
             int chipLayoutRes = (getLayoutRes(position) != 0 ? getLayoutRes(position) : getChipLayoutRes());
@@ -156,6 +159,7 @@ public abstract class ChipViewAdapter extends Observable {
 
                 TextView text = new TextView(mContext);
                 text.setId(android.R.id.text1);
+
                 ((LinearLayout) view).addView(text);
             } else {
                 view = mInflater.inflate(chipLayoutRes, parent, false);
@@ -168,11 +172,12 @@ public abstract class ChipViewAdapter extends Observable {
                 View content = view.findViewById(android.R.id.content);
 
                 if (text != null) {
-                    text.setText(chip.getText());
+                    text.setText(chip);
                     text.setGravity(Gravity.CENTER);
 
                     if (mChipTextSize > 0)
                         text.setTextSize(TypedValue.COMPLEX_UNIT_SP, mChipTextSize);
+                    text.setTextColor(mChipTextColor);
                 }
 
                 if (mHasBackground) {
@@ -231,7 +236,7 @@ public abstract class ChipViewAdapter extends Observable {
         notifyObservers();
     }
 
-    public Chip getChip(int position) {
+    public String getChip(int position) {
         return (position < count() ? mChipList.get(position) : null);
     }
 
@@ -240,7 +245,7 @@ public abstract class ChipViewAdapter extends Observable {
      *
      * @param chip
      */
-    public void add(Chip chip) {
+    public void add(String chip) {
         if (!mChipList.contains(chip) || mToleratingDuplicate) {
             mChipList.add(chip);
             notifyUpdate();
@@ -252,7 +257,7 @@ public abstract class ChipViewAdapter extends Observable {
      *
      * @param chip
      */
-    public void remove(Chip chip) {
+    public void remove(String chip) {
         mChipList.remove(chip);
         notifyUpdate();
     }
@@ -283,11 +288,11 @@ public abstract class ChipViewAdapter extends Observable {
         init();
     }
 
-    public List<Chip> getChipList() {
+    public List<String> getChipList() {
         return mChipList;
     }
 
-    public void setChipList(List<Chip> chipList) {
+    public void setChipList(List<String> chipList) {
         mChipList = chipList;
         notifyUpdate();
     }
@@ -375,6 +380,14 @@ public abstract class ChipViewAdapter extends Observable {
 
     public void setChipTextSize(int chipTextSize) {
         mChipTextSize = chipTextSize;
+    }
+
+    public int getmChipTextColor() {
+        return mChipTextColor;
+    }
+
+    public void setmChipTextColor(int mChipTextColor) {
+        this.mChipTextColor = mChipTextColor;
     }
 
     /**

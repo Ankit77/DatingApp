@@ -3,8 +3,6 @@ package com.chatapp.webservice;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.chatapp.model.InterestModel;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -25,7 +23,7 @@ public class WSGetInterest {
     private int total;
     private boolean isNextPageAvail = false;
     private String isNextPageUrl = "";
-    ArrayList<InterestModel> interestModelArrayList = new ArrayList<>();
+    ArrayList<String> interestModelArrayList = new ArrayList<>();
 
     public WSGetInterest(Context context) {
         this.context = context;
@@ -39,7 +37,7 @@ public class WSGetInterest {
         return success;
     }
 
-    public ArrayList<InterestModel> executeWebservice(String accessToken) {
+    public ArrayList<String> executeWebservice(String accessToken) {
         final String url = "https://graph.facebook.com/v2.8/me?fields=context&access_token=" + accessToken;
         try {
             return parseJSONResponse(WebService.GET(HttpUrl.parse(url)), true);
@@ -50,7 +48,7 @@ public class WSGetInterest {
     }
 
 
-    public ArrayList<InterestModel> parseJSONResponse(final String response, boolean isFirstTime) {
+    public ArrayList<String> parseJSONResponse(final String response, boolean isFirstTime) {
         try {
             if (isFirstTime) {
                 if (!TextUtils.isEmpty(response)) {
@@ -72,7 +70,7 @@ public class WSGetInterest {
     }
 
 
-    public ArrayList<InterestModel> parseDataResponse(JSONObject jsonObject_data) {
+    public ArrayList<String> parseDataResponse(JSONObject jsonObject_data) {
 
         try {
             JSONObject jsonObject_summery = jsonObject_data.getJSONObject("summary");
@@ -80,13 +78,13 @@ public class WSGetInterest {
 
             JSONArray jsonArray_likes = jsonObject_data.getJSONArray("data");
             if (jsonArray_likes != null && jsonArray_likes.length() > 0) {
-                ArrayList<InterestModel> interestdata = new ArrayList<>();
+                ArrayList<String> interestdata = new ArrayList<>();
                 for (int i = 0; i < jsonArray_likes.length(); i++) {
                     JSONObject jsonObject_index = jsonArray_likes.getJSONObject(i);
-                    InterestModel interestModel = new InterestModel();
-                    interestModel.setId(jsonObject_index.optString("id"));
-                    interestModel.setName(jsonObject_index.optString("name"));
-                    interestdata.add(interestModel);
+//                    InterestModel interestModel = new InterestModel();
+//                    interestModel.setId(jsonObject_index.optString("id"));
+//                    interestModel.setName(jsonObject_index.optString("name"));
+                    interestdata.add(jsonObject_index.optString("name"));
                 }
                 interestModelArrayList.addAll(interestdata);
                 JSONObject jsonObject_page = jsonObject_data.getJSONObject("paging");

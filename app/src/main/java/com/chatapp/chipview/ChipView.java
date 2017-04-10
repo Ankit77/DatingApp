@@ -144,7 +144,7 @@ public class ChipView extends ViewGroup implements Observer {
             int childY = getPaddingTop();
 
             for (int i = 0; i < childCount; i++) {
-                final Chip chip = mAdapter.getChipList().get(i);
+                final String chip = mAdapter.getChipList().get(i);
                 View childView = getChildAt(i);
                 MarginLayoutParams layoutParams = (MarginLayoutParams) childView.getLayoutParams();
 
@@ -244,7 +244,7 @@ public class ChipView extends ViewGroup implements Observer {
      *
      * @param chip
      */
-    public void add(Chip chip) {
+    public void add(String chip) {
         mAdapter.add(chip);
     }
 
@@ -253,7 +253,7 @@ public class ChipView extends ViewGroup implements Observer {
      *
      * @param chip
      */
-    public void remove(Chip chip) {
+    public void remove(String chip) {
         mAdapter.remove(chip);
     }
 
@@ -266,11 +266,11 @@ public class ChipView extends ViewGroup implements Observer {
         return mAdapter.count();
     }
 
-    public List<Chip> getChipList() {
+    public List<String> getChipList() {
         return mAdapter.getChipList();
     }
 
-    public void setChipList(List<Chip> chipList) {
+    public void setChipList(List<String> chipList) {
         mAdapter.setChipList(chipList);
     }
 

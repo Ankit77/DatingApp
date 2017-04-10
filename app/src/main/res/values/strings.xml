@@ -21,4 +21,12 @@
     <string name="lbl_login_with_facebook">Login with facebook</string>
     <string name="lbl_viewmore">View More</string>
     <string name="lbl_settings">Settings</string>
+    <string name="lbl_about_me">About Me</string>
+    <string name="lbl_relationship">RELATIONSHIP</string>
+    <string name="lbl_faith">FAITH</string>
+    <string name="lbl_weight">WEIGHT</string>
+    <string name="lbl_height">HEIGHT</string>
+    <string name="lbl_natioanlity">NATIOANLITY</string>
+    <string name="lbl_summary">Summary</string>
+    <string name="lbl_interest">Interest</string>
 </resources>

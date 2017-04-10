@@ -2,7 +2,6 @@ package com.chatapp.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,24 +13,16 @@ import android.widget.TextView;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
-import com.chatapp.model.InterestModel;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
 import com.chatapp.util.WriteLog;
-import com.chatapp.webservice.WSGetInterest;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by ANKIT on 4/1/2017.
@@ -106,6 +97,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                new AsyncGetInterest().execute();
                 SharedPreferences.Editor editor = DatingApp.getsInstance().getSharedPreferences().edit();
                 editor.putBoolean(PREF.PREF_IS_LOGGED_IN, true);
+                editor.putBoolean(PREF.PREF_FB_LOGIN, true);
+                editor.putString(PREF.PREF_FB_TOKEN, AccessToken.getCurrentAccessToken().getToken());
                 editor.commit();
                 Intent intent_home = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent_home);
@@ -162,26 +155,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private class AsyncGetInterest extends AsyncTask<String, Void, ArrayList<InterestModel>> {
 
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected ArrayList<InterestModel> doInBackground(String... strings) {
-            WSGetInterest wsGetInterest = new WSGetInterest(LoginActivity.this);
-            return wsGetInterest.executeWebservice(AccessToken.getCurrentAccessToken().getToken());
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<InterestModel> interestModels) {
-            super.onPostExecute(interestModels);
-            if (interestModels != null && interestModels.size() > 0) {
-
-            }
-        }
-    }
 }
