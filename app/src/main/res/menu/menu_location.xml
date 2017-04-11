@@ -5,6 +5,6 @@
         android:id="@+id/menu_done"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom"
-        android:icon="@drawable/ic_check"
+        android:icon="@drawable/ic_edit"
         android:title="Done" />
 </menu>

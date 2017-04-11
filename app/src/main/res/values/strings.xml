@@ -36,4 +36,6 @@
     <string name="lbl_other_location">Other Location</string>
     <string name="page_setting">Setting</string>
     <string name="page_select_location">Select Location</string>
+    <string name="lbl_logout">Logout</string>
+    <string name="lbl_delete_account">Delete Account</string>
 </resources>
