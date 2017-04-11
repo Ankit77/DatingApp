@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/layout_margin">
+
+    <com.chatapp.common.CustomTextView
+        style="@style/bold_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Suggestion in" />
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        card_view:cardBackgroundColor="@android:color/white"
+        android:layout_marginTop="@dimen/_5sdp"
+        card_view:cardCornerRadius="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10sdp">
+
+                <ImageView
+                    android:id="@+id/fragment_setting_img_locationlbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_room" />
+
+                <com.chatapp.common.CustomTextView
+                    android:id="@+id/fragment_setting_tv_locationlbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/fragment_setting_img_locationlbl"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/lbl_my_current_location"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_18sdp" />
+
+                <CheckBox
+                    android:id="@+id/fragment_setting_chk_currentlocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:checked="true" />
+            </RelativeLayout>
+
+            <com.chatapp.common.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_toRightOf="@+id/fragment_setting_img_locationlbl"
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/lbl_or"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_18sdp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10sdp">
+
+                <ImageView
+                    android:id="@+id/fragment_setting_img_otherlocationlbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_room" />
+
+                <com.chatapp.common.CustomTextView
+                    android:id="@+id/fragment_setting_tv_otherlocationlbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/fragment_setting_img_otherlocationlbl"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/lbl_other_location"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_18sdp" />
+
+                <CheckBox
+                    android:id="@+id/fragment_setting_chk_otherlocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:checked="true" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_setting_ll_otherlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_30sdp">
+
+                <com.chatapp.common.CustomTextView
+                    android:id="@+id/fragment_setting_tv_otherlocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/fragment_setting_img_otherlocationlbl"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_16sdp"
+                    tools:text="Ahmedabad" />
+
+                <ImageView
+                    android:id="@+id/fragment_setting_img_editlocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_edit_location" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

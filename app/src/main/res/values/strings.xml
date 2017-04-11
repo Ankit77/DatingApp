@@ -30,4 +30,8 @@
     <string name="lbl_summary">Summary</string>
     <string name="lbl_interest">Interest</string>
     <string name="alert_permision_need">Permision are needed</string>
+    <string name="lbl_location">Location</string>
+    <string name="lbl_my_current_location">My Current Location</string>
+    <string name="lbl_or">OR</string>
+    <string name="lbl_other_location">Other Location</string>
 </resources>

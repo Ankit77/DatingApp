@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.chatapp"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -47,4 +47,6 @@ dependencies {
     compile 'com.github.nirhart:parallaxscroll:1.0'
     compile 'me.relex:circleindicator:1.2.2@aar'
     compile 'com.google.android.gms:play-services-location:10.2.0'
+    compile 'com.google.android.gms:play-services-maps:10.2.0'
+    compile 'com.google.android.gms:play-services-places:10.2.0'
 }

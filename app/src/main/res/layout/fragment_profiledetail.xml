@@ -112,12 +112,10 @@
                     android:gravity="center">
 
                     <com.chatapp.common.CustomTextView
+                        style="@style/bold_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/lbl_about_me"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_18sdp" />
+                        android:text="@string/lbl_about_me" />
 
                     <View
                         android:layout_width="match_parent"
@@ -271,12 +269,10 @@
                     android:gravity="center">
 
                     <com.chatapp.common.CustomTextView
+                        style="@style/bold_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/lbl_summary"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_18sdp" />
+                        android:text="@string/lbl_summary" />
 
                     <View
                         android:layout_width="match_parent"
@@ -304,12 +300,10 @@
                     android:gravity="center">
 
                     <com.chatapp.common.CustomTextView
+                        style="@style/bold_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/lbl_interest"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_18sdp" />
+                        android:text="@string/lbl_interest" />
 
                     <View
                         android:layout_width="match_parent"
@@ -359,6 +353,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/_15sdp"
-        app:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/ic_edit" />
+        android:src="@drawable/ic_edit"
+        app:backgroundTint="@color/colorPrimary" />
 </FrameLayout>

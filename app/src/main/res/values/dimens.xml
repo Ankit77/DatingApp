@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="layout_margin">@dimen/_5sdp</dimen>
+    <dimen name="layout_margin">@dimen/_10sdp</dimen>
     <dimen name="chip_padding">2dp</dimen>
     <dimen name="chip_side_padding">6dp</dimen>
     <dimen name="chip_spacing">4dp</dimen>

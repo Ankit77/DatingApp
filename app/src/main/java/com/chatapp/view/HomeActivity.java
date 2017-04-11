@@ -11,8 +11,7 @@ import android.view.Menu;
 import android.view.View;
 
 import com.chatapp.R;
-import com.chatapp.fragment.ProfileDetailFragment;
-import com.chatapp.fragment.SuggestionFragment;
+import com.chatapp.fragment.SettingFragment;
 
 /**
  * Created by ANKIT on 3/31/2017.
@@ -29,8 +28,8 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         drawerLayout = (DrawerLayout) findViewById(R.id.activity_home_drawer_layout);
         initToolbar();
-        ProfileDetailFragment profileDetailFragment = new ProfileDetailFragment();
-        getFragmentManager().beginTransaction().add(R.id.activity_home_container, profileDetailFragment, SuggestionFragment.class.getSimpleName()).commit();
+        SettingFragment profileDetailFragment = new SettingFragment();
+        getFragmentManager().beginTransaction().add(R.id.activity_home_container, profileDetailFragment, SettingFragment.class.getSimpleName()).commit();
     }
 
     @Override
