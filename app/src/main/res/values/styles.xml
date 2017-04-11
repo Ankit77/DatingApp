@@ -31,6 +31,7 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/_14sdp</item>
     </style>
+
     <style name="greybutton">
         <item name="android:background">@drawable/roundedcorner_greybutton</item>
         <item name="android:fontFamily">sans-serif-light</item>
@@ -39,6 +40,7 @@
         <item name="android:textColor">@color/dark_grey</item>
         <item name="android:textSize">@dimen/_14sdp</item>
     </style>
+
     <style name="bluebutton">
         <item name="android:background">@drawable/roundedbutton</item>
         <item name="android:fontFamily">sans-serif-light</item>
@@ -53,9 +55,20 @@
         <item name="min_adapter_stack">6</item>
         <item name="max_visible">4</item>
     </style>
+
     <style name="bold_label">
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">@dimen/_18sdp</item>
+    </style>
+
+    <style name="TextStyle.Toolbar" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/_18sdp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+
     </style>
 </resources>

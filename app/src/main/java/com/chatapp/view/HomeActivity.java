@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.fragment.SettingFragment;
@@ -35,6 +36,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     public void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.activity_home_toolbar);
+        toolbarTitle = (TextView) toolbar.findViewById(R.id.tv_toolbar_title);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         if (actionBar != null) {

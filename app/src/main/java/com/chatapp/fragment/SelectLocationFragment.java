@@ -82,8 +82,8 @@ public class SelectLocationFragment extends Fragment implements OnMapReadyCallba
     }
 
     private void init(View view) {
-        homeActivity.setUpToolbar("Select Location", true);
-        homeActivity.setDrawerState(true);
+        homeActivity.setUpToolbar(getString(R.string.page_select_location), true);
+        homeActivity.setDrawerState(false);
         tvSearch = (TextView) view.findViewById(R.id.fragment_selectlocation_tvlocation);
         tvSearch.setOnClickListener(new View.OnClickListener() {
             @Override
