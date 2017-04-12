@@ -2,10 +2,10 @@
 <resources>
 
     <declare-styleable name="SwipeFlingAdapterView">
-        <attr name="SwipeFlingStyle" format="reference"/>
-        <attr name="rotation_degrees" format="float"/>
-        <attr name="min_adapter_stack" format="integer"/>
-        <attr name="max_visible" format="integer"/>
+        <attr name="SwipeFlingStyle" format="reference" />
+        <attr name="rotation_degrees" format="float" />
+        <attr name="min_adapter_stack" format="integer" />
+        <attr name="max_visible" format="integer" />
     </declare-styleable>
     <declare-styleable name="ChipView">
         <attr name="chip_spacing" format="dimension" />
@@ -33,5 +33,20 @@
         <attr name="contentView" format="reference" />
         <attr name="zoomView" format="reference" />
         <attr name="isHeaderParallax" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="Pulsator4Droid">
+        <attr name="pulse_count" format="integer" />
+        <attr name="pulse_duration" format="integer" />
+        <attr name="pulse_color" format="color" />
+        <attr name="pulse_repeat" format="integer" />
+        <attr name="pulse_maxScale" format="float" />
+        <attr name="pulse_startFromScratch" format="boolean" />
+        <attr name="pulse_interpolator" format="enum">
+            <enum name="Linear" value="0" />
+            <enum name="Accelerate" value="1" />
+            <enum name="Decelerate" value="2" />
+            <enum name="AccelerateDecelerate" value="3" />
+        </attr>
     </declare-styleable>
 </resources>

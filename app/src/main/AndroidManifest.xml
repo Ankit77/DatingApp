@@ -27,6 +27,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".view.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity
+            android:name=".view.NearbyScanActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,10 +46,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.LoginActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
-        <activity
             android:name=".view.HomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
         </activity>
@@ -61,8 +70,8 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
         <!--<meta-data-->
-            <!--android:name="com.google.android.maps.v2.API_KEY"-->
-            <!--android:value="AIzaSyBa5rsloNKEf-GFFW8mFVZ3pWV52B4Xd9Q" />-->
+        <!--android:name="com.google.android.maps.v2.API_KEY"-->
+        <!--android:value="AIzaSyBa5rsloNKEf-GFFW8mFVZ3pWV52B4Xd9Q" />-->
         <!--<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCAt7HFStojOhF3ragHvj0Sp5oYvJMqKbk"/>-->
 
         <meta-data
