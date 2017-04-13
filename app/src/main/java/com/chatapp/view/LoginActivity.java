@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
+import com.chatapp.tutorial.activity.TutorialActivity;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
 import com.chatapp.util.WriteLog;
@@ -100,11 +101,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 editor.putBoolean(PREF.PREF_FB_LOGIN, true);
                 editor.putString(PREF.PREF_FB_TOKEN, AccessToken.getCurrentAccessToken().getToken());
                 editor.commit();
-                Intent intent_home = new Intent(LoginActivity.this, NearbyScanActivity.class);
-                startActivity(intent_home);
-                overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
-                finish();
+                Intent intent = null;
+                if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_SHOW_TUTORIAL, true)) {
+                    intent = new Intent(LoginActivity.this, TutorialActivity.class);
 
+                } else {
+                    intent = new Intent(LoginActivity.this, HomeActivity.class);
+
+                }
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
             }
 
             @Override

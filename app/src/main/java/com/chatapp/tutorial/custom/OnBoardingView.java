@@ -152,11 +152,11 @@ public class OnBoardingView extends RelativeLayout implements View.OnClickListen
         if (view.getId() == R.id.btn_skip) {
             if (tvSkip.getText().equals(getContext().getString(R.string.got_it))) {
 
-
                 if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_SHOW_TUTORIAL, true)) {
                     appCompatActivity.startActivity(new Intent(getContext(), HomeActivity.class));
                     appCompatActivity.finish();
                     appCompatActivity.overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
+                    DatingApp.getsInstance().getSharedPreferences().edit().putBoolean(PREF.PREF_SHOW_TUTORIAL, false).commit();
 
                 } else {
                     appCompatActivity.overridePendingTransition(R.anim.anim_left_in, R.anim.anim_right_out);
@@ -166,9 +166,11 @@ public class OnBoardingView extends RelativeLayout implements View.OnClickListen
                 viewPager.setCurrentItem(getItem(+1), true);
             }
         } else if (view.getId() == R.id.btn_previous) {
-            appCompatActivity.finish();
             if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_SHOW_TUTORIAL, true)) {
+                appCompatActivity.startActivity(new Intent(getContext(), HomeActivity.class));
+                appCompatActivity.finish();
                 appCompatActivity.overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
+                DatingApp.getsInstance().getSharedPreferences().edit().putBoolean(PREF.PREF_SHOW_TUTORIAL, false).commit();
             } else {
                 appCompatActivity.overridePendingTransition(R.anim.anim_left_in, R.anim.anim_right_out);
                 appCompatActivity.finish();
