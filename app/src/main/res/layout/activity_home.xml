@@ -1,51 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_home_drawer_layout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    android:background="@color/color_backgrond"
+    android:orientation="vertical">
 
-    <android.support.design.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/_5sdp">
 
-        <LinearLayout
-            android:id="@+id/activity_main_content"
+        <ImageView
+            android:id="@+id/activity_home_img_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="left|center_vertical"
+            android:src="@drawable/ic_menu" />
+
+        <com.chatapp.common.CustomTextView
+            android:id="@+id/activity_home_tv_title"
+            style="@style/TextStyle.Toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/activity_home_img_chat"
+            android:layout_toRightOf="@+id/activity_home_img_menu"
+            android:text="Matches" />
 
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark">
+        <ImageView
+            android:id="@+id/activity_home_img_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/group" />
+    </RelativeLayout>
 
-
-                <include
-                    android:id="@+id/activity_home_toolbar"
-                    layout="@layout/toolbar" />
-
-            </android.support.design.widget.AppBarLayout>
-
-
-            <FrameLayout
-                android:id="@+id/activity_home_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-
-    </android.support.design.widget.CoordinatorLayout>
-
-    <FrameLayout
-        android:layout_width="@dimen/_100sdp"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/activity_home_container"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/colorPrimary"></FrameLayout>
+        android:background="@android:color/transparent"
+        android:orientation="vertical" />
 
-
-</android.support.v4.widget.DrawerLayout>
+</LinearLayout>

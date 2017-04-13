@@ -31,8 +31,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init(View view) {
-        homeActivity.setUpToolbar(getString(R.string.page_setting), false);
-        homeActivity.setDrawerState(true);
+        homeActivity.setActionBarTitle("Settings");
+        homeActivity.isBackEnable(true);
         llOtherLocation = (LinearLayout) view.findViewById(R.id.fragment_setting_ll_otherlocation);
         llOtherLocation.setOnClickListener(this);
     }
@@ -48,9 +48,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!isHidden()) {
-            homeActivity.setUpToolbar(getString(R.string.page_setting), false);
-            homeActivity.setDrawerState(true);
-        }
+
     }
 }

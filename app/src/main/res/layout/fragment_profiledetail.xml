@@ -49,7 +49,7 @@
                     android:fontFamily="sans-serif-light"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/_22sdp"
-                    tools:text="Abbey Johnson,27" />
+                    android:text="Abbey Johnson,27" />
 
                 <com.chatapp.common.CustomTextView
                     android:id="@+id/fragment_profiledetail_tv_profession"
@@ -59,7 +59,7 @@
                     android:fontFamily="sans-serif-condensed"
                     android:textColor="@color/dark_grey"
                     android:textSize="@dimen/_14sdp"
-                    tools:text="Fashion Designer" />
+                    android:text="Fashion Designer" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                             android:gravity="center|left"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/_14sdp"
-                            tools:text="Lives in Boston" />
+                            android:text="Lives in Boston" />
                     </LinearLayout>
 
                     <com.chatapp.common.CustomTextView
@@ -102,7 +102,7 @@
                         android:gravity="center|left"
                         android:textColor="@color/dark_grey"
                         android:textSize="@dimen/_13sdp"
-                        tools:text="23 Kilometer away" />
+                        android:text="23 Kilometer away" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -154,7 +154,7 @@
                             android:fontFamily="sans-serif-light"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/_12sdp"
-                            tools:text="Single" />
+                            android:text="Single" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -180,7 +180,7 @@
                             android:fontFamily="sans-serif-light"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/_12sdp"
-                            tools:text="Indian" />
+                            android:text="Indian" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -206,7 +206,7 @@
                             android:fontFamily="sans-serif-light"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/_12sdp"
-                            tools:text="Indian" />
+                            android:text="Indian" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -232,7 +232,7 @@
                             android:fontFamily="sans-serif-light"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/_12sdp"
-                            tools:text="Indian" />
+                            android:text="Indian" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -258,7 +258,7 @@
                             android:fontFamily="sans-serif-light"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/_12sdp"
-                            tools:text="Indian" />
+                            android:text="Indian" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -291,7 +291,7 @@
                     android:fontFamily="sans-serif-light"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_12sdp"
-                    tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum" />
+                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

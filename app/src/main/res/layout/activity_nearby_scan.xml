@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/framlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.chatapp.common.PulsatorLayout
-        android:id="@+id/pulsator"
+    <com.skyfishjy.library.RippleBackground
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:pulse_color="@color/colorAccent"
-        app:pulse_count="6"
-        app:pulse_duration="4000"
-        app:pulse_interpolator="Linear"
-        app:pulse_repeat="0"
-        app:pulse_startFromScratch="false"></com.chatapp.common.PulsatorLayout>
-
-    <ImageView
-        android:id="@+id/img_heart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_heart" />
+        android:id="@+id/content"
+        app:rb_color="#0099CC"
+        app:rb_radius="50dp"
+        app:rb_rippleAmount="4"
+        app:rb_duration="3000"
+        app:rb_scale="6">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/centerImage"
+            android:src="@mipmap/ic_launcher_round"/>
+    </com.skyfishjy.library.RippleBackground>
 </FrameLayout>

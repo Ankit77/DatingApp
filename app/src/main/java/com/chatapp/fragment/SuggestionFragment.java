@@ -14,6 +14,7 @@ import com.chatapp.adapter.SuggetionAdapter;
 import com.chatapp.model.SuggetionModel;
 import com.chatapp.swipeview.CardStackView;
 import com.chatapp.swipeview.Direction;
+import com.chatapp.util.Utils;
 import com.chatapp.util.WriteLog;
 import com.chatapp.view.HomeActivity;
 
@@ -42,10 +43,10 @@ public class SuggestionFragment extends Fragment implements CardStackView.CardSt
     }
 
     private void init(View view) {
-        homeActivity.setUpToolbar("DashBoard", false);
-        homeActivity.setDrawerState(true);
         cardStackView = (CardStackView) view.findViewById(R.id.activity_main_card_stack_view);
         loadData();
+        homeActivity.setActionBarTitle("Matches");
+        homeActivity.isBackEnable(false);
     }
 
     private void loadData() {
@@ -101,6 +102,16 @@ public class SuggestionFragment extends Fragment implements CardStackView.CardSt
 
     @Override
     public void onTapUp(int index) {
+        ProfileDetailFragment profileDetailFragment = new ProfileDetailFragment();
+        Utils.addNextFragment(R.id.activity_home_container, homeActivity, profileDetailFragment, SuggestionFragment.this, false);
+    }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            homeActivity.setActionBarTitle("Matches");
+            homeActivity.isBackEnable(false);
+        }
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/activity_tutorial_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--android:theme="?attr/actionBarTheme">-->
+
+        <!--<com.chatapp.common.CustomTextView-->
+            <!--android:id="@+id/activity_home_tv_title"-->
+            <!--style="@style/TextStyle.Toolbar"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Matches" />-->
+    <!--</android.support.v7.widget.Toolbar>-->
+
+    <com.chatapp.tutorial.custom.OnBoardingView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        custom:colorChangeRequired="false"
+
+        custom:colorsForOnboarding="@array/colorsForOnboarding"
+
+        custom:imagesForOnboarding="@array/imagesForOnboarding"
+
+        custom:messagesForOnboarding="@array/messagesForOnboarding"
+
+        custom:pageTransformer="temp"
+
+        custom:showPreNextView="true"
+
+        custom:titlesForOnboarding="@array/titlesForOnboarding" />
+</LinearLayout>

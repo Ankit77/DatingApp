@@ -9,4 +9,13 @@
 
     <color name="chip_background">#BDBDBD</color>
     <color name="chip_background_selected">#9E9E9E</color>
+
+    <color name="color1">#4CAF50</color>
+    <color name="color2">#F44336</color>
+    <color name="color3">#3F51B5</color>
+    <color name="color4">@android:color/holo_orange_light</color>
+    <color name="color5">@android:color/holo_blue_bright</color>
+    <color name="color6">@android:color/holo_purple</color>
+    <color name="colorGray">#F0F0F0</color>
+    <color name="colorRed">#E83E44</color>
 </resources>

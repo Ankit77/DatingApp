@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 repositories {
     mavenCentral()
@@ -51,4 +52,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-places:10.0.1'
     compile 'com.crystal:crystalrangeseekbar:1.1.1'
     compile files('libs/nineoldandroids-library-2.4.0.jar')
+    compile 'com.skyfishjy.ripplebackground:library:1.0.1'
 }

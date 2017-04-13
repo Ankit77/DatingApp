@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 editor.putBoolean(PREF.PREF_FB_LOGIN, true);
                 editor.putString(PREF.PREF_FB_TOKEN, AccessToken.getCurrentAccessToken().getToken());
                 editor.commit();
-                Intent intent_home = new Intent(LoginActivity.this, HomeActivity.class);
+                Intent intent_home = new Intent(LoginActivity.this, NearbyScanActivity.class);
                 startActivity(intent_home);
                 overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
                 finish();

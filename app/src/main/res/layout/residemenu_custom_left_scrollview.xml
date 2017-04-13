@@ -4,21 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/residemenu_custom_left_scrollview_img_userphoto"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:src="@drawable/like"
+            app:civ_border_color="#00000000" />
+
+
+        <com.chatapp.common.CustomTextView
+            android:id="@+id/residemenu_custom_left_scrollview_tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Ankit,28"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_18sdp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <ScrollView
 
         android:id="@+id/sv_left_menu"
-        android:layout_width="250dp"
+        android:layout_width="@dimen/_200sdp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/layout_left_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+        </LinearLayout>
     </ScrollView>
 
     <LinearLayout
@@ -26,52 +57,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_rectangle_transperent"
-        android:gravity="center"
         android:alpha="0.7"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:paddingBottom="@dimen/_15sdp"
         android:paddingLeft="@dimen/_15sdp"
         android:paddingRight="@dimen/_15sdp"
-        android:paddingTop="@dimen/_15sdp"
-        android:paddingBottom="@dimen/_15sdp">
+        android:paddingTop="@dimen/_15sdp">
 
-        <ImageView
+        <com.chatapp.common.CustomTextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:src="@drawable/ic_questionmark" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="str_about_us"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/lbl_logout"
             android:textColor="@android:color/white"
-            android:textStyle="bold"
-             />
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15sdp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:src="@drawable/ic_forward_arrow" />
-        </RelativeLayout>
     </LinearLayout>
 
-    <ImageView
 
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/sv_left_menu"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/ic_menu_logo" />
 </RelativeLayout>

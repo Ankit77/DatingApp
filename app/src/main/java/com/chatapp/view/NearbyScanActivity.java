@@ -1,15 +1,17 @@
 package com.chatapp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.animation.Animation;
-import android.view.animation.Interpolator;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
+import com.chatapp.DatingApp;
 import com.chatapp.R;
-import com.chatapp.common.PulsatorLayout;
+import com.chatapp.tutorial.activity.TutorialActivity;
+import com.chatapp.util.PREF;
+import com.skyfishjy.library.RippleBackground;
 
 
 public class NearbyScanActivity extends AppCompatActivity {
@@ -18,26 +20,36 @@ public class NearbyScanActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_scan);
-        PulsatorLayout pulsator = (PulsatorLayout) findViewById(R.id.pulsator);
-        pulsator.start();
-        ImageView imageView = (ImageView) findViewById(R.id.img_heart);
-        customInterpolator i = new customInterpolator();
-        //Create an Scale Animation(fromX,toX,fromY,toY,pivotX,pivotY)
-        ScaleAnimation anim = new ScaleAnimation(1, 1.2f, 1, 1.2f, imageView.getWidth() / 2, imageView.getHeight() / 2);
-        anim.setRepeatCount(Animation.INFINITE);
-        anim.setDuration(750);
-        anim.setInterpolator(i);
-        //Attach our Custom Scale Animation to the imageview
-        imageView.startAnimation(anim);
+        final RippleBackground rippleBackground = (RippleBackground) findViewById(R.id.content);
+        ImageView imageView = (ImageView) findViewById(R.id.centerImage);
+        rippleBackground.startRippleAnimation();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        rippleBackground.stopRippleAnimation();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = null;
+                                if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_SHOW_TUTORIAL, true)) {
+                                    intent = new Intent(NearbyScanActivity.this, TutorialActivity.class);
+                                } else {
+                                    intent = new Intent(NearbyScanActivity.this, HomeActivity.class);
+                                    DatingApp.getsInstance().getSharedPreferences().edit().putBoolean(PREF.PREF_SHOW_TUTORIAL, true).commit();
+                                }
+                                startActivity(intent);
+                                finish();
+                                overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
+                            }
+                        }, 1000);
 
-    }
+                    }
+                }, 5000);
+            }
+        }, 2000);
 
-    public class customInterpolator implements Interpolator {
-
-        @Override
-        public float getInterpolation(float v) {
-            float x = v < 1 / 3f ? 2 * v : (1 + v) / 2;
-            return (float) Math.sin(x * Math.PI);
-        }
     }
 }

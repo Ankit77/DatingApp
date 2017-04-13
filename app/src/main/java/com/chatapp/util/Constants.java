@@ -19,5 +19,9 @@ public class Constants {
     public static final int FONT_LARGE = 3;
 
 
+    public static final String TAG_BACK = "BACK";
+    public static final String TAG_MENU = "MENU";
+
+
 }
 

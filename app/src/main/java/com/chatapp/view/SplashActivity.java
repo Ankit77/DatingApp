@@ -215,7 +215,7 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
         public void run() {
             Intent intent = null;
             if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_IS_LOGGED_IN, false)) {
-                intent = new Intent(SplashActivity.this, HomeActivity.class);
+                intent = new Intent(SplashActivity.this, NearbyScanActivity.class);
             } else {
                 intent = new Intent(SplashActivity.this, LoginActivity.class);
             }

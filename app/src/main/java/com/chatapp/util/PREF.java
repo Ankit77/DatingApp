@@ -8,6 +8,7 @@ public class PREF {
     public static final String PREF_FB_LOGIN = "PREF_FB_LOGIN";
     public static final String PREF_FB_TOKEN = "PREF_FB_TOKEN";
     public static final String PREF_PLACE_NAME = "PREF_PLACE_NAME";
+    public static final String PREF_SHOW_TUTORIAL = "PREF_SHOW_TUTORIAL";
 
 
 }

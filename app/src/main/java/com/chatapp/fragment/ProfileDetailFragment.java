@@ -17,6 +17,7 @@ import com.chatapp.chipview.ChipView;
 import com.chatapp.model.UserModel;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
+import com.chatapp.view.HomeActivity;
 import com.chatapp.webservice.WSGetInterest;
 import com.chatapp.webservice.WSGetProfileImage;
 import com.chatapp.webservice.WSGetUserHistory;
@@ -42,17 +43,21 @@ public class ProfileDetailFragment extends Fragment {
     private AsyncLoadBasic asyncLoadBasic;
     private AsyncGetInterest asyncGetInterest;
     private UserModel mUserModel;
+    private HomeActivity homeActivity;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profiledetail, null);
+        homeActivity = (HomeActivity) getActivity();
         init(view);
         return view;
     }
 
     private void init(View view) {
+        homeActivity.setActionBarTitle("Profile");
+        homeActivity.isBackEnable(true);
         viewPager = (ViewPager) view.findViewById(R.id.fragment_profiledetail_pager);
         indicator = (CircleIndicator) view.findViewById(R.id.fragment_profiledetail_indicator);
         mTextChipDefault = (ChipView) view.findViewById(R.id.fragment_profiledetail_chipview_interest);
@@ -80,7 +85,7 @@ public class ProfileDetailFragment extends Fragment {
         @Override
         protected ArrayList<String> doInBackground(Void... voids) {
             WSGetProfileImage wsGetProfileImage = new WSGetProfileImage();
-            return wsGetProfileImage.executeWebservice(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_TOKEN,""));
+            return wsGetProfileImage.executeWebservice(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_TOKEN, ""));
         }
 
         @Override
@@ -103,7 +108,7 @@ public class ProfileDetailFragment extends Fragment {
         @Override
         protected UserModel doInBackground(Void... voids) {
             WSGetUserHistory wsGetUserHistory = new WSGetUserHistory();
-            return wsGetUserHistory.executeWebservice(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_TOKEN,""));
+            return wsGetUserHistory.executeWebservice(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_TOKEN, ""));
         }
 
         @Override
@@ -130,7 +135,7 @@ public class ProfileDetailFragment extends Fragment {
         @Override
         protected ArrayList<String> doInBackground(String... strings) {
             WSGetInterest wsGetInterest = new WSGetInterest(getActivity());
-            return wsGetInterest.executeWebservice(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_TOKEN,""));
+            return wsGetInterest.executeWebservice(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_TOKEN, ""));
         }
 
         @Override
@@ -145,5 +150,6 @@ public class ProfileDetailFragment extends Fragment {
             }
         }
     }
+
 
 }

@@ -4,7 +4,6 @@ package com.chatapp.fragment;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,14 +26,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-
 import com.chatapp.R;
 import com.chatapp.common.ResideMenu;
 import com.chatapp.common.ResideMenuItem;
 import com.chatapp.view.MainActivity;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -106,39 +102,6 @@ public class HomeFragment extends BaseFragment implements SurfaceHolder.Callback
     }
 
 
-    private void setUpMenu() {
-
-        // attach to current activity;
-        resideMenu = new ResideMenu(getActivity());
-        resideMenu.setUse3D(false);
-        resideMenu.setBackground(R.drawable.ic_background);
-        resideMenu.attachToActivity(getActivity());
-        resideMenu.setMenuListener(menuListener);
-        //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
-        resideMenu.setScaleValue(0.6f);
-
-        // create menu items;
-        itemRateApp = new ResideMenuItem(getActivity(), R.drawable.ic_menu_rate_app, "RATE APP");
-        itemShareWithFriends = new ResideMenuItem(getActivity(), R.drawable.ic_menu_share, "SHARE WITH FRIENDS");
-        itemContactUs = new ResideMenuItem(getActivity(), R.drawable.ic_menu_contatct_us, "CONTACT US");
-        itemFollowUs = new ResideMenuItem(getActivity(), R.drawable.ic_menu_followus, "FOLLOW US");
-        itemRateApp.setOnClickListener(this);
-        itemShareWithFriends.setOnClickListener(this);
-        itemContactUs.setOnClickListener(this);
-        itemFollowUs.setOnClickListener(this);
-        resideMenu.addMenuItem(itemRateApp, ResideMenu.DIRECTION_LEFT);
-        resideMenu.addMenuItem(itemShareWithFriends, ResideMenu.DIRECTION_LEFT);
-        resideMenu.addMenuItem(itemContactUs, ResideMenu.DIRECTION_LEFT);
-        resideMenu.addMenuItem(itemFollowUs, ResideMenu.DIRECTION_LEFT);
-        resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
-        btnMenuIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
-            }
-        });
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -203,16 +166,6 @@ public class HomeFragment extends BaseFragment implements SurfaceHolder.Callback
 //        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
 //        startActivity(Intent.createChooser(sharingIntent, getString(R.string.str_share_via)));
     }
-
-    private final ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
-        @Override
-        public void openMenu() {
-        }
-
-        @Override
-        public void closeMenu() {
-        }
-    };
 
 
     @Override
@@ -283,7 +236,6 @@ public class HomeFragment extends BaseFragment implements SurfaceHolder.Callback
                 return true;
             }
         });
-        setUpMenu();
     }
 
     /***
