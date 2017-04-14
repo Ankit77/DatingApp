@@ -16,13 +16,16 @@ public class CustomTextView extends TextView {
 
     public CustomTextView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        CustomFontHelper.setCustomFont(this, context, attrs);
     }
 
     public CustomTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        CustomFontHelper.setCustomFont(this, context, attrs);
     }
 
     public CustomTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        CustomFontHelper.setCustomFont(this, context, attrs);
     }
 }

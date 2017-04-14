@@ -11,17 +11,21 @@ import android.widget.Button;
 public class CustomButton extends Button {
     public CustomButton(Context context) {
         super(context);
+
     }
 
     public CustomButton(Context context, AttributeSet attrs) {
         super(context, attrs);
+        CustomFontHelper.setCustomFont(this, context, attrs);
     }
 
     public CustomButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        CustomFontHelper.setCustomFont(this, context, attrs);
     }
 
     public CustomButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        CustomFontHelper.setCustomFont(this, context, attrs);
     }
 }

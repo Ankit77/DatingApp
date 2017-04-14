@@ -40,6 +40,18 @@
     <string name="lbl_delete_account">Delete Account</string>
     <string name="lbl_skip">Skip</string>
 
+    <!--fonts-->
+    <string name="font_OpenSans_Bold">OpenSans-Bold.ttf</string>
+    <string name="font_OpenSans_BoldItalic">OpenSans-BoldItalic.ttf</string>
+    <string name="font_OpenSans_ExtraBold">OpenSans-ExtraBold.ttf</string>
+    <string name="font_OpenSans_ExtraBoldItalic">OpenSans-ExtraBoldItalic.ttf</string>
+    <string name="font_OpenSans_Italic">OpenSans-Italic.ttf</string>
+    <string name="font_OpenSans_Light">OpenSans-Light.ttf</string>
+    <string name="font_OpenSans_LightItalic">OpenSans-LightItalic.ttf</string>
+    <string name="font_OpenSans_Regular">OpenSans-Regular.ttf</string>
+    <string name="font_OpenSans_Semibold">OpenSans-Semibold.ttf</string>
+    <string name="font_OpenSans_SemiboldItalic">OpenSans-SemiboldItalic.ttf</string>
+
 
     <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Tutorial Screen&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
     <string name="skip">SKIP</string>
