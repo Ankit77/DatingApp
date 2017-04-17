@@ -3,31 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F5F8">
+    android:clipChildren="true">
 
-    <com.skyfishjy.library.RippleBackground
-        android:id="@+id/fragment_suggestion_radarview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:rb_color="@color/colorAccent"
-        app:rb_duration="3000"
-        app:rb_radius="50dp"
-        app:rb_rippleAmount="4"
-        app:rb_scale="6">
+    <!--<com.skyfishjy.library.RippleBackground-->
+    <!--android:id="@+id/fragment_suggestion_radarview"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:rb_color="@color/colorAccent"-->
+    <!--app:rb_duration="3000"-->
+    <!--app:rb_radius="50dp"-->
+    <!--app:rb_rippleAmount="4"-->
+    <!--app:rb_scale="6">-->
 
-        <ImageView
-            android:id="@+id/fragment_suggestion_img_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/ic_launcher_round" />
-    </com.skyfishjy.library.RippleBackground>
+    <!--<ImageView-->
+    <!--android:id="@+id/fragment_suggestion_img_image"-->
+    <!--android:layout_width="64dp"-->
+    <!--android:layout_height="64dp"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:src="@mipmap/ic_launcher_round" />-->
+    <!--</com.skyfishjy.library.RippleBackground>-->
 
-    <com.chatapp.swipeview.CardStackView
+    <!--<com.chatapp.swipeview.CardStackView-->
+    <!--android:id="@+id/activity_main_card_stack_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="@dimen/_20sdp"-->
+    <!--android:clipChildren="true"-->
+    <!--android:clipToPadding="true" />-->
+    <com.chatapp.swipestack.SwipeStack
         android:id="@+id/activity_main_card_stack_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipChildren="true"
-        android:clipToPadding="true" />
+        android:layout_margin="@dimen/_20sdp"
+        android:background="@color/black"
+        app:stack_rotation="10"
+        app:stack_size="3" />
 
 </FrameLayout>

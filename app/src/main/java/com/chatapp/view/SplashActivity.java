@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.chatapp.DatingApp;
 import com.chatapp.R;
 import com.chatapp.service.LocationService;
+import com.chatapp.tutorial.activity.TutorialActivity;
 import com.chatapp.util.PREF;
 import com.chatapp.util.WriteLog;
 import com.google.android.gms.common.ConnectionResult;
@@ -215,7 +216,15 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
         public void run() {
             Intent intent = null;
             if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_IS_LOGGED_IN, false)) {
-                intent = new Intent(SplashActivity.this, NearbyScanActivity.class);
+                if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_SHOW_TUTORIAL, true)) {
+                    intent = new Intent(SplashActivity.this, TutorialActivity.class);
+                } else {
+                    intent = new Intent(SplashActivity.this, HomeActivity.class);
+                    DatingApp.getsInstance().getSharedPreferences().edit().putBoolean(PREF.PREF_SHOW_TUTORIAL, true).commit();
+                }
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
             } else {
                 intent = new Intent(SplashActivity.this, LoginActivity.class);
             }

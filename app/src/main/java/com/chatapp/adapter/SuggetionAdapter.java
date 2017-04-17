@@ -67,7 +67,7 @@ public class SuggetionAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.row_item_suggestion, null);
+            convertView = inflater.inflate(R.layout.row_item_suggestion, parent,false);
             holder.tvAddress = (TextView) convertView.findViewById(R.id.row_item_suggetion_tv_address);
             holder.tvName = (TextView) convertView.findViewById(R.id.row_item_suggetion_tv_name);
             holder.tvProfession = (TextView) convertView.findViewById(R.id.row_item_suggetion_tv_profession);

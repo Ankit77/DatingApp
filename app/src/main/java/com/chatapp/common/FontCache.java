@@ -13,7 +13,7 @@ public class FontCache {
         Typeface tf = fontCache.get(name);
         if (tf == null) {
             try {
-                tf = Typeface.createFromAsset(context.getAssets(), "fonts/" + name);
+                tf = Typeface.createFromAsset(context.getAssets(), "fonts/" + name + ".ttf");
 
             } catch (Exception e) {
                 return null;

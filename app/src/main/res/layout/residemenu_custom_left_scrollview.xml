@@ -30,7 +30,7 @@
             android:text="Ankit,28"
             android:textColor="@android:color/black"
             android:textSize="@dimen/_18sdp"
-            android:textStyle="bold" />
+            app:font="@string/font_OpenSans_Bold"/>
     </LinearLayout>
 
     <ScrollView
@@ -73,7 +73,8 @@
             android:text="@string/lbl_logout"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_16sdp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:font="@string/font_OpenSans_Bold" />
 
     </LinearLayout>
 

@@ -1,116 +1,131 @@
+/*
+ * Copyright (C) 2016 Frederik Schweiger
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.chatapp.view;
 
-import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chatapp.R;
-import com.chatapp.common.ResideMenu;
-import com.chatapp.fragment.HomeFragment;
+import com.chatapp.swipestack.SwipeStack;
 
-import static com.chatapp.fragment.HomeFragment.resideMenu;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button btnMenuIcon;
+public class MainActivity extends AppCompatActivity implements SwipeStack.SwipeStackListener, View.OnClickListener {
 
-    /**
-     * Called when the activity is first created.
-     */
+
+    private ArrayList<String> mData;
+    private SwipeStack mSwipeStack;
+    private SwipeStackAdapter mAdapter;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnMenuIcon = (Button) findViewById(R.id.activity_main_navigationMenuIcon);
-        if (savedInstanceState == null)
-            replaceFragment(new HomeFragment(), R.id.main_container);
-        setUpMenu();
+
+        mSwipeStack = (SwipeStack) findViewById(R.id.swipeStack);
+
+
+        mData = new ArrayList<>();
+        mAdapter = new SwipeStackAdapter(mData);
+        mSwipeStack.setAdapter(mAdapter);
+        mSwipeStack.setListener(this);
+
+        fillWithTestData();
     }
 
-    private void setUpMenu() {
+    private void fillWithTestData() {
+        for (int x = 0; x < 5; x++) {
+            mData.add("test" + " " + (x + 1));
+        }
+    }
 
-        // attach to current activity;
-        resideMenu = new ResideMenu(MainActivity.this);
-        resideMenu.setUse3D(false);
-        resideMenu.setBackground(R.drawable.ic_background);
-        resideMenu.attachToActivity(MainActivity.this);
-        resideMenu.setMenuListener(menuListener);
-        //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
-        resideMenu.setScaleValue(0.6f);
+    @Override
+    public void onClick(View v) {
 
-        // create menu items;
+    }
 
 
-        btnMenuIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
+    @Override
+    public void onViewSwipedToRight(int position) {
+        String swipedElement = mAdapter.getItem(position);
+        Toast.makeText(this, getString(R.string.view_swiped_right, swipedElement),
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onViewSwipedToLeft(int position) {
+        String swipedElement = mAdapter.getItem(position);
+        Toast.makeText(this, getString(R.string.view_swiped_left, swipedElement),
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onStackEmpty() {
+        Toast.makeText(this, R.string.stack_empty, Toast.LENGTH_SHORT).show();
+    }
+
+    public class SwipeStackAdapter extends BaseAdapter {
+
+        private List<String> mData;
+
+        public SwipeStackAdapter(List<String> data) {
+            this.mData = data;
+        }
+
+        @Override
+        public int getCount() {
+            return mData.size();
+        }
+
+        @Override
+        public String getItem(int position) {
+            return mData.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.card, parent, false);
             }
-        });
-    }
 
-    private final ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
-        @Override
-        public void openMenu() {
+            TextView textViewCard = (TextView) convertView.findViewById(R.id.textViewCard);
+            textViewCard.setText(mData.get(position));
+
+            return convertView;
         }
-
-        @Override
-        public void closeMenu() {
-        }
-    };
-
-    /***
-     * This method will replace current fragment with new fragment.
-     *
-     * @param fragment
-     */
-    private void replaceFragment(final Fragment fragment, int containerId) {
-        getFragmentManager()
-                .beginTransaction()
-                .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .replace(containerId, fragment, fragment.getClass().getSimpleName())
-                .commit();
-    }
-
-    /***
-     * This method will add new fragment on current fragment
-     * @param currentFragment
-     * @param newFragment
-     */
-    public void addFragment(final Fragment currentFragment, final Fragment newFragment) {
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.main_container, newFragment, newFragment.getClass().getSimpleName())
-                .hide(currentFragment)
-                .addToBackStack(currentFragment.getClass().getSimpleName())
-                .commit();
-    }
-
-    // What good method is to access resideMenu？
-    public ResideMenu getResideMenu() {
-        return resideMenu;
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-//        android.app.FragmentManager fm = getFragmentManager();
-//        Fragment myFragment = (Fragment) fm.findFragmentById(R.id.main_container);
-//        if (myFragment instanceof StaticScreens) {
-//            getFragmentManager().popBackStack();
-//        } else if (getFragmentManager().getBackStackEntryCount() > 0) {
-//            getFragmentManager().popBackStack();
-//            resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
-//        } else {
-//            super.onBackPressed();
-//        }
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 }

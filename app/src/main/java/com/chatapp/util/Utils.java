@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -34,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chatapp.R;
+import com.chatapp.common.FontCache;
 
 import org.json.JSONObject;
 

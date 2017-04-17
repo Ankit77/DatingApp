@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_backgrond"
+    android:background="@color/timberwolf"
     android:orientation="vertical">
 
-    <RelativeLayout
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/_5sdp">
+        android:layout_height="58dp"
+        android:minHeight="?attr/actionBarSize"
+       >
 
-        <ImageView
-            android:id="@+id/activity_home_img_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="left|center_vertical"
-            android:src="@drawable/ic_menu" />
-
-        <com.chatapp.common.CustomTextView
-            android:id="@+id/activity_home_tv_title"
-            style="@style/TextStyle.Toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/activity_home_img_chat"
-            android:layout_toRightOf="@+id/activity_home_img_menu"
-            android:text="Matches" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_5sdp">
 
-        <ImageView
-            android:id="@+id/activity_home_img_chat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/group" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/activity_home_img_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/menu" />
+
+            <com.chatapp.common.CustomTextView
+                android:id="@+id/activity_home_tv_title"
+                style="@style/TextStyle.Toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:text="Matches"
+                app:font="@string/font_OpenSans_Semibold" />
+
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/activity_home_container"

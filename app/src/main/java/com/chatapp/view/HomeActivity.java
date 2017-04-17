@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chatapp.R;
 import com.chatapp.common.ResideMenu;
@@ -25,13 +29,13 @@ import com.chatapp.util.Utils;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ResideMenu resideMenu;
     private ImageView imgMenu;
-    private ImageView imgChat;
     private ResideMenuItem itemSetting;
     private ResideMenuItem itemProfile;
     private ResideMenuItem itemChat;
     private ResideMenuItem itemSuggetion;
     private ResideMenuItem itemTutorial;
     private TextView tvTitle;
+    private Toolbar toolbar;
 
 
     @Override
@@ -42,14 +46,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setUpMenu();
         SuggestionFragment suggestionFragment = new SuggestionFragment();
         getFragmentManager().beginTransaction().add(R.id.activity_home_container, suggestionFragment, SuggestionFragment.class.getSimpleName()).commit();
+        initToolBar();
         init();
+    }
+
+    public void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     private void init() {
         imgMenu = (ImageView) findViewById(R.id.activity_home_img_menu);
-        imgChat = (ImageView) findViewById(R.id.activity_home_img_chat);
         tvTitle = (TextView) findViewById(R.id.activity_home_tv_title);
-        imgChat.setOnClickListener(this);
         imgMenu.setOnClickListener(this);
         isBackEnable(false);
     }
@@ -64,11 +72,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (isbackEnable) {
             imgMenu.setImageResource(R.drawable.ic_back);
             imgMenu.setTag(Constants.TAG_BACK);
-            imgChat.setVisibility(View.GONE);
         } else {
-            imgMenu.setImageResource(R.drawable.ic_menu);
+            imgMenu.setImageResource(R.drawable.menu);
             imgMenu.setTag(Constants.TAG_MENU);
-            imgChat.setVisibility(View.VISIBLE);
         }
     }
 
@@ -122,8 +128,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             SettingFragment settingFragment = new SettingFragment();
             Utils.addNextFragment(R.id.activity_home_container, HomeActivity.this, settingFragment, getFragmentManager().findFragmentById(R.id.activity_home_container), false);
             resideMenu.closeMenu();
-        } else if (view == itemChat) {
-
         } else if (view == itemSuggetion) {
 
         } else if (view == itemSuggetion) {
@@ -154,5 +158,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             super.onBackPressed();
         }
     }
+
 
 }

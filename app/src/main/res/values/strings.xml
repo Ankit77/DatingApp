@@ -41,16 +41,16 @@
     <string name="lbl_skip">Skip</string>
 
     <!--fonts-->
-    <string name="font_OpenSans_Bold">OpenSans-Bold.ttf</string>
-    <string name="font_OpenSans_BoldItalic">OpenSans-BoldItalic.ttf</string>
-    <string name="font_OpenSans_ExtraBold">OpenSans-ExtraBold.ttf</string>
-    <string name="font_OpenSans_ExtraBoldItalic">OpenSans-ExtraBoldItalic.ttf</string>
-    <string name="font_OpenSans_Italic">OpenSans-Italic.ttf</string>
+    <string name="font_OpenSans_Bold">OpenSans-Bold</string>
+    <string name="font_OpenSans_BoldItalic">OpenSans-BoldItalic</string>
+    <string name="font_OpenSans_ExtraBold">OpenSans-ExtraBold</string>
+    <string name="font_OpenSans_ExtraBoldItalic">OpenSans-ExtraBoldItalic</string>
+    <string name="font_OpenSans_Italic">OpenSans-Italic</string>
     <string name="font_OpenSans_Light">OpenSans-Light.ttf</string>
-    <string name="font_OpenSans_LightItalic">OpenSans-LightItalic.ttf</string>
-    <string name="font_OpenSans_Regular">OpenSans-Regular.ttf</string>
-    <string name="font_OpenSans_Semibold">OpenSans-Semibold.ttf</string>
-    <string name="font_OpenSans_SemiboldItalic">OpenSans-SemiboldItalic.ttf</string>
+    <string name="font_OpenSans_LightItalic">OpenSans-LightItalic</string>
+    <string name="font_OpenSans_Regular">OpenSans-Regular</string>
+    <string name="font_OpenSans_Semibold">OpenSans-Semibold</string>
+    <string name="font_OpenSans_SemiboldItalic">OpenSans-SemiboldItalic</string>
 
 
     <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;Tutorial Screen&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
@@ -91,5 +91,21 @@
         <item>@color/color5</item>
         <item>@color/color6</item>
     </integer-array>
+
+
+
+
+    <string name="swipe_left">Swipe left</string>
+    <string name="swipe_right">Swipe right</string>
+    <string name="view_swiped_left">%1$s swiped to left!</string>
+    <string name="view_swiped_right">%1$s swiped to right!</string>
+    <string name="dummy_text">Test</string>
+    <string name="dummy_fab">Fab Test</string>
+
+    <string name="reset">Reset stack</string>
+    <string name="stack_reset">Stack reset!</string>
+    <string name="stack_empty">Card stack empty!</string>
+    <string name="github">View on GitHub</string>
+
 
 </resources>

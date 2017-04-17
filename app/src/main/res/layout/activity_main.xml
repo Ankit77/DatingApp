@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:orientation="vertical">
+    android:clipChildren="false">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <include
-            layout="@layout/main_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/main_container"
+    <com.chatapp.swipestack.SwipeStack
+        android:id="@+id/swipeStack"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:orientation="vertical" />
+        android:padding="20dp"
+        app:stack_rotation="10"
+        app:stack_size="3" />
 
-</LinearLayout>
+
+</RelativeLayout>

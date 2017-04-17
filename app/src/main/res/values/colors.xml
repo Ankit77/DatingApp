@@ -18,4 +18,16 @@
     <color name="color6">@android:color/holo_purple</color>
     <color name="colorGray">#F0F0F0</color>
     <color name="colorRed">#E83E44</color>
+
+
+    <color name="white">#ffffff</color>
+    <color name="timberwolf">#d7d7d7</color>
+    <color name="black">#000000</color>
+    <color name="white_smoke">#f4f5f8</color>
+    <color name="brink_pink">#ff5277</color>
+    <color name="manatee">#9b9fb1</color>
+    <color name="gainsboro">#d9dbda</color>
+    <color name="united_nations_blue">#4a90e2</color>
+    <color name="charcoal">#3d4254</color>
+
 </resources>

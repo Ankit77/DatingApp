@@ -1,140 +1,117 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?><!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:background="@android:color/transparent"--><!--android:orientation="vertical">-->
+
+<!--<android.support.v7.widget.CardView xmlns:app1="http://schemas.android.com/apk/res-auto"--><!--xmlns:card_view="http://schemas.android.com/apk/res-auto"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:id="@+id/card_view"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:layout_gravity="center"--><!--card_view:cardBackgroundColor="@android:color/white"--><!--card_view:cardCornerRadius="15dp"--><!--card_view:cardElevation="0dp">-->
+
+
+<!---->
+
+
+<!--</android.support.v7.widget.CardView>--><!--.-->
+
+<!--<View--><!--android:id="@+id/item_swipe_left_indicator"--><!--android:layout_width="20dp"--><!--android:layout_height="20dp"--><!--android:layout_margin="10dp"--><!--android:alpha="0"--><!--android:background="#A5F" />-->
+
+<!--<View--><!--android:id="@+id/item_swipe_right_indicator"--><!--android:layout_width="20dp"--><!--android:layout_height="20dp"--><!--android:layout_gravity="right"--><!--android:layout_margin="10dp"--><!--android:alpha="0"--><!--android:background="#5AF" />--><!--</FrameLayout>-->
+
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app1="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app1="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/_20sdp"
-    android:paddingLeft="@dimen/_10sdp"
-    android:paddingRight="@dimen/_10sdp"
-    android:paddingTop="@dimen/_40sdp">
+    card_view:cardCornerRadius="@dimen/_6sdp"
+    card_view:cardElevation="@dimen/_6sdp">
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        card_view:cardBackgroundColor="@android:color/white"
-        card_view:cardCornerRadius="15dp">
+        android:orientation="vertical"
+        android:weightSum="1">
 
+        <ImageView
+            android:id="@+id/row_item_suggestion_img_profile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_260sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/like" />
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/row_item_suggestion_img_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/row_item_suggestion_img_profile"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="-25dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/like" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/row_item_suggestion_img_profile"
             android:orientation="vertical"
-            android:weightSum="1">
+            android:padding="@dimen/_20sdp">
 
-            <ImageView
-                android:id="@+id/row_item_suggestion_img_profile"
+            <com.chatapp.common.CustomTextView
+                android:id="@+id/row_item_suggetion_tv_name"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_250sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/like" />
-
-            <ImageView
-                android:id="@+id/row_item_suggestion_img_like"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/row_item_suggestion_img_profile"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="-25dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/like" />
+                android:fontFamily="sans-serif-light"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/_20sdp"
+                app1:font="@string/font_OpenSans_Light" />
 
-            <LinearLayout
+            <com.chatapp.common.CustomTextView
+                android:id="@+id/row_item_suggetion_tv_profession"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/row_item_suggestion_img_profile"
-                android:orientation="vertical"
-                android:padding="@dimen/_10sdp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_12sdp"
+                app1:font="@string/font_OpenSans_Semibold" />
 
-                <com.chatapp.common.CustomTextView
-                    android:id="@+id/row_item_suggetion_tv_name"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:id="@+id/row_item_suggetion_ll_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/_22sdp"
-                    tools:text="Abbey Johnson,27"
-                    app1:font_name="@string/font_OpenSans_ExtraBold"/>
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <com.chatapp.common.CustomTextView
-                    android:id="@+id/row_item_suggetion_tv_profession"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="@dimen/_14sdp"
-                    tools:text="Fashion Designer"
-                    app1:font_name="@string/font_OpenSans_Regular"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp">
-
-                    <LinearLayout
-                        android:id="@+id/row_item_suggetion_ll_address"
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/row_item_suggetion_img_location"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/row_item_suggetion_img_location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/location" />
-
-                        <com.chatapp.common.CustomTextView
-                            android:id="@+id/row_item_suggetion_tv_address"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:layout_toRightOf="@+id/row_item_suggetion_img_location"
-                            android:gravity="center|left"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/_14sdp"
-                            tools:text="Lives in Boston"
-                            app:font_name="@string/font_OpenSans_Semibold"/>
-                    </LinearLayout>
+                        android:src="@drawable/location" />
 
                     <com.chatapp.common.CustomTextView
-                        android:id="@+id/row_item_suggetion_tv_distance"
+                        android:id="@+id/row_item_suggetion_tv_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/row_item_suggetion_ll_address"
-                        android:layout_marginLeft="@dimen/_12sdp"
-                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_toRightOf="@+id/row_item_suggetion_img_location"
                         android:gravity="center|left"
-                        android:textColor="@color/dark_grey"
+                        android:textColor="@android:color/black"
                         android:textSize="@dimen/_13sdp"
-                        tools:text="23 Kilometer away"
-                        app1:font_name="@string/font_OpenSans_Light"/>
-                </RelativeLayout>
-            </LinearLayout>
-        </RelativeLayout>
+                        app1:font="@string/font_OpenSans_Semibold" />
+                </LinearLayout>
 
+                <com.chatapp.common.CustomTextView
+                    android:id="@+id/row_item_suggetion_tv_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/row_item_suggetion_ll_address"
+                    android:layout_marginLeft="@dimen/_12sdp"
+                    android:gravity="center|left"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_11sdp"
+                    app1:font="@string/font_OpenSans_Semibold" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
-    .
-
-    <View
-        android:id="@+id/item_swipe_left_indicator"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_margin="10dp"
-        android:alpha="0"
-        android:background="#A5F" />
-
-    <View
-        android:id="@+id/item_swipe_right_indicator"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_gravity="right"
-        android:layout_margin="10dp"
-        android:alpha="0"
-        android:background="#5AF" />
-</FrameLayout>
+</android.support.v7.widget.CardView>
