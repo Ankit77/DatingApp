@@ -38,7 +38,12 @@ public class CustomTextView extends TextView {
                 attrs,
                 R.styleable.CustomFontTextView);
         String fontName = attributeArray.getString(R.styleable.CustomFontTextView_font);
-        setTypeface(FontCache.get(fontName, context));
+        if(fontName!=null) {
+            setTypeface(FontCache.get(fontName, context));
+        }else
+        {
+            setTypeface(FontCache.get("font_OpenSans_Regular", context));
+        }
 
         attributeArray.recycle();
     }

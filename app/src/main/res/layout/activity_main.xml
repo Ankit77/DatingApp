@@ -3,17 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipChildren="false">
+    android:layout_height="match_parent">
 
 
-    <com.chatapp.swipestack.SwipeStack
-        android:id="@+id/swipeStack"
+    <FrameLayout
+        android:id="@+id/activity_home_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        app:stack_rotation="10"
-        app:stack_size="3" />
+        android:clipChildren="false"></FrameLayout>
 
 
 </RelativeLayout>
