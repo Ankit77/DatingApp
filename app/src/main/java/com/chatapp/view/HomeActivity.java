@@ -44,10 +44,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setUpMenu();
-        SuggestionFragment suggestionFragment = new SuggestionFragment();
-        getFragmentManager().beginTransaction().add(R.id.activity_home_container, suggestionFragment, SuggestionFragment.class.getSimpleName()).commit();
         initToolBar();
         init();
+        SuggestionFragment suggestionFragment = new SuggestionFragment();
+        getFragmentManager().beginTransaction().add(R.id.activity_home_container, suggestionFragment, SuggestionFragment.class.getSimpleName()).commit();
     }
 
     public void initToolBar() {
@@ -90,11 +90,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         resideMenu.setScaleValue(0.6f);
 
         // create menu items;
-        itemSetting = new ResideMenuItem(HomeActivity.this, R.drawable.ic_menu_rate_app, "SETTING");
-        itemProfile = new ResideMenuItem(HomeActivity.this, R.drawable.ic_menu_share, "PROFILE");
-        itemChat = new ResideMenuItem(HomeActivity.this, R.drawable.ic_menu_contatct_us, "CHAT");
-        itemSuggetion = new ResideMenuItem(HomeActivity.this, R.drawable.ic_menu_followus, "SUGGETION");
-        itemTutorial = new ResideMenuItem(HomeActivity.this, R.drawable.ic_menu_followus, "HOW ITS WORK");
+        itemSetting = new ResideMenuItem(HomeActivity.this, R.drawable.ic_edit, "SETTING");
+        itemProfile = new ResideMenuItem(HomeActivity.this, R.drawable.ic_edit, "PROFILE");
+        itemChat = new ResideMenuItem(HomeActivity.this, R.drawable.ic_edit, "CHAT");
+        itemSuggetion = new ResideMenuItem(HomeActivity.this, R.drawable.ic_edit, "SUGGETION");
+        itemTutorial = new ResideMenuItem(HomeActivity.this, R.drawable.ic_edit, "HOW ITS WORK");
         itemSetting.setOnClickListener(this);
         itemProfile.setOnClickListener(this);
         itemChat.setOnClickListener(this);

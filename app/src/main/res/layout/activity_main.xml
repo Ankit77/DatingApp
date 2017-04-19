@@ -7,7 +7,7 @@
 
 
     <FrameLayout
-        android:id="@+id/activity_home_container"
+        android:id="@+id/activity_home_container11"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"></FrameLayout>

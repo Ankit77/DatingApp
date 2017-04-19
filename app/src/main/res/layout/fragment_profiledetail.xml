@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app1="http://schemas.android.com/apk/res-auto"
     xmlns:chip="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fragment_profiledetail_btn_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/_15sdp"
+        android:src="@drawable/ic_edit"
+        app:backgroundTint="@color/colorPrimary" />
 
     <com.nirhart.parallaxscroll.views.ParallaxScrollView
         android:layout_width="match_parent"
@@ -18,14 +28,13 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_275sdp"
+                android:layout_height="@dimen/_290sdp"
                 android:visibility="visible">
 
                 <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/fragment_profiledetail_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#BDBDBD"></android.support.v4.view.ViewPager>
+                    android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
                 <me.relex.circleindicator.CircleIndicator
                     android:id="@+id/fragment_profiledetail_indicator"
@@ -38,7 +47,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"
+                android:background="@color/background"
                 android:orientation="vertical"
                 android:padding="@dimen/_10sdp">
 
@@ -47,19 +56,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
+                    android:text="Abbey Johnson,27"
                     android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/_22sdp"
-                    android:text="Abbey Johnson,27" />
+                    android:textSize="@dimen/_20sdp"
+                    app1:font="@string/font_OpenSans_Light" />
 
                 <com.chatapp.common.CustomTextView
                     android:id="@+id/fragment_profiledetail_tv_profession"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="@dimen/_14sdp"
-                    android:text="Fashion Designer" />
+                    android:text="Fashion Designer"
+                    android:textColor="@color/font_grey"
+                    android:textSize="@dimen/_12sdp"
+                    app1:font="@string/font_OpenSans_Semibold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -85,11 +95,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_toRightOf="@+id/fragment_profiledetail_img_location"
-                            android:fontFamily="sans-serif-medium"
                             android:gravity="center|left"
+                            android:text="Lives in Boston"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/_14sdp"
-                            android:text="Lives in Boston" />
+                            android:textSize="@dimen/_13sdp"
+                            app1:font="@string/font_OpenSans_Semibold" />
                     </LinearLayout>
 
                     <com.chatapp.common.CustomTextView
@@ -98,11 +108,11 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/fragment_profiledetail_ll_address"
                         android:layout_marginLeft="@dimen/_12sdp"
-                        android:fontFamily="sans-serif-medium"
                         android:gravity="center|left"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="@dimen/_13sdp"
-                        android:text="23 Kilometer away" />
+                        android:text="23 Kilometer away"
+                        android:textColor="@color/font_grey"
+                        android:textSize="@dimen/_11sdp"
+                        app1:font="@string/font_OpenSans_Semibold" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -115,7 +125,8 @@
                         style="@style/bold_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/lbl_about_me" />
+                        android:text="@string/lbl_about_me"
+                        app1:font="@string/font_OpenSans_Bold" />
 
                     <View
                         android:layout_width="match_parent"
@@ -140,21 +151,21 @@
                             android:id="@+id/fragment_profiledetail_tv_relationshiplbl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.7"
-                            android:fontFamily="sans-serif-condensed"
+                            android:layout_weight="0.6"
                             android:text="@string/lbl_relationship"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textColor="@color/charcoal"
+                            android:textSize="@dimen/_13sdp"
+                            app1:font="@string/font_OpenSans_Semibold" />
 
                         <com.chatapp.common.CustomTextView
                             android:id="@+id/fragment_profiledetail_tv_relationship"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.3"
-                            android:fontFamily="sans-serif-light"
-                            android:textColor="@android:color/black"
+                            android:layout_weight="0.4"
+                            android:text="Single"
+                            android:textColor="@color/manatee"
                             android:textSize="@dimen/_12sdp"
-                            android:text="Single" />
+                            app1:font="@string/font_OpenSans_Semibold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -166,21 +177,21 @@
                             android:id="@+id/fragment_profiledetail_tv_nationalitylbl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.7"
-                            android:fontFamily="sans-serif-condensed"
+                            android:layout_weight="0.6"
                             android:text="@string/lbl_natioanlity"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textColor="@color/charcoal"
+                            android:textSize="@dimen/_12sdp"
+                            app1:font="@string/font_OpenSans_Semibold" />
 
                         <com.chatapp.common.CustomTextView
                             android:id="@+id/fragment_profiledetail_tv_nationality"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.3"
-                            android:fontFamily="sans-serif-light"
-                            android:textColor="@android:color/black"
+                            android:layout_weight="0.4"
+                            android:text="Indian"
+                            android:textColor="@color/manatee"
                             android:textSize="@dimen/_12sdp"
-                            android:text="Indian" />
+                            app1:font="@string/font_OpenSans_Semibold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -192,21 +203,21 @@
                             android:id="@+id/fragment_profiledetail_tv_heightlbl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.7"
-                            android:fontFamily="sans-serif-condensed"
+                            android:layout_weight="0.6"
                             android:text="@string/lbl_height"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textColor="@color/charcoal"
+                            android:textSize="@dimen/_12sdp"
+                            app1:font="@string/font_OpenSans_Semibold" />
 
                         <com.chatapp.common.CustomTextView
                             android:id="@+id/fragment_profiledetail_tv_height"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.3"
-                            android:fontFamily="sans-serif-light"
-                            android:textColor="@android:color/black"
+                            android:layout_weight="0.4"
+                            android:text="Indian"
+                            android:textColor="@color/manatee"
                             android:textSize="@dimen/_12sdp"
-                            android:text="Indian" />
+                            app1:font="@string/font_OpenSans_Semibold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -218,21 +229,21 @@
                             android:id="@+id/fragment_profiledetail_tv_weightlbl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.7"
-                            android:fontFamily="sans-serif-condensed"
+                            android:layout_weight="0.6"
                             android:text="@string/lbl_weight"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textColor="@color/charcoal"
+                            android:textSize="@dimen/_12sdp"
+                            app1:font="@string/font_OpenSans_Semibold" />
 
                         <com.chatapp.common.CustomTextView
                             android:id="@+id/fragment_profiledetail_tv_weight"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.3"
-                            android:fontFamily="sans-serif-light"
-                            android:textColor="@android:color/black"
+                            android:layout_weight="0.4"
+                            android:text="Indian"
+                            android:textColor="@color/manatee"
                             android:textSize="@dimen/_12sdp"
-                            android:text="Indian" />
+                            app1:font="@string/font_OpenSans_Semibold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -244,21 +255,21 @@
                             android:id="@+id/fragment_profiledetail_tv_faithlbl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.7"
-                            android:fontFamily="sans-serif-condensed"
+                            android:layout_weight="0.6"
                             android:text="@string/lbl_faith"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textColor="@color/charcoal"
+                            android:textSize="@dimen/_12sdp"
+                            app1:font="@string/font_OpenSans_Semibold" />
 
                         <com.chatapp.common.CustomTextView
                             android:id="@+id/fragment_profiledetail_tv_faith"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.3"
-                            android:fontFamily="sans-serif-light"
-                            android:textColor="@android:color/black"
+                            android:layout_weight="0.4"
+                            android:text="Indian"
+                            android:textColor="@color/manatee"
                             android:textSize="@dimen/_12sdp"
-                            android:text="Indian" />
+                            app1:font="@string/font_OpenSans_Semibold" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -266,18 +277,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <com.chatapp.common.CustomTextView
                         style="@style/bold_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/lbl_summary" />
+                        android:text="@string/lbl_summary"
+                        app1:font="@string/font_OpenSans_Bold" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
                         android:background="@color/dark_grey"></View>
 
                 </LinearLayout>
@@ -288,10 +301,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_weight="0.3"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum" />
+                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+                    android:textColor="@color/manatee"
+                    android:textSize="@dimen/_14sdp"
+                    app1:font="@string/font_OpenSans_Regular" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -303,7 +316,8 @@
                         style="@style/bold_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/lbl_interest" />
+                        android:text="@string/lbl_interest"
+                        app1:font="@string/font_OpenSans_Bold" />
 
                     <View
                         android:layout_width="match_parent"
@@ -346,13 +360,4 @@
             </LinearLayout>
         </LinearLayout>
     </com.nirhart.parallaxscroll.views.ParallaxScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fragment_profiledetail_btn_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/_15sdp"
-        android:src="@drawable/ic_edit"
-        app:backgroundTint="@color/colorPrimary" />
 </FrameLayout>

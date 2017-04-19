@@ -5,6 +5,5 @@
         android:id="@+id/menu_chat"
         android:icon="@drawable/group"
         android:title="Chat"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="collapseActionView|ifRoom" />
+        app:showAsAction="always" />
 </menu>

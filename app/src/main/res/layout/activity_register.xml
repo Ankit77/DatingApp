@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
     android:padding="@dimen/_10sdp">
 
@@ -23,13 +25,13 @@
 
         <EditText
             android:id="@+id/activity_register_et_firstname"
+            style="@style/normal_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
             android:hint="@string/hint_first_name"
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:textSize="@dimen/_14sdp"
+            app:font="@string/font_OpenSans_Light"
             tools:text="sdlskdlksldksldlsdklsdkls" />
 
     </android.support.design.widget.TextInputLayout>
@@ -43,13 +45,13 @@
 
         <EditText
             android:id="@+id/activity_register_et_lastname"
+            style="@style/normal_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
             android:hint="@string/hint_lastname"
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:textSize="@dimen/_14sdp"
+            app:font="@string/font_OpenSans_Light"
             tools:text="sdlskdlksldksldlsdklsdkls" />
 
     </android.support.design.widget.TextInputLayout>
@@ -63,13 +65,13 @@
 
         <EditText
             android:id="@+id/activity_register_et_email"
+            style="@style/normal_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
             android:hint="@string/hint_email"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
-            android:textSize="@dimen/_14sdp"
+            app:font="@string/font_OpenSans_Light"
             tools:text="sdlskdlksldksldlsdklsdkls" />
 
     </android.support.design.widget.TextInputLayout>
@@ -83,12 +85,12 @@
 
         <EditText
             android:id="@+id/activity_register_et_password"
+            style="@style/normal_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
             android:hint="@string/hint_password"
             android:inputType="textEmailAddress"
-            android:textSize="@dimen/_14sdp"
+            app:font="@string/font_OpenSans_Light"
             tools:text="sdlskdlksldksldlsdklsdkls" />
 
     </android.support.design.widget.TextInputLayout>
@@ -99,6 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
-        android:text="@string/lbl_signup" />
+        android:text="@string/lbl_signup"
+        app:font="@string/font_OpenSans_Regular" />
 
 </LinearLayout>

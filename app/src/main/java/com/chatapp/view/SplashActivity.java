@@ -220,7 +220,6 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                     intent = new Intent(SplashActivity.this, TutorialActivity.class);
                 } else {
                     intent = new Intent(SplashActivity.this, HomeActivity.class);
-                    DatingApp.getsInstance().getSharedPreferences().edit().putBoolean(PREF.PREF_SHOW_TUTORIAL, true).commit();
                 }
                 startActivity(intent);
                 finish();

@@ -4,7 +4,6 @@
     <color name="colorPrimaryDark">#E54A6A</color>
     <color name="colorAccent">#4A90E2</color>
     <color name="dark_grey">#A4A5A5</color>
-    <color name="color_backgrond">#F5F5F5</color>
 
 
     <color name="chip_background">#BDBDBD</color>
@@ -29,5 +28,8 @@
     <color name="gainsboro">#d9dbda</color>
     <color name="united_nations_blue">#4a90e2</color>
     <color name="charcoal">#3d4254</color>
+
+    <color name="background">#f4f5f8</color>
+    <color name="font_grey">#9b9fb1</color>
 
 </resources>

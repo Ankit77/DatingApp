@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
     android:padding="@dimen/_10sdp">
 
@@ -22,14 +23,12 @@
         android:theme="@style/TextLabel">
 
         <EditText
+            style="@style/normal_edittext"
             android:id="@+id/activity_login_et_UserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
             android:hint="@string/hint_username"
             android:inputType="textEmailAddress"
-            android:textColor="#4d4d4d"
-            android:textSize="@dimen/_14sdp"
             app:font="@string/font_OpenSans_Light"
             tools:text="sdlskdlksldksldlsdklsdkls" />
 
@@ -43,14 +42,12 @@
         android:theme="@style/TextLabel">
 
         <EditText
+            style="@style/normal_edittext"
             android:id="@+id/activity_login_et_Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
             android:hint="@string/hint_password"
             android:inputType="textPassword"
-            android:textColor="#4d4d4d"
-            android:textSize="@dimen/_14sdp"
             app:font="@string/font_OpenSans_Light"
             tools:text="sdlskdlksldksldlsdklsdkls" />
 

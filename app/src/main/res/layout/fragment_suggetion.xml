@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F5F8">
+    android:background="@android:color/transparent">
 
     <com.skyfishjy.library.RippleBackground
         android:id="@+id/fragment_suggestion_radarview"
@@ -26,15 +26,15 @@
     <com.chatapp.wenchao.cardstack.CardStack
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/_420sdp"
+        android:layout_gravity="center"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:gravity="center"
-        android:padding="10dp"
+        android:padding="5dp"
         app:card_enable_loop="false"
         app:card_enable_rotation="true"
         app:card_gravity="top"
-        app:card_margin="20dp"
         app:card_stack_size="4" />
 
 </FrameLayout>

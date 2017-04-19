@@ -117,6 +117,7 @@ public abstract class ChipViewAdapter extends Observable {
         mChipPadding = mContext.getResources().getDimensionPixelSize(R.dimen.chip_padding);
         mChipSidePadding = mContext.getResources().getDimensionPixelSize(R.dimen.chip_side_padding);
         mChipCornerRadius = mContext.getResources().getDimensionPixelSize(R.dimen.chip_corner_radius);
+        mChipTextSize = 14;
         mChipBackgroundColor = getBackgroundRes(R.drawable.roundedborder_pinkbutton);
         mChipTextColor = getColor(R.color.colorPrimary);
         mChipBackgroundColorSelected = getColor(R.color.chip_background_selected);

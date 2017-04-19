@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -35,10 +38,17 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
     private RippleBackground rippleBackground;
     private CardStack cardStack;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_suggetion, null);
+
         homeActivity = (HomeActivity) getActivity();
         cardStack = (CardStack) view.findViewById(R.id.container);
         cardStack.setStackGravity(CardAnimator.TOP);
@@ -52,6 +62,24 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
         homeActivity.setActionBarTitle("Matches");
         homeActivity.isBackEnable(false);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_chat, menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_chat:
+                Toast.makeText(getActivity(), "Chat is called", Toast.LENGTH_LONG).show();
+                break;
+        }
+        return true;
+    }
+
 
     private void loadData() {
 
@@ -94,9 +122,6 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
     }
 
 
-    private void makeToast(Context ctx, String s) {
-        Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();
-    }
 
 
     @Override
