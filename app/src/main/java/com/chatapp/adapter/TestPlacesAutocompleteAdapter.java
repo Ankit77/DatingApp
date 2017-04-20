@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chatapp.R;
-import com.seatgeek.placesautocomplete.PlacesApi;
-import com.seatgeek.placesautocomplete.adapter.AbstractPlacesAutocompleteAdapter;
-import com.seatgeek.placesautocomplete.history.AutocompleteHistoryManager;
-import com.seatgeek.placesautocomplete.model.AutocompleteResultType;
-import com.seatgeek.placesautocomplete.model.Place;
+import com.chatapp.placesautocomplete.PlacesApi;
+import com.chatapp.placesautocomplete.adapter.AbstractPlacesAutocompleteAdapter;
+import com.chatapp.placesautocomplete.history.AutocompleteHistoryManager;
+import com.chatapp.placesautocomplete.model.AutocompleteResultType;
+import com.chatapp.placesautocomplete.model.Place;
 
 /**
  * Created by indianic on 20/04/17.

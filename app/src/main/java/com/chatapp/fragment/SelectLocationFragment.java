@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
+import com.chatapp.placesautocomplete.DetailsCallback;
+import com.chatapp.placesautocomplete.PlacesApi;
+import com.chatapp.placesautocomplete.model.PlaceDetails;
 import com.chatapp.util.PREF;
 import com.chatapp.view.HomeActivity;
 import com.google.android.gms.common.api.Status;
@@ -28,10 +31,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.seatgeek.placesautocomplete.OnPlaceSelectedListener;
-import com.seatgeek.placesautocomplete.PlacesAutocompleteTextView;
+import com.chatapp.placesautocomplete.OnPlaceSelectedListener;
+import com.chatapp.placesautocomplete.PlacesAutocompleteTextView;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -87,7 +91,31 @@ public class SelectLocationFragment extends Fragment implements OnMapReadyCallba
         mAutocomplete.setOnPlaceSelectedListener(new OnPlaceSelectedListener() {
 
             @Override
-            public void onPlaceSelected(@NonNull com.seatgeek.placesautocomplete.model.Place place) {
+            public void onPlaceSelected(@NonNull com.chatapp.placesautocomplete.model.Place place) {
+                mAutocomplete.getDetailsFor(place, new DetailsCallback() {
+                    @Override
+                    public void onSuccess(PlaceDetails details) {
+                        Location targetLocation = new Location("");//provider name is unnecessary
+                        targetLocation.setLatitude(details.geometry.location.lat);//your coords of course
+                        targetLocation.setLongitude(details.geometry.location.lng);
+//        tvSearch.setText(place.getName());
+                        DatingApp.getsInstance().setCurrentLocation(targetLocation);
+                        DatingApp.getsInstance().getSharedPreferences().edit().putString(PREF.PREF_PLACE_NAME, details.name.toString()).commit();
+                        Marker marker = map.addMarker(new MarkerOptions()
+                                .position(new LatLng(details.geometry.location.lat, details.geometry.location.lng))
+                                .title(details.name.toString()).visible(true)
+                        );
+                        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(details.geometry.location.lat, details.geometry.location.lng)));
+                        // Zoom in the Google Map
+                        map.animateCamera(CameraUpdateFactory.zoomTo(15));
+                    }
+
+                    @Override
+                    public void onFailure(Throwable failure) {
+
+                    }
+                });
+
 
             }
 

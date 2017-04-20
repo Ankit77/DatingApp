@@ -106,6 +106,6 @@
     <string name="stack_reset">Stack reset!</string>
     <string name="stack_empty">Card stack empty!</string>
     <string name="github">View on GitHub</string>
-
+    <string name="pacv_default_history_file_name">pacv_history.json</string>
 
 </resources>

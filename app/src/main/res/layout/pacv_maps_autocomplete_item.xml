@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app1="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp"
+    android:textAppearance="@style/PACV.TextAppearance.PlacesAutoComplete"
+    android:textColor="@color/charcoal"
+    android:textSize="@dimen/_14sdp"
+    app1:font="@string/font_OpenSans_Light"
+    tools:text="235 Park Ave South, New York, NY, USA" />

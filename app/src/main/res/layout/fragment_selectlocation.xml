@@ -1,50 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app1="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<android.support.v7.widget.CardView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_margin="@dimen/_10sdp"-->
-    <!--android:layout_marginTop="@dimen/_20sdp"-->
-    <!--card_view:cardBackgroundColor="@android:color/white"-->
-    <!--card_view:cardCornerRadius="5dp">-->
 
-    <!--<TextView-->
-    <!--android:id="@+id/fragment_selectlocation_tvlocation"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center_vertical"-->
-    <!--android:layout_margin="@dimen/_10sdp"-->
-    <!--android:background="@android:color/transparent"-->
-    <!--android:drawableLeft="@drawable/ic_search"-->
-    <!--android:drawablePadding="@dimen/_10sdp"-->
-    <!--android:hint="Select Location"-->
-    <!--android:gravity="center_vertical"-->
-    <!--android:textColor="@android:color/black"-->
-    <!--android:fontFamily="sans-serif-condensed"-->
-    <!--android:textSize="@dimen/_16sdp" />-->
-
-    <!--</android.support.v7.widget.CardView>-->
     <com.google.android.gms.maps.MapView
         android:id="@+id/fragment_selectlocation_mapview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.seatgeek.placesautocomplete.PlacesAutocompleteTextView
-        android:id="@+id/autocomplete"
-        android:layout_width="256dp"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:padding="16dp"
-        app:pacv_adapterClass="com.chatapp.adapter.TestPlacesAutocompleteAdapter"
-        app:pacv_googleMapsApiKey="AIzaSyAqxzPp0AjtQW5k5rr_WI9UU6q-NdkFrjE"
-        app:pacv_languageCode="en"
-        app:pacv_resultType="no_type" />
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="5dp">
+
+        <com.chatapp.placesautocomplete.PlacesAutocompleteTextView
+            android:id="@+id/autocomplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_search"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/charcoal"
+            android:textSize="@dimen/_14sdp"
+            app1:font="@string/font_OpenSans_Light"
+            app:pacv_adapterClass="com.chatapp.adapter.TestPlacesAutocompleteAdapter"
+            app:pacv_googleMapsApiKey="AIzaSyAc-2wwl0QbkFLwfvjTBxQLS0Mw1WzxrRY"
+            app:pacv_languageCode="en"
+            app:pacv_resultType="geocode" />
+
+    </android.support.v7.widget.CardView>
 
 
 </FrameLayout>

@@ -1,0 +1,11 @@
+package com.chatapp.placesautocomplete.history;
+
+import android.support.annotation.NonNull;
+
+import com.chatapp.placesautocomplete.model.Place;
+
+import java.util.List;
+
+public interface OnHistoryUpdatedListener {
+    public void onHistoryUpdated(@NonNull List<Place> updatedHistory);
+}
