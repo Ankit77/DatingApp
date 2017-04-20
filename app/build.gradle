@@ -24,6 +24,7 @@ repositories {
 }
 repositories {
     maven { url "https://jitpack.io" }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -53,4 +54,6 @@ dependencies {
     compile 'com.crystal:crystalrangeseekbar:1.1.1'
     compile files('libs/nineoldandroids-library-2.4.0.jar')
     compile 'com.skyfishjy.ripplebackground:library:1.0.1'
+    compile 'com.seatgeek:placesautocomplete:0.2-SNAPSHOT'
+
 }

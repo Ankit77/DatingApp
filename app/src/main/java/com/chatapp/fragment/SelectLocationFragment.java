@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,14 +14,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
 import com.chatapp.util.PREF;
 import com.chatapp.view.HomeActivity;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
@@ -32,6 +30,8 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.seatgeek.placesautocomplete.OnPlaceSelectedListener;
+import com.seatgeek.placesautocomplete.PlacesAutocompleteTextView;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -42,9 +42,10 @@ import static android.app.Activity.RESULT_OK;
 public class SelectLocationFragment extends Fragment implements OnMapReadyCallback, PlaceSelectionListener {
     private MapView mapView;
     private GoogleMap map;
-    private TextView tvSearch;
+    //    private TextView tvSearch;
     private static final int REQUEST_SELECT_PLACE = 1000;
     private HomeActivity homeActivity;
+    private PlacesAutocompleteTextView mAutocomplete;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,21 +83,31 @@ public class SelectLocationFragment extends Fragment implements OnMapReadyCallba
     }
 
     private void init(View view) {
-        tvSearch = (TextView) view.findViewById(R.id.fragment_selectlocation_tvlocation);
-        tvSearch.setOnClickListener(new View.OnClickListener() {
+        mAutocomplete = (PlacesAutocompleteTextView) view.findViewById(R.id.autocomplete);
+        mAutocomplete.setOnPlaceSelectedListener(new OnPlaceSelectedListener() {
+
             @Override
-            public void onClick(View v) {
-                try {
-                    Intent intent = new PlaceAutocomplete.IntentBuilder
-                            (PlaceAutocomplete.MODE_FULLSCREEN)
-                            .build(getActivity());
-                    startActivityForResult(intent, REQUEST_SELECT_PLACE);
-                } catch (GooglePlayServicesRepairableException |
-                        GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
+            public void onPlaceSelected(@NonNull com.seatgeek.placesautocomplete.model.Place place) {
+
             }
+
         });
+
+//        tvSearch = (TextView) view.findViewById(R.id.fragment_selectlocation_tvlocation);
+//        tvSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    Intent intent = new PlaceAutocomplete.IntentBuilder
+//                            (PlaceAutocomplete.MODE_FULLSCREEN)
+//                            .build(getActivity());
+//                    startActivityForResult(intent, REQUEST_SELECT_PLACE);
+//                } catch (GooglePlayServicesRepairableException |
+//                        GooglePlayServicesNotAvailableException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -121,7 +132,7 @@ public class SelectLocationFragment extends Fragment implements OnMapReadyCallba
         Location targetLocation = new Location("");//provider name is unnecessary
         targetLocation.setLatitude(place.getLatLng().latitude);//your coords of course
         targetLocation.setLongitude(place.getLatLng().longitude);
-        tvSearch.setText(place.getName());
+//        tvSearch.setText(place.getName());
         DatingApp.getsInstance().setCurrentLocation(targetLocation);
         DatingApp.getsInstance().getSharedPreferences().edit().putString(PREF.PREF_PLACE_NAME, place.getName().toString()).commit();
         Marker marker = map.addMarker(new MarkerOptions()
