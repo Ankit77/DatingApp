@@ -22,8 +22,8 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:text="Profile"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/_18sdp"
-        app:font="@string/font_OpenSans_Light" />
+        android:textSize="@dimen/_15sdp"
+        app:font="@string/font_OpenSans_Semibold" />
 
 
 </LinearLayout>
