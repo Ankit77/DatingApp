@@ -3,7 +3,6 @@ package com.chatapp.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -81,7 +80,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // attach to current activity;
         resideMenu = new ResideMenu(HomeActivity.this);
         resideMenu.setUse3D(false);
-        resideMenu.setBackground(ContextCompat.getColor(HomeActivity.this, R.color.white));
+        //resideMenu.setBackground(ContextCompat.getColor(HomeActivity.this, R.color.white));
         resideMenu.attachToActivity(HomeActivity.this);
         resideMenu.setMenuListener(menuListener);
         //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
