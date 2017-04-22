@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_done"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="collapseActionView|ifRoom"
         android:icon="@drawable/ic_done"
-        android:title="Done" />
+        android:title="Done"
+        app:showAsAction="always" />
 </menu>

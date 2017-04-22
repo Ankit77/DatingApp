@@ -108,5 +108,7 @@
     <string name="github">View on GitHub</string>
     <string name="pacv_default_history_file_name">pacv_history.json</string>
     <string name="title_selectlocation">Select Location</string>
+    <string name="default_selectlocation">Select Location</string>
+    <string name="screen_settings">Settings</string>
 
 </resources>

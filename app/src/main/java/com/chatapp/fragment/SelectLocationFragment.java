@@ -301,6 +301,7 @@ public class SelectLocationFragment extends Fragment implements OnMapReadyCallba
             try {
                 if (fulladdress != null && !fulladdress.isEmpty()) {
 
+                    DatingApp.getsInstance().getSharedPreferences().edit().putString(PREF.PREF_PLACE_NAME, fulladdress).commit();
                     Snackbar snackbar;
                     snackbar = Snackbar.make(flmain, fulladdress, Snackbar.LENGTH_LONG);
                     View snackBarView = snackbar.getView();

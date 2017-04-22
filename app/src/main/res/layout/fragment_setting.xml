@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:buttonTint="@color/colorAccent"
-                        android:checked="true" />
+                        android:checked="false" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -247,7 +247,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/fragment_setting_tv_distance"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:max="100"
                         app:bar_color="@color/dark_grey"
                         app:bar_highlight_color="@color/colorPrimary"
                         app:corner_radius="10"
@@ -255,7 +254,8 @@
                         app:left_thumb_color="@color/colorPrimary"
                         app:left_thumb_color_pressed="@color/colorPrimary"
                         app:max_value="150"
-                        app:min_value="0" />
+                        app:min_value="0"
+                        />
                 </RelativeLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>

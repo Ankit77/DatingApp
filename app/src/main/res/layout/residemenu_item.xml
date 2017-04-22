@@ -4,14 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_10sdp"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="@dimen/_10sdp">
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_room" />
 
@@ -21,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_10sdp"
         android:text="Profile"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_15sdp"
-        app:font="@string/font_OpenSans_Semibold" />
+        android:textColor="@color/charcoal"
+        android:textSize="@dimen/_13sdp"
+        app:font="@string/font_OpenSans_Bold" />
 
 
 </LinearLayout>

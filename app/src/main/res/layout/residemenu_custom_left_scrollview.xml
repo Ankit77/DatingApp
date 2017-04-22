@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="@dimen/_170sdp"
+    <android.support.v7.widget.CardView
+        android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_20sdp"
         android:layout_marginLeft="-20dp"
         android:layout_marginTop="@dimen/_20sdp"
-        app:cardBackgroundColor="@color/timberwolf"
-        card_view:cardCornerRadius="@dimen/_10sdp"
-        card_view:cardElevation="8dp">
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -20,13 +20,11 @@
 
             <LinearLayout
                 android:id="@+id/residemenu_custom_left_scrollview_ll_photo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/sv_left_menu"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="23dp"
+                android:layout_margin="@dimen/_10sdp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -35,7 +33,7 @@
                     android:id="@+id/residemenu_custom_left_scrollview_img_userphoto"
                     android:layout_width="@dimen/_90sdp"
                     android:layout_height="@dimen/_90sdp"
-                    android:src="@drawable/like"
+                    android:src="@drawable/ic_profile"
                     app:civ_border_color="#00000000" />
 
 
@@ -44,9 +42,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="sans-serif-condensed"
                     android:text="Ankit,28"
-                    android:textColor="@color/white"
+                    android:textColor="@color/charcoal"
                     android:textSize="@dimen/_16sdp"
                     app:font="@string/font_OpenSans_Bold" />
             </LinearLayout>
@@ -73,26 +70,18 @@
                 </LinearLayout>
             </ScrollView>
 
-            <LinearLayout
-                android:id="@+id/residemenu_custom_left_scrollview_menuAboutUs"
-                android:layout_width="match_parent"
+
+            <com.chatapp.common.CustomTextView
+                android:id="@+id/residemenu_custom_left_scrollview_tv_logout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:alpha="0.7"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:padding="@dimen/_10sdp">
-
-                <com.chatapp.common.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="@string/lbl_logout"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold"
-                    app:font="@string/font_OpenSans_Bold" />
-            </LinearLayout>
+                android:layout_centerHorizontal="true"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/lbl_logout"
+                android:textColor="@color/charcoal"
+                android:textSize="@dimen/_16sdp"
+                app:font="@string/font_OpenSans_Bold" />
 
 
         </RelativeLayout>

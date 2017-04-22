@@ -116,14 +116,6 @@ public class ResideMenu extends FrameLayout {
         //Menu click of About us
         LinearLayout llMenuAboutUs = (LinearLayout) scrollViewLeftMenu.findViewById(R.id.residemenu_custom_left_scrollview_menuAboutUs);
         setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
-        llMenuAboutUs.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                closeMenu();
-
-
-            }
-        });
         imageViewShadow = (ImageView) findViewById(R.id.iv_shadow);
         imageViewBackground = (ImageView) findViewById(R.id.iv_background);
 
@@ -132,19 +124,12 @@ public class ResideMenu extends FrameLayout {
 
     }
 
-    /**
-     * Returns left menu view so you can findViews and do whatever you want with
-     */
-    public View getLeftMenuView() {
+    public View getSideMenuView()
+    {
         return scrollViewLeftMenu;
     }
 
-    /**
-     * Returns right menu view so you can findViews and do whatever you want with
-     */
-//    public View getRightMenuView() {
-//        return scrollViewRightMenu;
-//    }
+
     @Override
     protected boolean fitSystemWindows(Rect insets) {
         // Applies the content insets to the view's padding, consuming that
@@ -226,7 +211,9 @@ public class ResideMenu extends FrameLayout {
     public void setBackground(int imageResource) {
         imageViewBackground.setImageResource(imageResource);
     }
-
+    public void setBackgroundColor(int color) {
+        imageViewBackground.setBackgroundColor(color);
+    }
     /**
      * The visibility of the shadow under the activity;
      *
@@ -377,6 +364,7 @@ public class ResideMenu extends FrameLayout {
         scaleUp_activity.start();
     }
 
+
     @Deprecated
     public void setDirectionDisable(int direction) {
         disabledSwipeDirection.add(direction);
@@ -433,7 +421,7 @@ public class ResideMenu extends FrameLayout {
      *
      * @return
      */
-    private boolean isOpened() {
+    public boolean isOpened() {
         return isOpened;
     }
 
