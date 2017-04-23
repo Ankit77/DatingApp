@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.chatapp.R;
+import com.chatapp.fragment.EditProfileFragment;
+import com.chatapp.fragment.ProfileDetailFragment;
 import com.chatapp.fragment.SuggestionFragment;
 
 
@@ -30,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SuggestionFragment suggestionFragment = new SuggestionFragment();
-        getFragmentManager().beginTransaction().add(R.id.activity_home_container, suggestionFragment, SuggestionFragment.class.getSimpleName()).commit();
+        EditProfileFragment suggestionFragment = new EditProfileFragment();
+        getFragmentManager().beginTransaction().add(R.id.activity_home_container11, suggestionFragment, EditProfileFragment.class.getSimpleName()).commit();
 
         //fillWithTestData();
     }

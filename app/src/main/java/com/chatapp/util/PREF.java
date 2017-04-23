@@ -1,7 +1,7 @@
 package com.chatapp.util;
 
 public class PREF {
-
+    public static final String PREF_TOKEN = "PREF_TOKEN";
     public static final String PREF_USERNAME = "username";
     public static final String PREF_PASSWORD = "password";
     public static final String PREF_IS_LOGGED_IN = "is_logged_in";
@@ -21,6 +21,9 @@ public class PREF {
     public static final String PREF_MESSAGE_LIKE = "PREF_MESSAGE_LIKE";
     public static final String PREF_MESSAGE_SUPER_LIKE = "PREF_MESSAGE_SUPER_LIKE";
     public static final String PREF_MESSAGE = "PREF_MESSAGE";
+    public static final String PREF_SHOW_AGE = "PREF_SHOW_AGE";
+    public static final String PREF_SHOW_DISTANCE = "PREF_SHOW_DISTANCE";
+    public static final String PREF_GENDER = "PREF_GENDER";
 
 
 }

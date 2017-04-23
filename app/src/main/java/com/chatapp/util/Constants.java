@@ -42,6 +42,12 @@ public class Constants {
     public static final String TAG_BACK = "BACK";
     public static final String TAG_MENU = "MENU";
 
+    public static final int GENDER_MALE = 0;
+    public static final int GENDER_FEMALE = 1;
+
+    public static final String IMAGE_EXTENSION = ".jpg";
+    public static final String IMAGE_FOLDER = "image";
+
 
 }
 

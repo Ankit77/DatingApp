@@ -866,4 +866,18 @@ public class Utils {
         int km = (int) (Mile / 0.621);
         return km;
     }
+
+    public static long getFileSizeInKB(String path) {
+        // Get file from file name
+        File file = new File(path);
+
+// Get length of file in bytes
+        long fileSizeInBytes = file.length();
+// Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
+        long fileSizeInKB = fileSizeInBytes / 1024;
+// Convert the KB to MegaBytes (1 MB = 1024 KBytes)
+        long fileSizeInMB = fileSizeInKB / 1024;
+        return fileSizeInKB;
+    }
+
 }

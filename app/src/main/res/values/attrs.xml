@@ -122,6 +122,16 @@
             <enum name="no_type" value="3" />
         </attr>
     </declare-styleable>
+    <declare-styleable name="RecipientEditTextView">
+        <attr name="invalidChipBackground" format="reference" />
+        <attr name="chipBackground" format="reference" />
+        <attr name="chipBackgroundPressed" format="reference" />
+        <attr name="chipDelete" format="reference" />
+        <attr name="chipAlternatesLayout" format="reference" />
+        <attr name="chipPadding" format="reference" />
+        <attr name="chipHeight" format="reference" />
+        <attr name="chipFontSize" format="reference" />
+    </declare-styleable>
 
     <attr name="pacv_placesAutoCompleteTextViewStyle" format="reference" />
 </resources>

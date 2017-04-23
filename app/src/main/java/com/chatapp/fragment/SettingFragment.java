@@ -226,7 +226,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_done) {
-
+            getFragmentManager().popBackStack();
         }
         return true;
     }

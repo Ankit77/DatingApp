@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1012583357606",
+    "firebase_url": "https://chapapp-9a05d.firebaseio.com",
+    "project_id": "chapapp-9a05d",
+    "storage_bucket": "chapapp-9a05d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012583357606:android:c61cc839daef7074",
+        "android_client_info": {
+          "package_name": "com.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012583357606-qiij0c5rm1vrtfo7uf4lkumu7t4jg6c2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw99BRby7-2r_NN3XBhPxrmcfmwyR9cI4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

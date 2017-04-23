@@ -46,7 +46,7 @@
     <string name="font_OpenSans_ExtraBold">OpenSans-ExtraBold</string>
     <string name="font_OpenSans_ExtraBoldItalic">OpenSans-ExtraBoldItalic</string>
     <string name="font_OpenSans_Italic">OpenSans-Italic</string>
-    <string name="font_OpenSans_Light">OpenSans-Light.ttf</string>
+    <string name="font_OpenSans_Light">OpenSans-Light</string>
     <string name="font_OpenSans_LightItalic">OpenSans-LightItalic</string>
     <string name="font_OpenSans_Regular">OpenSans-Regular</string>
     <string name="font_OpenSans_Semibold">OpenSans-Semibold</string>
@@ -93,8 +93,6 @@
     </integer-array>
 
 
-
-
     <string name="swipe_left">Swipe left</string>
     <string name="swipe_right">Swipe right</string>
     <string name="view_swiped_left">%1$s swiped to left!</string>
@@ -110,5 +108,14 @@
     <string name="title_selectlocation">Select Location</string>
     <string name="default_selectlocation">Select Location</string>
     <string name="screen_settings">Settings</string>
+    <string name="lbl_capture_image">Capture Image</string>
+    <string name="lbl_pick_image">Pick Image</string>
+    <string name="screen_editprofile">Edit Profile</string>
+    <string name="alret_permision_need">Permission i needed to perform action</string>
+    <string name="lbl_current_job">Current Job</string>
+    <string name="lbl_gender">Gender</string>
+    <string name="lbl_male">Male</string>
+    <string name="lbl_female">Female</string>
+    <string name="lbl_control_profile">Control Profile</string>
 
 </resources>
