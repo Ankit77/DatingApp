@@ -22,11 +22,11 @@
     <string name="lbl_viewmore">View More</string>
     <string name="lbl_settings">Settings</string>
     <string name="lbl_about_me">About Me</string>
-    <string name="lbl_relationship">RELATIONSHIP</string>
-    <string name="lbl_faith">FAITH</string>
-    <string name="lbl_weight">WEIGHT</string>
-    <string name="lbl_height">HEIGHT</string>
-    <string name="lbl_natioanlity">NATIOANLITY</string>
+    <string name="lbl_relationship">Relationship</string>
+    <string name="lbl_faith">Faith</string>
+    <string name="lbl_weight">Weight</string>
+    <string name="lbl_height">Height</string>
+    <string name="lbl_natioanlity">Natioanlity</string>
     <string name="lbl_summary">Summary</string>
     <string name="lbl_interest">Interest</string>
     <string name="alert_permision_need">Permision are needed</string>
@@ -117,5 +117,6 @@
     <string name="lbl_male">Male</string>
     <string name="lbl_female">Female</string>
     <string name="lbl_control_profile">Control Profile</string>
+    <string name="lbl_add_interest">Add Interest</string>
 
 </resources>

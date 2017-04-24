@@ -18,7 +18,6 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SwitchCompat;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,16 +33,16 @@ import android.widget.Toast;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
-import com.chatapp.chipview.ChipView;
+import com.chatapp.chipedittext.EditTag;
 import com.chatapp.util.Constants;
 import com.chatapp.util.FileUtils;
 import com.chatapp.util.GetFilePath;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
-import com.chatapp.view.HomeActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import id.zelory.compressor.Compressor;
 
@@ -51,7 +50,7 @@ import id.zelory.compressor.Compressor;
  * Created by ANKIT on 4/23/2017.
  */
 
-public class EditProfileFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+public class EditProfileFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, View.OnClickListener, EditTag.TagAddCallback, EditTag.TagDeletedCallback {
 
     private ImageView img1, img2, img3, img4, img5;
     private ImageView imgdelete1, imgdelete2, imgdelete3, imgdelete4, imgdelete5;
@@ -79,9 +78,9 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
     private String cameraFilePath;
     int PERMISSION_ALL = 1;
     private int position = -1;
-    private ChipView mTextChipDefault;
-
+    private EditTag editTagView;
     String[] PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    private ArrayList<String> interestList = new ArrayList<>();
 //    private HomeActivity homeActivity;
 
     @Override
@@ -97,6 +96,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
         view = inflater.inflate(R.layout.fragment_editprofile, null);
 //        homeActivity.setActionBarTitle(getString(R.string.screen_editprofile));
 //        homeActivity.isBackEnable(true);
+        editTagView = (EditTag) view.findViewById(R.id.fragment_editprofile_et_interest);
         img1 = (ImageView) view.findViewById(R.id.fragment_editprofile_img1);
         img2 = (ImageView) view.findViewById(R.id.fragment_editprofile_img2);
         img3 = (ImageView) view.findViewById(R.id.fragment_editprofile_img3);
@@ -118,6 +118,31 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
         imgdelete3.setOnClickListener(this);
         imgdelete4.setOnClickListener(this);
         imgdelete5.setOnClickListener(this);
+
+
+        //Code for ChipView
+        for (int i = 0; i < 10; i++) {
+            interestList.add("Test" + i + 1);
+        }
+        editTagView.setEditable(true);
+        editTagView.setTagAddCallBack(this);
+//        editTagView.setTagAddCallBack(new EditTag.TagAddCallback() {
+//            @Override
+//            public boolean onTagAdd(String tagValue) {
+//                if (interestList.contains(tagValue)) {
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            }
+//        });
+//        editTagView.setTagDeletedCallback(new EditTag.TagDeletedCallback() {
+//            @Override
+//            public void onTagDelete(String deletedTagValue) {
+//                Toast.makeText(getActivity(), deletedTagValue, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        editTagView.setTagList(interestList);
         return view;
     }
 
@@ -424,7 +449,6 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
         if (requestCode == PERMISSION_ALL) {
             // BEGIN_INCLUDE(permission_result)
             // Received permission result for write permission.
-
             // Check if the only required permission has been granted
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 // write permission has been granted
@@ -437,5 +461,17 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    @Override
+    public boolean onTagAdd(String tagValue) {
+        {
+            return true;
+        }
+    }
+
+    @Override
+    public void onTagDelete(String deletedTagValue) {
+        Toast.makeText(getActivity(), deletedTagValue, Toast.LENGTH_SHORT).show();
     }
 }

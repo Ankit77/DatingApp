@@ -381,20 +381,15 @@
                 android:text="@string/lbl_interest"
                 app:font="@string/font_OpenSans_Bold" />
 
-            <com.chatapp.common.CustomEdittext
-                android:id="@+id/fragment_editprofile_et_faith"
-                style="@style/normal_edittext"
+            <com.chatapp.chipedittext.EditTag
+                android:id="@+id/fragment_editprofile_et_interest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_7sdp"
-                android:background="@android:color/white"
-                android:gravity="top"
-                android:padding="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:paddingTop="@dimen/_10sdp"
-                android:text="Hindu"
-                android:textSize="@dimen/_14sdp"
-                app:font="@string/font_OpenSans_Light" />
+                android:background="@color/white"
+                android:minHeight="@dimen/_30sdp"
+                app:input_layout="@layout/view_default_input_tag"
+                app:tag_layout="@layout/view_default_tag" />
 
             <com.chatapp.common.CustomTextView
                 style="@style/bold_label"
@@ -402,6 +397,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:text="@string/lbl_control_profile"
+
                 app:font="@string/font_OpenSans_Bold" />
 
             <LinearLayout
