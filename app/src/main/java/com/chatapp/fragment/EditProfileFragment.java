@@ -1,7 +1,6 @@
 package com.chatapp.fragment;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -39,12 +38,16 @@ import com.chatapp.util.FileUtils;
 import com.chatapp.util.GetFilePath;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import id.zelory.compressor.Compressor;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by ANKIT on 4/23/2017.
@@ -81,6 +84,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
     private EditTag editTagView;
     String[] PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private ArrayList<String> interestList = new ArrayList<>();
+    private CropImageFragment cropImageFragment;
 //    private HomeActivity homeActivity;
 
     @Override
@@ -119,6 +123,8 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
         imgdelete4.setOnClickListener(this);
         imgdelete5.setOnClickListener(this);
 
+        cropImageFragment = new CropImageFragment();
+
 
         //Code for ChipView
         for (int i = 0; i < 10; i++) {
@@ -126,23 +132,8 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
         }
         editTagView.setEditable(true);
         editTagView.setTagAddCallBack(this);
-//        editTagView.setTagAddCallBack(new EditTag.TagAddCallback() {
-//            @Override
-//            public boolean onTagAdd(String tagValue) {
-//                if (interestList.contains(tagValue)) {
-//                    return false;
-//                } else {
-//                    return true;
-//                }
-//            }
-//        });
-//        editTagView.setTagDeletedCallback(new EditTag.TagDeletedCallback() {
-//            @Override
-//            public void onTagDelete(String deletedTagValue) {
-//                Toast.makeText(getActivity(), deletedTagValue, Toast.LENGTH_SHORT).show();
-//            }
-//        });
         editTagView.setTagList(interestList);
+        //end
         return view;
     }
 
@@ -212,7 +203,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
     }
 
     private void showDialog(final int position) {
-        BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
+        final BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
         dialog.setContentView(R.layout.dialog_attachimage);
         Button btnCaptureImage = (Button) dialog.findViewById(R.id.dialog_attacimage_captureimage);
         Button btnPickImage = (Button) dialog.findViewById(R.id.dialog_attacimage_btn_pickimage);
@@ -230,6 +221,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
                 } else if (position == 5) {
                     captureImage(REQUEST_CAPTURE_IMAGE_5);
                 }
+                dialog.dismiss();
             }
         });
 
@@ -247,6 +239,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
                 } else if (position == 5) {
                     chooseImageFileFromStorage(REQUEST_PICK_IMAGE_5);
                 }
+                dialog.dismiss();
             }
         });
         dialog.show();
@@ -298,94 +291,84 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
 
         String filepath;
         try {
-            if (resultCode == Activity.RESULT_OK) {
+            if (resultCode == RESULT_OK) {
                 // Callback from Gallery
-
+                Uri uri = null;
                 if (requestCode == REQUEST_CAPTURE_IMAGE_1) {
-                    final Uri uri = Uri.fromFile(new File(cameraFilePath));
-                    imageurl1 = getCompressImage(GetFilePath.getPath(getActivity(), uri));
-                    Bitmap bmp = BitmapFactory.decodeFile(imageurl1);
-                    if (bmp != null)
-                        img1.setImageBitmap(bmp);
-                } else if (requestCode == REQUEST_CAPTURE_IMAGE_2) {
-                    final Uri uri = Uri.fromFile(new File(cameraFilePath));
-                    imageurl2 = getCompressImage(GetFilePath.getPath(getActivity(), uri));
-                    Bitmap bmp = BitmapFactory.decodeFile(imageurl2);
-                    if (bmp != null)
-                        img2.setImageBitmap(bmp);
-                } else if (requestCode == REQUEST_CAPTURE_IMAGE_3) {
-                    final Uri uri = Uri.fromFile(new File(cameraFilePath));
-                    imageurl3 = getCompressImage(GetFilePath.getPath(getActivity(), uri));
-                    Bitmap bmp = BitmapFactory.decodeFile(imageurl3);
-                    if (bmp != null)
-                        img3.setImageBitmap(bmp);
-                } else if (requestCode == REQUEST_CAPTURE_IMAGE_4) {
-                    final Uri uri = Uri.fromFile(new File(cameraFilePath));
-                    imageurl4 = getCompressImage(GetFilePath.getPath(getActivity(), uri));
-                    Bitmap bmp = BitmapFactory.decodeFile(imageurl4);
-                    if (bmp != null)
-                        img4.setImageBitmap(bmp);
-                } else if (requestCode == REQUEST_CAPTURE_IMAGE_5) {
-                    final Uri uri = Uri.fromFile(new File(cameraFilePath));
-                    imageurl5 = getCompressImage(GetFilePath.getPath(getActivity(), uri));
-                    Bitmap bmp = BitmapFactory.decodeFile(imageurl5);
-                    if (bmp != null)
-                        img5.setImageBitmap(bmp);
+                    uri = Uri.fromFile(new File(cameraFilePath));
+                    CropImage.activity(uri)
+                            .setGuidelines(CropImageView.Guidelines.ON)
+                            .start(getActivity());
                 } else if (requestCode == REQUEST_PICK_IMAGE_1) {
-                    final Uri selectedImageUri = data.getData();
-                    try {
-                        imageurl1 = GetFilePath.getPath(getActivity(), selectedImageUri);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    Bitmap bmp = BitmapFactory.decodeFile(imageurl1);
-                    if (bmp != null)
-                        img1.setImageBitmap(bmp);
-                } else if (requestCode == REQUEST_PICK_IMAGE_2) {
-                    final Uri selectedImageUri = data.getData();
-                    try {
-                        imageurl2 = GetFilePath.getPath(getActivity(), selectedImageUri);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    Bitmap bmp = BitmapFactory.decodeFile(imageurl2);
-                    if (bmp != null)
-                        img2.setImageBitmap(bmp);
-                } else if (requestCode == REQUEST_PICK_IMAGE_3) {
+                    uri = data.getData();
+                    CropImage.activity(uri)
+                            .setGuidelines(CropImageView.Guidelines.ON)
+                            .start(getActivity());
+//                    CropImage.activity(uri)
+//                            .start(getActivity(), this);
+                    //cropImageFragment.setImageUri(uri);
+//                    try {
+//                        imageurl1 = GetFilePath.getPath(getActivity(), selectedImageUri);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                    Bitmap bmp = BitmapFactory.decodeFile(imageurl1);
+//                    if (bmp != null)
+//                        img1.setImageBitmap(bmp);
+                } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                    CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                    if (resultCode == RESULT_OK) {
+                        Uri resultUri = result.getUri();
+                        if (position == 1) {
+                            try {
+                                imageurl1 = GetFilePath.getPath(getActivity(), resultUri);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            Bitmap bmp = BitmapFactory.decodeFile(imageurl1);
+                            if (bmp != null)
+                                img1.setImageBitmap(bmp);
+                        } else if (position == 2) {
+                            try {
+                                imageurl2 = GetFilePath.getPath(getActivity(), resultUri);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            Bitmap bmp = BitmapFactory.decodeFile(imageurl2);
+                            if (bmp != null)
+                                img1.setImageBitmap(bmp);
+                        } else if (position == 3) {
+                            try {
+                                imageurl3 = GetFilePath.getPath(getActivity(), resultUri);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            Bitmap bmp = BitmapFactory.decodeFile(imageurl3);
+                            if (bmp != null)
+                                img1.setImageBitmap(bmp);
+                        } else if (position == 4) {
+                            try {
+                                imageurl4 = GetFilePath.getPath(getActivity(), resultUri);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            Bitmap bmp = BitmapFactory.decodeFile(imageurl4);
+                            if (bmp != null)
+                                img1.setImageBitmap(bmp);
+                        } else if (position == 5) {
+                            try {
+                                imageurl5 = GetFilePath.getPath(getActivity(), resultUri);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            Bitmap bmp = BitmapFactory.decodeFile(imageurl5);
+                            if (bmp != null)
+                                img1.setImageBitmap(bmp);
+                        }
 
-                    final Uri selectedImageUri = data.getData();
-                    try {
-                        imageurl3 = GetFilePath.getPath(getActivity(), selectedImageUri);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                        Exception error = result.getError();
                     }
-                    Bitmap bmp = BitmapFactory.decodeFile(imageurl3);
-                    if (bmp != null)
-                        img3.setImageBitmap(bmp);
-
-                } else if (requestCode == REQUEST_PICK_IMAGE_4) {
-
-                    final Uri selectedImageUri = data.getData();
-                    try {
-                        imageurl4 = GetFilePath.getPath(getActivity(), selectedImageUri);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    Bitmap bmp = BitmapFactory.decodeFile(imageurl4);
-                    if (bmp != null)
-                        img4.setImageBitmap(bmp);
-
-                } else if (requestCode == REQUEST_PICK_IMAGE_5) {
-
-                    final Uri selectedImageUri = data.getData();
-                    try {
-                        imageurl5 = GetFilePath.getPath(getActivity(), selectedImageUri);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    Bitmap bmp = BitmapFactory.decodeFile(imageurl5);
-                    if (bmp != null)
-                        img5.setImageBitmap(bmp);
                 }
             }
         } catch (Exception e) {
@@ -474,4 +457,5 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
     public void onTagDelete(String deletedTagValue) {
         Toast.makeText(getActivity(), deletedTagValue, Toast.LENGTH_SHORT).show();
     }
+
 }

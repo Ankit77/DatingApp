@@ -119,4 +119,10 @@
     <string name="lbl_control_profile">Control Profile</string>
     <string name="lbl_add_interest">Add Interest</string>
 
+    <!--Crop Image-->
+    <string name="main_action_crop">CROP</string>
+    <string name="main_action_rotate">Rotate 90 degrees clockwise</string>
+    <string name="main_action_flip">Flip</string>
+    <string name="main_action_flip_horizontally">Flip horizontally</string>
+    <string name="main_action_flip_vertically">Flip vertically</string>
 </resources>

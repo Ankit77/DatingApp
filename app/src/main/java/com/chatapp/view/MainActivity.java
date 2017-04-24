@@ -16,13 +16,12 @@
 
 package com.chatapp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.chatapp.R;
 import com.chatapp.fragment.EditProfileFragment;
-import com.chatapp.fragment.ProfileDetailFragment;
-import com.chatapp.fragment.SuggestionFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,4 +38,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        EditProfileFragment fragment = (EditProfileFragment) getFragmentManager().findFragmentByTag(EditProfileFragment.class.getSimpleName());
+        if (fragment != null) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+
+//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+//            if (resultCode == RESULT_OK) {
+//                Uri resultUri = result.getUri();
+//            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+//                Exception error = result.getError();
+//            }
+//        }
+    }
 }
