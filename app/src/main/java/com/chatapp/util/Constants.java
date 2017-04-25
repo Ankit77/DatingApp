@@ -49,5 +49,8 @@ public class Constants {
     public static final String IMAGE_FOLDER = "image";
 
 
+    public static final int MAX_WORD_COUNT = 200;
+
+
 }
 

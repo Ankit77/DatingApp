@@ -130,6 +130,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view == itemProfile) {
             ProfileDetailFragment profileDetailFragment = new ProfileDetailFragment();
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(getString(R.string.key_isloggedin_user), true);
+            profileDetailFragment.setArguments(bundle);
             Utils.addNextFragment(R.id.activity_home_container, HomeActivity.this, profileDetailFragment, getFragmentManager().findFragmentById(R.id.activity_home_container), false);
             resideMenu.closeMenu();
         } else if (view == itemSetting) {

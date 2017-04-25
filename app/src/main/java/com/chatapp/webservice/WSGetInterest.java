@@ -1,6 +1,5 @@
 package com.chatapp.webservice;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import org.json.JSONArray;
@@ -19,15 +18,9 @@ public class WSGetInterest {
 
     private String message = "";
     private int success = 0;
-    private Context context;
-    private int total;
-    private boolean isNextPageAvail = false;
     private String isNextPageUrl = "";
     ArrayList<String> interestModelArrayList = new ArrayList<>();
 
-    public WSGetInterest(Context context) {
-        this.context = context;
-    }
 
     public String getMessage() {
         return message;
@@ -74,7 +67,6 @@ public class WSGetInterest {
 
         try {
             JSONObject jsonObject_summery = jsonObject_data.getJSONObject("summary");
-            total = jsonObject_summery.getInt("total_count");
 
             JSONArray jsonArray_likes = jsonObject_data.getJSONArray("data");
             if (jsonArray_likes != null && jsonArray_likes.length() > 0) {
@@ -90,7 +82,6 @@ public class WSGetInterest {
                 JSONObject jsonObject_page = jsonObject_data.getJSONObject("paging");
                 if (jsonObject_page.has("next")) {
                     isNextPageUrl = jsonObject_page.optString("next");
-                    isNextPageAvail = true;
                     isNextPageUrl = jsonObject_page.optString("next");
                     parseJSONResponse(WebService.GET(HttpUrl.parse(isNextPageUrl)), false);
                 }

@@ -17,6 +17,10 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SwitchCompat;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +32,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chatapp.DatingApp;
@@ -38,6 +43,7 @@ import com.chatapp.util.FileUtils;
 import com.chatapp.util.GetFilePath;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
+import com.chatapp.view.HomeActivity;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -57,49 +63,46 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
 
     private ImageView img1, img2, img3, img4, img5;
     private ImageView imgdelete1, imgdelete2, imgdelete3, imgdelete4, imgdelete5;
-    private ImageView imgedit1, imgedit2, imgedit3, imgedit4, imgedit5;
+    private EditText etAboutMe, etCurrentJob, etRelationship, etNationality, etHeight, etWeight, etfaith;
+    private TextView tvWordCount;
     private View view;
-    private EditText etAboutUs;
-    private EditText etCurrentJob;
     private RadioGroup rgGender;
     private SwitchCompat swtShowAge;
     private SwitchCompat swtLocation;
-    private final int REQUEST_CAPTURE_IMAGE_1 = 111;
-    private final int REQUEST_CAPTURE_IMAGE_2 = 112;
-    private final int REQUEST_CAPTURE_IMAGE_3 = 113;
-    private final int REQUEST_CAPTURE_IMAGE_4 = 114;
-    private final int REQUEST_CAPTURE_IMAGE_5 = 115;
-
-    private final int REQUEST_PICK_IMAGE_1 = 211;
-    private final int REQUEST_PICK_IMAGE_2 = 212;
-    private final int REQUEST_PICK_IMAGE_3 = 213;
-    private final int REQUEST_PICK_IMAGE_4 = 214;
-    private final int REQUEST_PICK_IMAGE_5 = 215;
-
-
+    private final int REQUEST_CAPTURE_IMAGE = 111;
+    private final int REQUEST_PICK_IMAGE = 211;
     private String imageurl1, imageurl2, imageurl3, imageurl4, imageurl5;
     private String cameraFilePath;
-    int PERMISSION_ALL = 1;
+    private int PERMISSION_ALL = 1;
     private int position = -1;
     private EditTag editTagView;
-    String[] PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    private String[] PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private ArrayList<String> interestList = new ArrayList<>();
-    private CropImageFragment cropImageFragment;
-//    private HomeActivity homeActivity;
+    private InputFilter filter;
+    private HomeActivity homeActivity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-//        homeActivity = (HomeActivity) getActivity();
+        homeActivity = (HomeActivity) getActivity();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_editprofile, null);
-//        homeActivity.setActionBarTitle(getString(R.string.screen_editprofile));
-//        homeActivity.isBackEnable(true);
+        homeActivity.setActionBarTitle(getString(R.string.screen_editprofile));
+        homeActivity.isBackEnable(true);
+        init(view);
+        //Code for ChipView
+
+        //end
+        return view;
+    }
+
+
+    private void init(View view) {
         editTagView = (EditTag) view.findViewById(R.id.fragment_editprofile_et_interest);
         img1 = (ImageView) view.findViewById(R.id.fragment_editprofile_img1);
         img2 = (ImageView) view.findViewById(R.id.fragment_editprofile_img2);
@@ -111,8 +114,14 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
         imgdelete3 = (ImageView) view.findViewById(R.id.fragment_editprofile_imgdelete3);
         imgdelete4 = (ImageView) view.findViewById(R.id.fragment_editprofile_imgdelete4);
         imgdelete5 = (ImageView) view.findViewById(R.id.fragment_editprofile_imgdelete5);
-        etAboutUs = (EditText) view.findViewById(R.id.fragment_editprofile_et_aboutme);
+        etAboutMe = (EditText) view.findViewById(R.id.fragment_editprofile_et_aboutme);
         etCurrentJob = (EditText) view.findViewById(R.id.fragment_editprofile_et_currentjob);
+        etfaith = (EditText) view.findViewById(R.id.fragment_editprofile_et_faith);
+        etHeight = (EditText) view.findViewById(R.id.fragment_editprofile_et_height);
+        etNationality = (EditText) view.findViewById(R.id.fragment_editprofile_et_nationality);
+        etRelationship = (EditText) view.findViewById(R.id.fragment_editprofile_et_relationship);
+        etWeight = (EditText) view.findViewById(R.id.fragment_editprofile_et_weight);
+        tvWordCount = (TextView) view.findViewById(R.id.fragment_editprofile_tv_wordcount);
         rgGender = (RadioGroup) view.findViewById(R.id.fragment_editprofile_rg_gender);
         swtShowAge = (SwitchCompat) view.findViewById(R.id.fragment_editprofile_sc_age);
         swtLocation = (SwitchCompat) view.findViewById(R.id.fragment_editprofile_sc_distance);
@@ -122,19 +131,70 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
         imgdelete3.setOnClickListener(this);
         imgdelete4.setOnClickListener(this);
         imgdelete5.setOnClickListener(this);
-
-        cropImageFragment = new CropImageFragment();
-
-
-        //Code for ChipView
+        //Start Chipview
         for (int i = 0; i < 10; i++) {
             interestList.add("Test" + i + 1);
         }
         editTagView.setEditable(true);
         editTagView.setTagAddCallBack(this);
         editTagView.setTagList(interestList);
-        //end
-        return view;
+        //End Chipview
+
+
+        //Start WordCount
+        etAboutMe.setFilters(new InputFilter[]{new InputFilter.LengthFilter(Constants.MAX_WORD_COUNT)});
+        if (TextUtils.isEmpty(etAboutMe.getText().toString())) {
+            tvWordCount.setText("0/" + Constants.MAX_WORD_COUNT);
+        } else {
+            tvWordCount.setText(etAboutMe.getText().length() + "/" + Constants.MAX_WORD_COUNT);
+        }
+
+        etAboutMe.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                int wordsLength = countWords(s.toString());// words.length;
+                // count == 0 means a new word is going to start
+                if (count == 0 && wordsLength >= Constants.MAX_WORD_COUNT) {
+                    setCharLimit(etAboutMe, etAboutMe.getText().length());
+                } else {
+                    removeFilter(etAboutMe);
+                }
+
+                tvWordCount.setText(String.valueOf(wordsLength) + "/" + Constants.MAX_WORD_COUNT);
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvWordCount.setText(String.valueOf(s.length()) + "/" + Constants.MAX_WORD_COUNT);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        //End WordCount
+    }
+
+    private int countWords(String s) {
+        String trim = s.trim();
+        if (trim.isEmpty())
+            return 0;
+        return trim.split("\\s+").length; // separate string around spaces
+    }
+
+
+    private void setCharLimit(EditText et, int max) {
+        filter = new InputFilter.LengthFilter(max);
+        et.setFilters(new InputFilter[]{filter});
+    }
+
+    private void removeFilter(EditText et) {
+        if (filter != null) {
+            et.setFilters(new InputFilter[0]);
+            filter = null;
+        }
     }
 
     @Override
@@ -210,17 +270,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (position == 1) {
-                    captureImage(REQUEST_CAPTURE_IMAGE_1);
-                } else if (position == 2) {
-                    captureImage(REQUEST_CAPTURE_IMAGE_2);
-                } else if (position == 3) {
-                    captureImage(REQUEST_CAPTURE_IMAGE_3);
-                } else if (position == 4) {
-                    captureImage(REQUEST_CAPTURE_IMAGE_4);
-                } else if (position == 5) {
-                    captureImage(REQUEST_CAPTURE_IMAGE_5);
-                }
+                captureImage(REQUEST_CAPTURE_IMAGE);
                 dialog.dismiss();
             }
         });
@@ -228,17 +278,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
         btnPickImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (position == 1) {
-                    chooseImageFileFromStorage(REQUEST_PICK_IMAGE_1);
-                } else if (position == 2) {
-                    chooseImageFileFromStorage(REQUEST_PICK_IMAGE_2);
-                } else if (position == 3) {
-                    chooseImageFileFromStorage(REQUEST_PICK_IMAGE_3);
-                } else if (position == 4) {
-                    chooseImageFileFromStorage(REQUEST_PICK_IMAGE_4);
-                } else if (position == 5) {
-                    chooseImageFileFromStorage(REQUEST_PICK_IMAGE_5);
-                }
+                chooseImageFileFromStorage(REQUEST_PICK_IMAGE);
                 dialog.dismiss();
             }
         });
@@ -294,27 +334,16 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
             if (resultCode == RESULT_OK) {
                 // Callback from Gallery
                 Uri uri = null;
-                if (requestCode == REQUEST_CAPTURE_IMAGE_1) {
+                if (requestCode == REQUEST_CAPTURE_IMAGE) {
                     uri = Uri.fromFile(new File(cameraFilePath));
                     CropImage.activity(uri)
                             .setGuidelines(CropImageView.Guidelines.ON)
                             .start(getActivity());
-                } else if (requestCode == REQUEST_PICK_IMAGE_1) {
+                } else if (requestCode == REQUEST_PICK_IMAGE) {
                     uri = data.getData();
                     CropImage.activity(uri)
                             .setGuidelines(CropImageView.Guidelines.ON)
                             .start(getActivity());
-//                    CropImage.activity(uri)
-//                            .start(getActivity(), this);
-                    //cropImageFragment.setImageUri(uri);
-//                    try {
-//                        imageurl1 = GetFilePath.getPath(getActivity(), selectedImageUri);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                    Bitmap bmp = BitmapFactory.decodeFile(imageurl1);
-//                    if (bmp != null)
-//                        img1.setImageBitmap(bmp);
                 } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
                     CropImage.ActivityResult result = CropImage.getActivityResult(data);
                     if (resultCode == RESULT_OK) {
@@ -336,7 +365,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
                             }
                             Bitmap bmp = BitmapFactory.decodeFile(imageurl2);
                             if (bmp != null)
-                                img1.setImageBitmap(bmp);
+                                img2.setImageBitmap(bmp);
                         } else if (position == 3) {
                             try {
                                 imageurl3 = GetFilePath.getPath(getActivity(), resultUri);
@@ -345,7 +374,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
                             }
                             Bitmap bmp = BitmapFactory.decodeFile(imageurl3);
                             if (bmp != null)
-                                img1.setImageBitmap(bmp);
+                                img3.setImageBitmap(bmp);
                         } else if (position == 4) {
                             try {
                                 imageurl4 = GetFilePath.getPath(getActivity(), resultUri);
@@ -354,7 +383,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
                             }
                             Bitmap bmp = BitmapFactory.decodeFile(imageurl4);
                             if (bmp != null)
-                                img1.setImageBitmap(bmp);
+                                img4.setImageBitmap(bmp);
                         } else if (position == 5) {
                             try {
                                 imageurl5 = GetFilePath.getPath(getActivity(), resultUri);
@@ -363,7 +392,7 @@ public class EditProfileFragment extends Fragment implements CompoundButton.OnCh
                             }
                             Bitmap bmp = BitmapFactory.decodeFile(imageurl5);
                             if (bmp != null)
-                                img1.setImageBitmap(bmp);
+                                img5.setImageBitmap(bmp);
                         }
 
                     } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {

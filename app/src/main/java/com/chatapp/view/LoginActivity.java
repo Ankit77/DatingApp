@@ -1,7 +1,9 @@
 package com.chatapp.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,10 +15,14 @@ import android.widget.TextView;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
+import com.chatapp.model.UserModel;
 import com.chatapp.tutorial.activity.TutorialActivity;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
 import com.chatapp.util.WriteLog;
+import com.chatapp.webservice.WSGetInterest;
+import com.chatapp.webservice.WSGetProfileImage;
+import com.chatapp.webservice.WSGetUserHistory;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -24,6 +30,8 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+
+import java.util.ArrayList;
 
 /**
  * Created by ANKIT on 4/1/2017.
@@ -40,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView tvForgotPassword;
     private Button btnLogin;
     private Button btnSignUp;
+    private AsyncLoadUserData asyncLoadUserData;
 
 
     @Override
@@ -83,34 +92,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onSuccess(LoginResult loginResult) {
                 updateFacebookButtonUI();
-//                new GraphRequest(
-//                        AccessToken.getCurrentAccessToken(),
-//                        "...?fields={fieldname_of_type_CoverPhoto}",
-//                        null,
-//                        HttpMethod.GET,
-//                        new GraphRequest.Callback() {
-//                            public void onCompleted(GraphResponse response) {
-//                                WriteLog.E(TAG, response.getRawResponse().toString());
-//            /* handle the result */
-//                            }
-//                        }
-//                ).executeAsync();
-//                new AsyncGetInterest().execute();
                 SharedPreferences.Editor editor = DatingApp.getsInstance().getSharedPreferences().edit();
                 editor.putBoolean(PREF.PREF_IS_LOGGED_IN, true);
                 editor.putBoolean(PREF.PREF_FB_LOGIN, true);
                 editor.putString(PREF.PREF_FB_TOKEN, AccessToken.getCurrentAccessToken().getToken());
                 editor.commit();
-                Intent intent = null;
-                if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_SHOW_TUTORIAL, true)) {
-                    intent = new Intent(LoginActivity.this, TutorialActivity.class);
-
-                } else {
-                    intent = new Intent(LoginActivity.this, HomeActivity.class);
-
-                }
-                startActivity(intent);
-                finish();
+                asyncLoadUserData = new AsyncLoadUserData();
+                asyncLoadUserData.execute(AccessToken.getCurrentAccessToken().getToken());
                 overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
             }
 
@@ -159,6 +147,54 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         } else if (view == rlFacebook) {
             handleFacebookLogin();
+        }
+    }
+
+    private class AsyncLoadUserData extends AsyncTask<String, Void, UserModel> {
+
+        private UserModel userModel;
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = Utils.displayProgressDialog(LoginActivity.this);
+        }
+
+        @Override
+        protected UserModel doInBackground(String... params) {
+            String accesstoken = params[0];
+            WSGetUserHistory wsGetUserHistory = new WSGetUserHistory();
+            UserModel userModel = wsGetUserHistory.executeWebservice(accesstoken);
+            WSGetInterest wsGetInterest = new WSGetInterest();
+            ArrayList<String> interestlist = wsGetInterest.executeWebservice(accesstoken);
+            if (interestlist != null) {
+                userModel.setInterest(interestlist);
+            }
+            WSGetProfileImage wsGetProfileImage = new WSGetProfileImage();
+            ArrayList<String> imagelist = wsGetProfileImage.executeWebservice(accesstoken);
+            if (imagelist != null) {
+                userModel.setImages(imagelist);
+            }
+            return userModel;
+        }
+
+        @Override
+        protected void onPostExecute(UserModel userModel) {
+            super.onPostExecute(userModel);
+            Utils.dismissProgressDialog(progressDialog);
+            if (!isCancelled()) {
+                Intent intent = null;
+                if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_SHOW_TUTORIAL, true)) {
+                    intent = new Intent(LoginActivity.this, TutorialActivity.class);
+
+                } else {
+                    intent = new Intent(LoginActivity.this, HomeActivity.class);
+
+                }
+                startActivity(intent);
+                finish();
+            }
         }
     }
 

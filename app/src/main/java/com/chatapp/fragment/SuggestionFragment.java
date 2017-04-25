@@ -1,7 +1,6 @@
 package com.chatapp.fragment;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -122,8 +121,6 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
     }
 
 
-
-
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
@@ -167,6 +164,9 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
     @Override
     public void topCardTapped(int mIndex) {
         ProfileDetailFragment profileDetailFragment = new ProfileDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(getString(R.string.key_isloggedin_user), false);
+        profileDetailFragment.setArguments(bundle);
         Utils.addNextFragment(R.id.activity_home_container, homeActivity, profileDetailFragment, SuggestionFragment.this, false);
         WriteLog.E(SuggestionFragment.class.getSimpleName(), list.get(mIndex).getName());
     }

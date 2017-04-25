@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import okhttp3.HttpUrl;
 
@@ -34,7 +33,7 @@ public class WSGetUserHistory {
     }
 
     public UserModel executeWebservice(String accessToken) {
-        final String url = "https://graph.facebook.com/v2.8/me?fields=id,name,work,education,birthday&access_token=" + accessToken;
+        final String url = "https://graph.facebook.com/v2.8/me?fields=id,name,work,birthday,email,gender,location&access_token=" + accessToken;
         try {
             return parseJSONResponse(WebService.GET(HttpUrl.parse(url)));
         } catch (IOException e) {
@@ -51,15 +50,12 @@ public class WSGetUserHistory {
                 JSONObject jsonObject = new JSONObject(response);
                 userModel.setUserName(jsonObject.optString("name"));
                 userModel.setBirthday(jsonObject.optString("birthday"));
-                JSONArray jsonArray_edu = jsonObject.getJSONArray("education");
-                if (jsonArray_edu != null && jsonArray_edu.length() > 0) {
-                    ArrayList<String> eduList = new ArrayList<>();
-                    for (int i = 0; i < jsonArray_edu.length(); i++) {
-                        JSONObject jsonObject_school = jsonArray_edu.getJSONObject(i);
-                        eduList.add(jsonObject_school.getJSONObject("school").optString("name"));
-                    }
-                    userModel.setEducationHistory(eduList);
+                JSONObject jsonObjec_location = jsonObject.getJSONObject("location");
+                if (jsonObjec_location != null) {
+                    userModel.setLocation(jsonObjec_location.getString("name"));
                 }
+                userModel.setGender(jsonObject.getString("gender"));
+                userModel.setEmail(jsonObject.getString("email"));
                 JSONArray jsonArray_work = jsonObject.getJSONArray("work");
                 if (jsonArray_work != null && jsonArray_work.length() > 0) {
                     WorkExperianceModel workExperianceModel = new WorkExperianceModel();
