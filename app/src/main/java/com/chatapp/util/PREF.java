@@ -24,6 +24,7 @@ public class PREF {
     public static final String PREF_SHOW_AGE = "PREF_SHOW_AGE";
     public static final String PREF_SHOW_DISTANCE = "PREF_SHOW_DISTANCE";
     public static final String PREF_GENDER = "PREF_GENDER";
+    public static final String PREF_ACTIVE_SUBSCRIBE = "PREF_ACTIVE_SUBSCRIBE";
 
 
 }

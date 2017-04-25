@@ -221,9 +221,6 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                 } else {
                     intent = new Intent(SplashActivity.this, HomeActivity.class);
                 }
-                startActivity(intent);
-                finish();
-                overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
             } else {
                 intent = new Intent(SplashActivity.this, LoginActivity.class);
             }

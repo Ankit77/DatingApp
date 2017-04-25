@@ -5,4 +5,5 @@
     <string name="map_api_key">AIzaSyAc-2wwl0QbkFLwfvjTBxQLS0Mw1WzxrRY</string>
 
     <string name="key_isloggedin_user">is_loggedin_user</string>
+    <string name="key_is_back_enable">is_back_enable</string>
 </resources>

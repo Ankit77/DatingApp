@@ -535,7 +535,18 @@ public class Utils {
      * @param targetedFragment
      */
     public static void replaceNextFragment(int containerid, Activity mActivity, Fragment targetedFragment) {
+
         final FragmentTransaction transaction = mActivity.getFragmentManager().beginTransaction();
+//        if (isDownToUp) {
+//            transaction.setCustomAnimations(R.animator.slide_fragment_vertical_right_in, R.animator.slide_fragment_vertical_left_out, R.animator.slide_fragment_vertical_left_in,
+//                    R.animator.slide_fragment_vertical_right_out);
+//
+//
+//        } else {
+//            transaction.setCustomAnimations(R.animator.slide_fragment_horizontal_right_in, R.animator.slide_fragment_horizontal_left_out, R.animator.slide_fragment_horizontal_left_in,
+//                    R.animator.slide_fragment_horizontal_right_out);
+//
+//        }
         transaction.replace(containerid, targetedFragment, targetedFragment.getClass().getSimpleName());
         //curFragment = targetedFragment;
         transaction.commit();

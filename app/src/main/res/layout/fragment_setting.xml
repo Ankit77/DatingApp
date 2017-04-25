@@ -70,74 +70,81 @@
                         android:checked="true" />
                 </RelativeLayout>
 
-                <com.chatapp.common.CustomTextView
-                    style="@style/setting_bold_pink_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_toRightOf="@+id/fragment_setting_img_locationlbl"
-                    android:text="@string/lbl_or"
-                    app1:font="@string/font_OpenSans_Semibold" />
-
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/fragment_setting_ll_otherlocationview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_10sdp">
-
-                    <ImageView
-                        android:id="@+id/fragment_setting_img_otherlocationlbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:src="@drawable/ic_room" />
+                    android:orientation="vertical">
 
                     <com.chatapp.common.CustomTextView
-                        android:id="@+id/fragment_setting_tv_otherlocationlbl"
-                        style="@style/setting_normal_black_text"
+                        style="@style/setting_bold_pink_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_toRightOf="@+id/fragment_setting_img_otherlocationlbl"
-                        android:text="@string/lbl_other_location"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_toRightOf="@+id/fragment_setting_img_locationlbl"
+                        android:text="@string/lbl_or"
                         app1:font="@string/font_OpenSans_Semibold" />
 
-                    <android.support.v7.widget.AppCompatCheckBox
-                        android:id="@+id/fragment_setting_chk_otherlocation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:buttonTint="@color/colorAccent"
-                        android:checked="false" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/fragment_setting_ll_otherlocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_30sdp"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_10sdp">
-
-                    <com.chatapp.common.CustomTextView
-                        android:id="@+id/fragment_setting_tv_otherlocation"
-                        style="@style/setting_normal_black_text"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_toRightOf="@+id/fragment_setting_img_otherlocationlbl"
-                        android:layout_weight="1"
-                        app1:font="@string/font_OpenSans_Semibold"
-                        tools:text="Ahmedabad" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_10sdp">
 
-                    <ImageView
-                        android:id="@+id/fragment_setting_img_editlocation"
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/fragment_setting_img_otherlocationlbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/ic_room" />
+
+                        <com.chatapp.common.CustomTextView
+                            android:id="@+id/fragment_setting_tv_otherlocationlbl"
+                            style="@style/setting_normal_black_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/fragment_setting_img_otherlocationlbl"
+                            android:text="@string/lbl_other_location"
+                            app1:font="@string/font_OpenSans_Semibold" />
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/fragment_setting_chk_otherlocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:buttonTint="@color/colorAccent"
+                            android:checked="false" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/fragment_setting_ll_otherlocation"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:src="@drawable/ic_edit_location" />
+                        android:layout_marginLeft="@dimen/_30sdp"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_10sdp">
+
+                        <com.chatapp.common.CustomTextView
+                            android:id="@+id/fragment_setting_tv_otherlocation"
+                            style="@style/setting_normal_black_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/fragment_setting_img_otherlocationlbl"
+                            android:layout_weight="1"
+                            app1:font="@string/font_OpenSans_Semibold"
+                            tools:text="Ahmedabad" />
+
+                        <ImageView
+                            android:id="@+id/fragment_setting_img_editlocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/ic_edit_location" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -229,33 +236,34 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="Search Distance"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Show Ages"
                         app1:font="@string/font_OpenSans_Semibold" />
 
                     <com.chatapp.common.CustomTextView
-                        android:id="@+id/fragment_setting_tv_distance"
+                        android:id="@+id/fragment_setting_tv_ages"
                         style="@style/setting_normal_black_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="3 km"
+                        android:text="24-34"
                         app1:font="@string/font_OpenSans_Semibold" />
 
-                    <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
-                        android:id="@+id/fragment_setting_sb_distance"
+                    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                        android:id="@+id/fragment_setting_sb_ages"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/fragment_setting_tv_distance"
+                        android:layout_below="@+id/fragment_setting_tv_ages"
                         android:layout_marginTop="@dimen/_10sdp"
                         app:bar_color="@color/dark_grey"
                         app:bar_highlight_color="@color/colorPrimary"
                         app:corner_radius="10"
                         app:data_type="_integer"
+                        app:gap="20"
                         app:left_thumb_color="@color/colorPrimary"
-                        app:left_thumb_color_pressed="@color/colorPrimary"
-                        app:max_value="150"
-                        app:min_value="0"
-                        />
+                        app:left_thumb_color_pressed="@color/colorPrimaryDark"
+                        app:right_thumb_color="@color/colorPrimary"
+                        app:right_thumb_color_pressed="@color/colorPrimaryDark" />
                 </RelativeLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -285,34 +293,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="Show Ages"
+                        android:text="Search Distance"
                         app1:font="@string/font_OpenSans_Semibold" />
 
                     <com.chatapp.common.CustomTextView
-                        android:id="@+id/fragment_setting_tv_ages"
+                        android:id="@+id/fragment_setting_tv_distance"
                         style="@style/setting_normal_black_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="24-34"
+                        android:text="3 km"
                         app1:font="@string/font_OpenSans_Semibold" />
 
-                    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-                        android:id="@+id/fragment_setting_sb_ages"
+                    <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                        android:id="@+id/fragment_setting_sb_distance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/fragment_setting_tv_ages"
+                        android:layout_below="@+id/fragment_setting_tv_distance"
                         android:layout_marginTop="@dimen/_10sdp"
                         app:bar_color="@color/dark_grey"
                         app:bar_highlight_color="@color/colorPrimary"
                         app:corner_radius="10"
                         app:data_type="_integer"
-                        app:gap="20"
                         app:left_thumb_color="@color/colorPrimary"
-                        app:left_thumb_color_pressed="@color/colorPrimaryDark"
-                        app:right_thumb_color="@color/colorPrimary"
-                        app:right_thumb_color_pressed="@color/colorPrimaryDark" />
+                        app:left_thumb_color_pressed="@color/colorPrimary"
+                        app:max_value="150"
+                        app:min_value="0" />
                 </RelativeLayout>
 
                 <RelativeLayout

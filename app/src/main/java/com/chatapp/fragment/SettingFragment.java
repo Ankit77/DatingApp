@@ -49,6 +49,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
     private TextView tvMatchDistance;
     private CrystalSeekbar sbDistance;
     private CrystalRangeSeekbar rsbAge;
+    private LinearLayout llOtherLocationview;
     private TextView tvAges;
     private RadioGroup rgDistanceUnit;
     private SwitchCompat swtNewMatch;
@@ -57,11 +58,15 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
     private SwitchCompat swtMessageSuperLike;
     private Button btnLogout;
     private Button btnDeleteAccount;
+    private boolean isBackEnable;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        if (getArguments() != null) {
+            isBackEnable = getArguments().getBoolean(getString(R.string.key_is_back_enable), true);
+        }
     }
 
     @Nullable
@@ -76,8 +81,8 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
 
     private void init(View view) {
         homeActivity.setActionBarTitle(getString(R.string.screen_settings));
-        homeActivity.isBackEnable(true);
-
+        homeActivity.isBackEnable(isBackEnable);
+        llOtherLocationview = (LinearLayout) view.findViewById(R.id.fragment_setting_ll_otherlocationview);
         chkCurrentLocation = (AppCompatCheckBox) view.findViewById(R.id.fragment_setting_chk_currentlocation);
         chkOtherLocation = (AppCompatCheckBox) view.findViewById(R.id.fragment_setting_chk_otherlocation);
         llOtherLocation = (LinearLayout) view.findViewById(R.id.fragment_setting_ll_otherlocation);
@@ -118,6 +123,14 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
         } else {
             chkOtherLocation.setChecked(true);
             chkCurrentLocation.setChecked(false);
+        }
+
+        if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_ACTIVE_SUBSCRIBE, true)) {
+            llOtherLocationview.setVisibility(View.VISIBLE);
+            chkCurrentLocation.setVisibility(View.VISIBLE);
+        } else {
+            llOtherLocationview.setVisibility(View.GONE);
+            chkCurrentLocation.setVisibility(View.GONE);
         }
         tvOtherLocation.setText(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_PLACE_NAME, getString(R.string.default_selectlocation)));
         if (DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_INTEREST, 0) == Constants.INTEREST_MEN) {
@@ -249,7 +262,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
         if (!isHidden()) {
             tvOtherLocation.setText(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_PLACE_NAME, getString(R.string.default_selectlocation)));
             homeActivity.setActionBarTitle(getString(R.string.screen_settings));
-            homeActivity.isBackEnable(true);
+            homeActivity.isBackEnable(isBackEnable);
         }
 
     }

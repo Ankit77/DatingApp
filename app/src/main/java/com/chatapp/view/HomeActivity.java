@@ -53,7 +53,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         init();
 
         SuggestionFragment suggestionFragment = new SuggestionFragment();
-        getFragmentManager().beginTransaction().add(R.id.activity_home_container, suggestionFragment, SuggestionFragment.class.getSimpleName()).commit();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(getString(R.string.key_is_back_enable), false);
+        Utils.replaceNextFragment(R.id.activity_home_container, HomeActivity.this, suggestionFragment);
     }
 
     public void initToolBar() {
@@ -69,8 +71,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         tvLogout = (TextView) resideMenu.getSideMenuView().findViewById(R.id.residemenu_custom_left_scrollview_tv_logout);
         imgMenu.setOnClickListener(this);
         tvLogout.setOnClickListener(this);
+        imgProfile.setOnClickListener(this);
+        tvProfileName.setOnClickListener(this);
         loadUserData();
-        isBackEnable(false);
+//        isBackEnable(false);
     }
 
     public void setActionBarTitle(String title) {
@@ -128,20 +132,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        if (view == itemProfile) {
+        if (view == itemProfile || view == imgProfile || view == tvProfileName) {
             ProfileDetailFragment profileDetailFragment = new ProfileDetailFragment();
             Bundle bundle = new Bundle();
             bundle.putBoolean(getString(R.string.key_isloggedin_user), true);
+            bundle.putBoolean(getString(R.string.key_is_back_enable), false);
             profileDetailFragment.setArguments(bundle);
-            Utils.addNextFragment(R.id.activity_home_container, HomeActivity.this, profileDetailFragment, getFragmentManager().findFragmentById(R.id.activity_home_container), false);
+            Utils.replaceNextFragment(R.id.activity_home_container, HomeActivity.this, profileDetailFragment);
             resideMenu.closeMenu();
         } else if (view == itemSetting) {
             SettingFragment settingFragment = new SettingFragment();
-            Utils.addNextFragment(R.id.activity_home_container, HomeActivity.this, settingFragment, getFragmentManager().findFragmentById(R.id.activity_home_container), false);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(getString(R.string.key_is_back_enable), false);
+            Utils.replaceNextFragment(R.id.activity_home_container, HomeActivity.this, settingFragment);
             resideMenu.closeMenu();
         } else if (view == itemSuggetion) {
-
-        } else if (view == itemSuggetion) {
+            SuggestionFragment suggestionFragment = new SuggestionFragment();
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(getString(R.string.key_is_back_enable), false);
+            Utils.replaceNextFragment(R.id.activity_home_container, HomeActivity.this, suggestionFragment);
+            resideMenu.closeMenu();
+        } else if (view == itemChat) {
 
         } else if (view == imgMenu) {
 
@@ -171,7 +182,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             if (getFragmentManager().getBackStackEntryCount() > 0) {
                 getFragmentManager().popBackStack();
             } else {
-                super.onBackPressed();
+                finish();
             }
         }
     }

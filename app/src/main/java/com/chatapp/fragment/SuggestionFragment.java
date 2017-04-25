@@ -36,11 +36,15 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
     private HomeActivity homeActivity;
     private RippleBackground rippleBackground;
     private CardStack cardStack;
+    private boolean isBackEnable = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        if (getArguments() != null) {
+            isBackEnable = getArguments().getBoolean(getString(R.string.key_is_back_enable), true);
+        }
     }
 
     @Nullable
@@ -59,7 +63,7 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
         rippleBackground = (RippleBackground) view.findViewById(R.id.fragment_suggestion_radarview);
         loadData();
         homeActivity.setActionBarTitle("Matches");
-        homeActivity.isBackEnable(false);
+        homeActivity.isBackEnable(isBackEnable);
     }
 
     @Override
@@ -126,7 +130,7 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
         super.onHiddenChanged(hidden);
         if (!hidden) {
             homeActivity.setActionBarTitle("Matches");
-            homeActivity.isBackEnable(false);
+            homeActivity.isBackEnable(isBackEnable);
         }
     }
 

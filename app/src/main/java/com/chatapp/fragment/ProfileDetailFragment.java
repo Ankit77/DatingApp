@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
@@ -23,6 +24,7 @@ import com.chatapp.view.HomeActivity;
 import com.chatapp.webservice.WSGetInterest;
 import com.chatapp.webservice.WSGetProfileImage;
 import com.chatapp.webservice.WSGetUserHistory;
+import com.nirhart.parallaxscroll.views.ParallaxScrollView;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,9 @@ public class ProfileDetailFragment extends Fragment implements View.OnClickListe
     private HomeActivity homeActivity;
     private FloatingActionButton btnEditProifile;
     private boolean isLogedUserProfile = false;
+    private boolean isBackEnable = false;
+    private RelativeLayout rlProgressbar;
+    private ParallaxScrollView parallaxScrollView;
 
 
     @Override
@@ -57,7 +62,7 @@ public class ProfileDetailFragment extends Fragment implements View.OnClickListe
         setHasOptionsMenu(true);
         if (getArguments() != null) {
             isLogedUserProfile = getArguments().getBoolean(getString(R.string.key_isloggedin_user), false);
-
+            isBackEnable = getArguments().getBoolean(getString(R.string.key_is_back_enable), true);
         }
     }
 
@@ -67,14 +72,14 @@ public class ProfileDetailFragment extends Fragment implements View.OnClickListe
         view = inflater.inflate(R.layout.fragment_profiledetail, null);
         homeActivity = (HomeActivity) getActivity();
         homeActivity.setActionBarTitle(getString(R.string.screen_profile));
-        homeActivity.isBackEnable(true);
+        homeActivity.isBackEnable(isBackEnable);
         init(view);
         return view;
     }
 
     private void init(View view) {
-        homeActivity.setActionBarTitle("Profile");
-        homeActivity.isBackEnable(true);
+        parallaxScrollView = (ParallaxScrollView) view.findViewById(R.id.fragment_profiledetail_scrollview);
+        rlProgressbar = (RelativeLayout) view.findViewById(R.id.fragment_profiledetail_rl_progressbar);
         viewPager = (ViewPager) view.findViewById(R.id.fragment_profiledetail_pager);
         indicator = (CircleIndicator) view.findViewById(R.id.fragment_profiledetail_indicator);
         btnEditProifile = (FloatingActionButton) view.findViewById(R.id.fragment_profiledetail_btn_edit);
@@ -113,7 +118,9 @@ public class ProfileDetailFragment extends Fragment implements View.OnClickListe
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = Utils.displayProgressDialog(getActivity());
+            parallaxScrollView.setVisibility(View.GONE);
+            rlProgressbar.setVisibility(View.VISIBLE);
+            btnEditProifile.setVisibility(View.GONE);
         }
 
         @Override
@@ -176,7 +183,9 @@ public class ProfileDetailFragment extends Fragment implements View.OnClickListe
         protected void onPostExecute(ArrayList<String> interestModels) {
             super.onPostExecute(interestModels);
             if (!isCancelled()) {
-                Utils.dismissProgressDialog(progressDialog);
+                parallaxScrollView.setVisibility(View.VISIBLE);
+                rlProgressbar.setVisibility(View.GONE);
+                btnEditProifile.setVisibility(View.VISIBLE);
                 if (interestModels != null && interestModels.size() > 0) {
                     interestList = interestModels;
                 }
@@ -189,6 +198,6 @@ public class ProfileDetailFragment extends Fragment implements View.OnClickListe
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         homeActivity.setActionBarTitle(getString(R.string.screen_profile));
-        homeActivity.isBackEnable(true);
+        homeActivity.isBackEnable(isBackEnable);
     }
 }

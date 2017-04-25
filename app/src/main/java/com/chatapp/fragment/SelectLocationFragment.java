@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -154,7 +155,14 @@ public class SelectLocationFragment extends Fragment implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.getUiSettings().setMyLocationButtonEnabled(false);
-        crntLocationLatLng = new LatLng(DatingApp.getsInstance().getCurrentLocation().getLatitude(), DatingApp.getsInstance().getCurrentLocation().getLongitude());
+        if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_IS_CURRENT_LOCATION, true)) {
+            crntLocationLatLng = new LatLng(DatingApp.getsInstance().getCurrentLocation().getLatitude(), DatingApp.getsInstance().getCurrentLocation().getLongitude());
+        } else {
+            Double lat = Double.parseDouble(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_PLACE_LAT, ""));
+            Double lang = Double.parseDouble(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_PLACE_LONG, ""));
+
+            crntLocationLatLng = new LatLng(lat, lang);
+        }
         CameraPosition cameraPosition = new CameraPosition.Builder().target(crntLocationLatLng).zoom(14.5f).build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -172,6 +180,12 @@ public class SelectLocationFragment extends Fragment implements OnMapReadyCallba
 
                 try {
                     if (crntLocationLatLng.latitude != 0 && crntLocationLatLng.longitude != 0) {
+                        Location targetLocation = new Location("");//provider name is unnecessary
+                        targetLocation.setLatitude(crntLocationLatLng.latitude);//your coords of course
+                        targetLocation.setLongitude(crntLocationLatLng.longitude);
+                        DatingApp.getsInstance().setCurrentLocation(targetLocation);
+                        DatingApp.getsInstance().getSharedPreferences().edit().putString(PREF.PREF_PLACE_LAT, String.valueOf(crntLocationLatLng.latitude)).commit();
+                        DatingApp.getsInstance().getSharedPreferences().edit().putString(PREF.PREF_PLACE_LONG, String.valueOf(crntLocationLatLng.longitude)).commit();
                         latlongToAddress(crntLocationLatLng.latitude, crntLocationLatLng.longitude);
                     }
 
@@ -257,36 +271,49 @@ public class SelectLocationFragment extends Fragment implements OnMapReadyCallba
                     fulladdress = "";
                     smallAddress = "";
 
-                    if (sb.append(address.getAddressLine(0)) != null) {
-                        smallAddress = address.getAddressLine(0);
-                        //Log.e("", "smallAddress:-" + smallAddress);
-                        fulladdress = smallAddress;
-                    }
-
                     if (address.getLocality() != null) {
-                        city = address.getLocality();
-                        if (!fulladdress.contains(city))
-                            fulladdress = fulladdress + " " + city;
-
+                        fulladdress = address.getLocality();
                     }
+
                     if (address.getAdminArea() != null) {
-                        state = address.getAdminArea();
-                        if (!fulladdress.contains(state))
-                            fulladdress = fulladdress + " " + state;
-
+                        if (TextUtils.isEmpty(fulladdress)) {
+                            fulladdress = address.getAdminArea();
+                        } else {
+                            fulladdress = fulladdress + "," + address.getAdminArea();
+                        }
+                        DatingApp.getsInstance().getSharedPreferences().edit().putString(PREF.PREF_PLACE_NAME, fulladdress).commit();
                     }
-                    if (address.getPostalCode() != null) {
-                        zipcode = address.getPostalCode();
-                        if (!fulladdress.contains(zipcode))
-                            fulladdress = fulladdress + " " + zipcode;
 
-                    }
-                    if (address.getCountryName() != null) {
-                        country = address.getCountryName();
-                        if (!fulladdress.contains(country))
-                            fulladdress = fulladdress + " " + country;
-
-                    }
+//                    if (sb.append(address.getAddressLine(0)) != null) {
+//                        smallAddress = address.getAddressLine(0);
+//                        //Log.e("", "smallAddress:-" + smallAddress);
+//                        fulladdress = smallAddress;
+//                    }
+//
+//                    if (address.getLocality() != null) {
+//                        city = address.getLocality();
+//                        if (!fulladdress.contains(city))
+//                            fulladdress = fulladdress + " " + city;
+//
+//                    }
+//                    if (address.getAdminArea() != null) {
+//                        state = address.getAdminArea();
+//                        if (!fulladdress.contains(state))
+//                            fulladdress = fulladdress + " " + state;
+//
+//                    }
+//                    if (address.getPostalCode() != null) {
+//                        zipcode = address.getPostalCode();
+//                        if (!fulladdress.contains(zipcode))
+//                            fulladdress = fulladdress + " " + zipcode;
+//
+//                    }
+//                    if (address.getCountryName() != null) {
+//                        country = address.getCountryName();
+//                        if (!fulladdress.contains(country))
+//                            fulladdress = fulladdress + " " + country;
+//
+//                    }
 
                 }
             } catch (IOException e) {
