@@ -3,6 +3,8 @@ package com.chatapp.util;
 
 public class Constants {
 
+    public static final String BASEURL = "http://35.154.238.107/dateapp/api/service.php?method";
+
     public static final int INTEREST_MEN = 1;
     public static final int INTEREST_WOMEN = 2;
     public static final int INTEREST_BOTH = 0;

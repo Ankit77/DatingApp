@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,12 +18,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.chatapp.DatingApp;
 import com.chatapp.R;
+import com.chatapp.model.Example;
 import com.chatapp.service.LocationService;
-import com.chatapp.tutorial.activity.TutorialActivity;
-import com.chatapp.util.PREF;
 import com.chatapp.util.WriteLog;
+import com.chatapp.webservice.WSLogin;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -214,19 +214,31 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            Intent intent = null;
-            if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_IS_LOGGED_IN, false)) {
-                if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_SHOW_TUTORIAL, true)) {
-                    intent = new Intent(SplashActivity.this, TutorialActivity.class);
-                } else {
-                    intent = new Intent(SplashActivity.this, HomeActivity.class);
-                }
-            } else {
-                intent = new Intent(SplashActivity.this, LoginActivity.class);
-            }
-            startActivity(intent);
-            overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
-            finish();
+//            Intent intent = null;
+//            if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_IS_LOGGED_IN, false)) {
+//                if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_SHOW_TUTORIAL, true)) {
+//                    intent = new Intent(SplashActivity.this, TutorialActivity.class);
+//                } else {
+//                    intent = new Intent(SplashActivity.this, HomeActivity.class);
+//                }
+//            } else {
+//                intent = new Intent(SplashActivity.this, LoginActivity.class);
+//            }
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
+//            finish();
+
+            new AsyncLogin().execute("adkhatri12@gmail.com", "ankit11112");
         }
     };
+
+    private class AsyncLogin extends AsyncTask<String, Void, Example> {
+
+        @Override
+        protected Example doInBackground(String... params) {
+            WSLogin wsLogin = new WSLogin();
+            wsLogin.executeWebservice(params[0], params[1]);
+            return null;
+        }
+    }
 }
