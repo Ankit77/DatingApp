@@ -5,6 +5,9 @@ public class Constants {
 
     public static final String BASEURL = "http://35.154.238.107/dateapp/api/service.php?method";
 
+    public static final String DISPLAY_DATEFORMAT = "dd-MMM-yyyy";
+    public static final String API_DATEFORMAT = "yyyy-MM-dd";
+
     public static final int INTEREST_MEN = 1;
     public static final int INTEREST_WOMEN = 2;
     public static final int INTEREST_BOTH = 0;
@@ -44,8 +47,8 @@ public class Constants {
     public static final String TAG_BACK = "BACK";
     public static final String TAG_MENU = "MENU";
 
-    public static final int GENDER_MALE = 0;
-    public static final int GENDER_FEMALE = 1;
+    public static final int GENDER_MALE = 1;
+    public static final int GENDER_FEMALE = 2;
 
     public static final String IMAGE_EXTENSION = ".jpg";
     public static final String IMAGE_FOLDER = "image";

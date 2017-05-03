@@ -15,6 +15,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -38,6 +41,7 @@ import com.chatapp.R;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -47,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class Utils {
@@ -891,4 +896,50 @@ public class Utils {
         return fileSizeInKB;
     }
 
+    public static String getLocationFromLatLong(Location location, Context context) {
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(context, Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+
+            String city = addresses.get(0).getLocality();
+            String state = addresses.get(0).getAdminArea();
+            return city + "," + state;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public static String getAge(String dateofbirth) {
+        try {
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat(Constants.API_DATEFORMAT, Locale.ENGLISH);
+
+            cal.setTime(sdf.parse(dateofbirth));
+
+            Calendar dob = Calendar.getInstance();
+            Calendar today = Calendar.getInstance();
+
+            dob.setTime(sdf.parse(dateofbirth));
+
+            int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+            if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+                age--;
+            }
+
+            Integer ageInt = new Integer(age);
+            String ageS = ageInt.toString();
+
+            return ageS;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -17,10 +17,10 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
 /**
- * Created by indianic on 03/05/17.
+ * Created by ANKIT on 5/4/2017.
  */
 
-public class WSLogin {
+public class WSRegister {
     private String message = "";
     private int success = 0;
 
@@ -33,12 +33,10 @@ public class WSLogin {
         return success;
     }
 
-    public Example executeWebservice(String email, String password) {
+    public Example executeWebservice(Bundle bundle) {
 
-        final String url = Constants.BASEURL + "=login";
+        final String url = Constants.BASEURL + "=registration";
         try {
-            Bundle bundle = new Bundle();
-            bundle.putString("data", generateJson(email, password).toString());
             return parseJSONResponse(WebService.POST(url, generateRequest(bundle)));
 //            return parseJSONResponse(WebService.POSTRAWDATA(url, generateJson(email, password).toString()), true);
         } catch (IOException e) {
@@ -47,26 +45,6 @@ public class WSLogin {
         return null;
     }
 
-    private JSONObject generateJson(String email, String password) {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("device_token", DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_TOKEN, ""));
-            if (!TextUtils.isEmpty(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_ID, ""))) {
-                jsonObject.put("fb_id", DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_ID, ""));
-            }
-            if (!TextUtils.isEmpty(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_TOKEN, ""))) {
-                jsonObject.put("fb_token", DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_TOKEN, ""));
-            }
-            jsonObject.put("email", email);
-            jsonObject.put("password", password);
-            jsonObject.put("lat", "" + DatingApp.getsInstance().getCurrentLocation().getLatitude());
-            jsonObject.put("long", "" + DatingApp.getsInstance().getCurrentLocation().getLongitude());
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return jsonObject;
-    }
 
     private RequestBody generateRequest(Bundle bundle) {
         FormBody.Builder formBodyBuilder = new FormBody.Builder();
@@ -93,6 +71,4 @@ public class WSLogin {
         }
         return null;
     }
-
-
 }

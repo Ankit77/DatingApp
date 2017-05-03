@@ -13,7 +13,7 @@
     <string name="labrl_signup_with_google">Signup with Google +</string>
     <string name="label_or">OR</string>
     <string name="lbl_signup">Sign Up</string>
-    <string name="hint_first_name">First Name</string>
+    <string name="hint_name">Name</string>
     <string name="hint_lastname">Last Name</string>
     <string name="hint_email">Email</string>
     <string name="drawer_open">drawer_open</string>
@@ -126,4 +126,7 @@
     <string name="main_action_flip_horizontally">Flip horizontally</string>
     <string name="main_action_flip_vertically">Flip vertically</string>
     <string name="screen_profile">Profile</string>
+    <string name="label_dob">DOB</string>
+    <string name="lblmale">Male</string>
+    <string name="lblfemale">Female</string>
 </resources>

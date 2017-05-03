@@ -12,7 +12,7 @@
     <style name="title_textview">
         <item name="android:textColor">#ff5377</item>
         <item name="android:textSize">@dimen/_28sdp</item>
-        <item name="android:gravity">center_horizontal</item>
+        <item name="android:gravity">center</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 

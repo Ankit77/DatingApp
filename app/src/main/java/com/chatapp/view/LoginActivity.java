@@ -144,6 +144,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (view == btnLogin) {
 
         } else if (view == btnSignUp) {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
 
         } else if (view == rlFacebook) {
             handleFacebookLogin();
