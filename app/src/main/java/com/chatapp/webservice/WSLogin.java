@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.chatapp.DatingApp;
-import com.chatapp.model.Example;
+import com.chatapp.model.BaseResponseModel;
+import com.chatapp.model.UserBasicInfoModel;
 import com.chatapp.util.Constants;
 import com.chatapp.util.PREF;
 
@@ -33,7 +34,7 @@ public class WSLogin {
         return success;
     }
 
-    public Example executeWebservice(String email, String password) {
+    public UserBasicInfoModel executeWebservice(String email, String password) {
 
         final String url = Constants.BASEURL + "=login";
         try {
@@ -58,7 +59,9 @@ public class WSLogin {
                 jsonObject.put("fb_token", DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_FB_TOKEN, ""));
             }
             jsonObject.put("email", email);
-            jsonObject.put("password", password);
+            if (!TextUtils.isEmpty(password))
+                jsonObject.put("password", password);
+
             jsonObject.put("lat", "" + DatingApp.getsInstance().getCurrentLocation().getLatitude());
             jsonObject.put("long", "" + DatingApp.getsInstance().getCurrentLocation().getLongitude());
         } catch (JSONException e) {
@@ -80,11 +83,22 @@ public class WSLogin {
         return formBodyBuilder.build();
     }
 
-    public Example parseJSONResponse(final String response) {
+    public UserBasicInfoModel parseJSONResponse(final String response) {
+        UserBasicInfoModel userBasicInfoModel = null;
         try {
-            if (TextUtils.isEmpty(response)) {
-                Example example = WebService.getGsonInstance().fromJson(response, Example.class);
-                return example;
+            if (!TextUtils.isEmpty(response)) {
+                BaseResponseModel baseResponseModel = WebService.parseBaseResponse(response);
+                if (baseResponseModel != null) {
+                    if (Integer.parseInt(baseResponseModel.getSuccess()) == 1) {
+                        userBasicInfoModel = WebService.getGsonInstance().fromJson(baseResponseModel.getData().toString(), UserBasicInfoModel.class);
+                        success = Constants.RESPONSE_SUCCESS;
+                    } else {
+                        userBasicInfoModel = null;
+                        success = Constants.RESPONSE_FAIL;
+                        message = baseResponseModel.getMessage();
+                    }
+                }
+                return userBasicInfoModel;
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -5,6 +5,14 @@ public class Constants {
 
     public static final String BASEURL = "http://35.154.238.107/dateapp/api/service.php?method";
 
+
+    public static final int RESPONSE_SUCCESS = 1;
+    public static final int RESPONSE_FAIL = 0;
+
+    public static final String ENABLE = "1";
+    public static final String DISABLE = "0";
+    public static final String USER_EXIST = "USER_EXIST";
+
     public static final String DISPLAY_DATEFORMAT = "dd-MMM-yyyy";
     public static final String API_DATEFORMAT = "yyyy-MM-dd";
 

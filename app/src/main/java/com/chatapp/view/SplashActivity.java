@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,12 +19,10 @@ import android.widget.Toast;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
-import com.chatapp.model.Example;
 import com.chatapp.service.LocationService;
 import com.chatapp.tutorial.activity.TutorialActivity;
 import com.chatapp.util.PREF;
 import com.chatapp.util.WriteLog;
-import com.chatapp.webservice.WSLogin;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -235,17 +232,5 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
         }
     };
 
-    private class AsyncLogin extends AsyncTask<String, Void, Example> {
 
-        @Override
-        protected Example doInBackground(String... params) {
-            WSLogin wsLogin = new WSLogin();
-            return wsLogin.executeWebservice(params[0], params[1]);
-        }
-
-        @Override
-        protected void onPostExecute(Example example) {
-            super.onPostExecute(example);
-        }
-    }
 }

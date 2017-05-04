@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.chatapp.model.BaseResponseModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
@@ -12,6 +13,8 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -120,5 +123,19 @@ public class WebService {
             }
             writer.value(value);
         }
+    }
+
+    public static BaseResponseModel parseBaseResponse(String response) {
+        try {
+            JSONObject objMain = new JSONObject(response);
+
+            BaseResponseModel model = new BaseResponseModel();
+            model.setMessage(objMain.optString("Message"));
+            model.setSuccess(objMain.optString("success"));
+            model.setData(objMain.optJSONObject("user_detail"));
+            return model;
+        } catch (Exception ignored) {
+        }
+        return null;
     }
 }

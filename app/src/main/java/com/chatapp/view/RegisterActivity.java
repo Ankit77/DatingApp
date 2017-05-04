@@ -1,11 +1,15 @@
 package com.chatapp.view;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,7 +21,8 @@ import android.widget.RadioGroup;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
-import com.chatapp.model.Example;
+import com.chatapp.dialog.CustomProgressDialog;
+import com.chatapp.model.UserBasicInfoModel;
 import com.chatapp.util.Constants;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
@@ -65,55 +70,56 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         rgGender = (RadioGroup) findViewById(R.id.activity_register_rg_gender);
         btnRegister.setOnClickListener(this);
         etDOB.setOnClickListener(this);
+        imgBack.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         if (view == btnRegister) {
 
-            if (TextUtils.isEmpty(etEmail.getText().toString())) {
+            if (TextUtils.isEmpty(etEmail.getText().toString()) && Utils.isValidEmail(etEmail.getText().toString())) {
                 snackbar = Snackbar
-                        .make(findViewById(R.id.layout_root), "Please enter email address", Snackbar.LENGTH_LONG)
-                        .setAction("UNDO", new View.OnClickListener() {
+                        .make(findViewById(R.id.layout_root), "Please enter valid email address", Snackbar.LENGTH_LONG)
+                        .setAction("OK", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 snackbar.dismiss();
                             }
                         });
-
+                snackbar.getView().setBackgroundColor(ContextCompat.getColor(RegisterActivity.this, R.color.colorAccent));
                 snackbar.show();
             } else if (TextUtils.isEmpty(etName.getText().toString())) {
                 snackbar = Snackbar
                         .make(findViewById(R.id.layout_root), "Please enter name", Snackbar.LENGTH_LONG)
-                        .setAction("UNDO", new View.OnClickListener() {
+                        .setAction("OK", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 snackbar.dismiss();
                             }
                         });
-
+                snackbar.getView().setBackgroundColor(ContextCompat.getColor(RegisterActivity.this, R.color.colorAccent));
                 snackbar.show();
             } else if (TextUtils.isEmpty(etPass.getText().toString())) {
                 snackbar = Snackbar
                         .make(findViewById(R.id.layout_root), "Please enter Password", Snackbar.LENGTH_LONG)
-                        .setAction("UNDO", new View.OnClickListener() {
+                        .setAction("OK", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 snackbar.dismiss();
                             }
                         });
-
+                snackbar.getView().setBackgroundColor(ContextCompat.getColor(RegisterActivity.this, R.color.colorAccent));
                 snackbar.show();
             } else if (TextUtils.isEmpty(etDOB.getText().toString())) {
                 snackbar = Snackbar
                         .make(findViewById(R.id.layout_root), "Please enter DOB", Snackbar.LENGTH_LONG)
-                        .setAction("UNDO", new View.OnClickListener() {
+                        .setAction("OK", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 snackbar.dismiss();
                             }
                         });
-
+                snackbar.getView().setBackgroundColor(ContextCompat.getColor(RegisterActivity.this, R.color.colorAccent));
                 snackbar.show();
 
             } else {
@@ -124,48 +130,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 } else {
                     gender = Constants.GENDER_FEMALE;
                 }
-                try {
-                    JSONObject bundle = new JSONObject();
-                    if (!TextUtils.isEmpty(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_TOKEN, ""))) {
-                        bundle.put("device_token", DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_TOKEN, ""));
 
-                    }
-                    bundle.put("device_type", "mobile");
-                    bundle.put("email", etEmail.getText().toString());
-                    bundle.put("password", etPass.getText().toString());
-                    bundle.put("name", etName.getText().toString());
-                    bundle.put("dob", DOB);
-                    bundle.put("gender", "" + gender);
-                    bundle.put("lat", "" + DatingApp.getsInstance().getCurrentLocation().getLatitude());
-                    bundle.put("long", "" + DatingApp.getsInstance().getCurrentLocation().getLongitude());
-                    String location = Utils.getLocationFromLatLong(DatingApp.getsInstance().getCurrentLocation(), RegisterActivity.this);
-                    if (!TextUtils.isEmpty(location))
-                        bundle.put("location", location);
-                    if (gender == Constants.GENDER_MALE) {
-                        bundle.put("interested_in", "" + Constants.INTEREST_WOMEN);
-                    } else {
-                        bundle.put("interested_in", "" + Constants.INTEREST_MEN);
-                    }
-                    bundle.put("radius", "" + Constants.DEFULT_DISTANCE);
-                    bundle.put("age", Utils.getAge(DOB));
-                    bundle.put("minage", "" + Constants.MIN_AGE);
-                    bundle.put("maxage", "" + Constants.MAX_AGE);
-                    bundle.put("os_type", "Android");
-                    bundle.put("os_version", "" + Build.VERSION.SDK_INT);
+                aysncRegisterUser = new AysncRegisterUser();
+                aysncRegisterUser.execute(etEmail.getText().toString(), etPass.getText().toString(), etName.getText().toString(), "" + gender);
 
-                    Bundle bundle1 = new Bundle();
-                    bundle1.putString("data", bundle.toString());
-                    aysncRegisterUser = new AysncRegisterUser(bundle1);
-                    aysncRegisterUser.execute();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
 
         } else if (view == etDOB) {
             new DatePickerDialog(RegisterActivity.this, date, myCalendar
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                     myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        } else if (view == imgBack) {
+            finish();
+            overridePendingTransition(R.anim.anim_left_in, R.anim.anim_right_out);
         }
     }
 
@@ -187,30 +164,162 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     };
 
-    private class AysncRegisterUser extends AsyncTask<String, Void, Example> {
-        private Bundle bundle;
-
-        public AysncRegisterUser(Bundle bundle) {
-            this.bundle = bundle;
-        }
+    private class AysncRegisterUser extends AsyncTask<String, Void, UserBasicInfoModel> {
+        WSRegister wsRegister;
+        CustomProgressDialog customProgressDialog = new CustomProgressDialog(RegisterActivity.this);
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            customProgressDialog.show();
+
         }
 
         @Override
-        protected Example doInBackground(String... strings) {
+        protected UserBasicInfoModel doInBackground(String... strings) {
+            String email = strings[0];
+            String pass = strings[1];
+            String name = strings[2];
+            int gender = Integer.parseInt(strings[3]);
 
-            WSRegister wsRegister = new WSRegister();
-            return wsRegister.executeWebservice(bundle);
+            try {
+                JSONObject bundle = new JSONObject();
+                if (!TextUtils.isEmpty(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_TOKEN, ""))) {
+                    bundle.put("device_token", DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_TOKEN, ""));
+
+                }
+                bundle.put("device_type", "mobile");
+                bundle.put("email", email);
+                bundle.put("password", pass);
+                bundle.put("name", name);
+                bundle.put("dob", DOB);
+                bundle.put("gender", "" + gender);
+                bundle.put("lat", "" + DatingApp.getsInstance().getCurrentLocation().getLatitude());
+                bundle.put("long", "" + DatingApp.getsInstance().getCurrentLocation().getLongitude());
+                String location = Utils.getLocationFromLatLong(DatingApp.getsInstance().getCurrentLocation(), RegisterActivity.this);
+                if (!TextUtils.isEmpty(location))
+                    bundle.put("location", location);
+                if (gender == Constants.GENDER_MALE) {
+                    bundle.put("interested_in", "" + Constants.INTEREST_WOMEN);
+                } else {
+                    bundle.put("interested_in", "" + Constants.INTEREST_MEN);
+                }
+                bundle.put("radius", "" + Constants.DEFULT_DISTANCE);
+                bundle.put("age", Utils.getAge(DOB));
+                bundle.put("minage", "" + Constants.MIN_AGE);
+                bundle.put("maxage", "" + Constants.MAX_AGE);
+                bundle.put("os_type", "Android");
+                bundle.put("os_version", "" + Build.VERSION.SDK_INT);
+
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("data", bundle.toString());
+
+                wsRegister = new WSRegister();
+                return wsRegister.executeWebservice(bundle1);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
 
         @Override
-        protected void onPostExecute(Example example) {
+        protected void onPostExecute(UserBasicInfoModel example) {
             super.onPostExecute(example);
-            if (!isCancelled()) {
 
+            if (!isCancelled()) {
+                if (customProgressDialog != null && customProgressDialog.isShowing()) {
+                    customProgressDialog.dismiss();
+                }
+                if (wsRegister.getSuccess() == Constants.RESPONSE_SUCCESS) {
+                    SharedPreferences.Editor editor = DatingApp.getsInstance().getSharedPreferences().edit();
+                    editor.putString(PREF.PREF_USERID, example.getUid());
+                    editor.putString(PREF.PREF_USERNAME, example.getUsername());
+                    editor.putBoolean(PREF.PREF_IS_LOGGED_IN, true);
+                    editor.putString(PREF.PREF_PLACE_NAME, example.getLocation());
+                    editor.putString(PREF.PREF_PLACE_LAT, example.getLat());
+                    editor.putString(PREF.PREF_PLACE_LONG, example.getLong());
+                    if (example.getShowCurrentLocation().equalsIgnoreCase(Constants.ENABLE)) {
+                        editor.putBoolean(PREF.PREF_IS_CURRENT_LOCATION, true);
+                    } else {
+                        editor.putBoolean(PREF.PREF_IS_CURRENT_LOCATION, false);
+                    }
+                    if (!TextUtils.isEmpty(example.getRadius()))
+                        editor.putInt(PREF.PREF_MATCH_DISTANCE, Integer.parseInt(example.getRadius()));
+                    if (!TextUtils.isEmpty(example.getMinage()))
+                        editor.putInt(PREF.PREF_MIN_AGE, Integer.parseInt(example.getMinage()));
+                    if (!TextUtils.isEmpty(example.getMaxage()))
+                        editor.putInt(PREF.PREF_MAX_AGE, Integer.parseInt(example.getMaxage()));
+                    if (!TextUtils.isEmpty(example.getDistanceUnit()))
+                        editor.putString(PREF.PREF_DISTANCE_UNIT_KM, example.getMaxage());
+
+                    if (example.getEnableNewMatch().equalsIgnoreCase(Constants.ENABLE)) {
+                        editor.putBoolean(PREF.PREF_NEW_MATCH, true);
+                    } else {
+                        editor.putBoolean(PREF.PREF_NEW_MATCH, false);
+                    }
+
+                    if (example.getEnableMessageLike().equalsIgnoreCase(Constants.ENABLE)) {
+                        editor.putBoolean(PREF.PREF_MESSAGE_LIKE, true);
+                    } else {
+                        editor.putBoolean(PREF.PREF_MESSAGE_LIKE, false);
+                    }
+
+                    if (example.getEnableSuperlikes().equalsIgnoreCase(Constants.ENABLE)) {
+                        editor.putBoolean(PREF.PREF_MESSAGE_SUPER_LIKE, true);
+                    } else {
+                        editor.putBoolean(PREF.PREF_MESSAGE_SUPER_LIKE, false);
+                    }
+
+
+                    if (example.getEnableMessage().equalsIgnoreCase(Constants.ENABLE)) {
+                        editor.putBoolean(PREF.PREF_MESSAGE, true);
+                    } else {
+                        editor.putBoolean(PREF.PREF_MESSAGE, false);
+                    }
+
+                    if (example.getShowAgeEnabled().equalsIgnoreCase(Constants.ENABLE)) {
+                        editor.putBoolean(PREF.PREF_SHOW_AGE, true);
+                    } else {
+                        editor.putBoolean(PREF.PREF_SHOW_AGE, false);
+                    }
+                    if (example.getShowLocationEnabled().equalsIgnoreCase(Constants.ENABLE)) {
+                        editor.putBoolean(PREF.PREF_SHOW_DISTANCE, true);
+                    } else {
+                        editor.putBoolean(PREF.PREF_SHOW_DISTANCE, false);
+                    }
+
+                    if (Integer.parseInt(example.getGender()) == Constants.GENDER_MALE) {
+                        editor.putInt(PREF.PREF_GENDER, Constants.GENDER_MALE);
+                    } else {
+                        editor.putInt(PREF.PREF_GENDER, Constants.GENDER_FEMALE);
+                    }
+
+                    if (!TextUtils.isEmpty(example.getName()))
+                        editor.putString(PREF.PREF_NAME, example.getName());
+
+                    if (!TextUtils.isEmpty(example.getLocation()))
+                        editor.putString(PREF.PREF_LOCATION, example.getLocation());
+
+                    if (!TextUtils.isEmpty(example.getAge()))
+                        editor.putString(PREF.PREF_AGE, example.getAge());
+                    if (!TextUtils.isEmpty(example.getProfilePhoto()))
+                        editor.putString(PREF.PREF_PROFILE, example.getProfilePhoto());
+
+                    editor.commit();
+                } else {
+                    snackbar = Snackbar
+                            .make(findViewById(R.id.layout_root), wsRegister.getMessage(), Snackbar.LENGTH_LONG)
+                            .setAction("OK", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    snackbar.dismiss();
+                                    finish();
+                                }
+                            });
+                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(RegisterActivity.this, R.color.colorAccent));
+                    snackbar.show();
+                }
             }
         }
     }

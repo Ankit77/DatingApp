@@ -129,4 +129,5 @@
     <string name="label_dob">DOB</string>
     <string name="lblmale">Male</string>
     <string name="lblfemale">Female</string>
+    <string name="alert_internet">Please Check Internet Connection</string>
 </resources>

@@ -942,4 +942,20 @@ public class Utils {
             return null;
         }
     }
+
+
+    public static String changeFbDateFormat(String date) {
+        try {
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH);
+
+            cal.setTime(sdf.parse(date));
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat(Constants.API_DATEFORMAT, Locale.US);
+            return sdf1.format(cal.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }

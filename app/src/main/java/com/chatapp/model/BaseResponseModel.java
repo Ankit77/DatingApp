@@ -1,10 +1,12 @@
-
 package com.chatapp.model;
+
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Example {
+import org.json.JSONObject;
+
+public class BaseResponseModel {
 
     @SerializedName("success")
     @Expose
@@ -14,7 +16,7 @@ public class Example {
     private String message;
     @SerializedName("user_detail")
     @Expose
-    private UserDetail userDetail;
+    private JSONObject data;;
 
     public String getSuccess() {
         return success;
@@ -32,12 +34,11 @@ public class Example {
         this.message = message;
     }
 
-    public UserDetail getUserDetail() {
-        return userDetail;
+    public JSONObject getData() {
+        return data;
     }
 
-    public void setUserDetail(UserDetail userDetail) {
-        this.userDetail = userDetail;
+    public void setData(JSONObject data) {
+        this.data = data;
     }
-
 }

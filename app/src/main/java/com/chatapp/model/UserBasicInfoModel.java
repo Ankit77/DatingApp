@@ -4,7 +4,7 @@ package com.chatapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserDetail {
+public class UserBasicInfoModel {
 
     @SerializedName("id")
     @Expose
@@ -84,6 +84,12 @@ public class UserDetail {
     @SerializedName("enable_superlikes")
     @Expose
     private String enableSuperlikes;
+    @SerializedName("show_age_enabled")
+    @Expose
+    private String showAgeEnabled;
+    @SerializedName("show_location_enabled")
+    @Expose
+    private String showLocationEnabled;
     @SerializedName("interested_in")
     @Expose
     private String interestedIn;
@@ -333,6 +339,22 @@ public class UserDetail {
 
     public void setEnableSuperlikes(String enableSuperlikes) {
         this.enableSuperlikes = enableSuperlikes;
+    }
+
+    public String getShowAgeEnabled() {
+        return showAgeEnabled;
+    }
+
+    public void setShowAgeEnabled(String showAgeEnabled) {
+        this.showAgeEnabled = showAgeEnabled;
+    }
+
+    public String getShowLocationEnabled() {
+        return showLocationEnabled;
+    }
+
+    public void setShowLocationEnabled(String showLocationEnabled) {
+        this.showLocationEnabled = showLocationEnabled;
     }
 
     public String getInterestedIn() {
