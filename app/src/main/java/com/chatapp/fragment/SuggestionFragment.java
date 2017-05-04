@@ -1,6 +1,7 @@
 package com.chatapp.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -77,6 +78,10 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_chat:
+                Intent launchIntent = getActivity().getPackageManager().getLaunchIntentForPackage("com.quickblox.q_municate");
+                if (launchIntent != null) {
+                    startActivity(launchIntent);//null pointer check in case package name was not found
+                }
                 Toast.makeText(getActivity(), "Chat is called", Toast.LENGTH_LONG).show();
                 break;
         }
@@ -174,5 +179,7 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
         Utils.addNextFragment(R.id.activity_home_container, homeActivity, profileDetailFragment, SuggestionFragment.this, false);
         WriteLog.E(SuggestionFragment.class.getSimpleName(), list.get(mIndex).getName());
     }
+
+
 }
 
