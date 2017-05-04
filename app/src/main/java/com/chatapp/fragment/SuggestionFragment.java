@@ -2,6 +2,7 @@ package com.chatapp.fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -11,14 +12,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chatapp.R;
 import com.chatapp.adapter.SuggetionAdapter;
 import com.chatapp.model.SuggetionModel;
+import com.chatapp.model.dashboard.UserDetailModel;
 import com.chatapp.util.Utils;
 import com.chatapp.util.WriteLog;
 import com.chatapp.view.HomeActivity;
+import com.chatapp.webservice.WSDashboard;
 import com.chatapp.wenchao.cardstack.CardAnimator;
 import com.chatapp.wenchao.cardstack.CardStack;
 import com.skyfishjy.library.RippleBackground;
@@ -33,11 +37,13 @@ import java.util.ArrayList;
 public class SuggestionFragment extends Fragment implements CardStack.CardEventListener {
     private View view;
     private SuggetionAdapter suggetionAdapter;
-    private ArrayList<SuggetionModel> list;
     private HomeActivity homeActivity;
     private RippleBackground rippleBackground;
     private CardStack cardStack;
     private boolean isBackEnable = false;
+    private AsyncGetSuggetion asyncGetSuggetion;
+    private ArrayList<UserDetailModel> suggetionList;
+    private TextView tvNoData;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,7 +58,7 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_suggetion, null);
-
+        tvNoData = (TextView) view.findViewById(R.id.fragment_suggetion_tv_nodata);
         homeActivity = (HomeActivity) getActivity();
         cardStack = (CardStack) view.findViewById(R.id.container);
         cardStack.setStackGravity(CardAnimator.TOP);
@@ -98,29 +104,10 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        rippleBackground.stopRippleAnimation();
-                        list = new ArrayList<>();
-                        list.add(new SuggetionModel("Änkit Khatri 1", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 2", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 3", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 4", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 5", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 6", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 7", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 8", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 9", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 10", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 11", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 12", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 13", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 14", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
-                        list.add(new SuggetionModel("Änkit Khatri 15", "28", "Ahmedabad", "Software Engineer", "2.5", 1, "https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg"));
 
-                        suggetionAdapter = new SuggetionAdapter(getActivity(), list);
-                        cardStack.setAdapter(suggetionAdapter);
-                        cardStack.setStackGravity(cardStack.getStackGravity() == CardAnimator.TOP ? CardAnimator.BOTTOM : CardAnimator.TOP);
-                        cardStack.reset(true);
-                        cardStack.setListener(SuggestionFragment.this);
+                        asyncGetSuggetion = new AsyncGetSuggetion();
+                        asyncGetSuggetion.execute();
+
                     }
                 }, 5000);
             }
@@ -177,9 +164,49 @@ public class SuggestionFragment extends Fragment implements CardStack.CardEventL
         bundle.putBoolean(getString(R.string.key_isloggedin_user), false);
         profileDetailFragment.setArguments(bundle);
         Utils.addNextFragment(R.id.activity_home_container, homeActivity, profileDetailFragment, SuggestionFragment.this, false);
-        WriteLog.E(SuggestionFragment.class.getSimpleName(), list.get(mIndex).getName());
+        WriteLog.E(SuggestionFragment.class.getSimpleName(), suggetionList.get(mIndex).getName());
     }
 
 
+    private class AsyncGetSuggetion extends AsyncTask<Void, Void, ArrayList<UserDetailModel>> {
+        private WSDashboard wsDashboard;
+
+        @Override
+        protected ArrayList<UserDetailModel> doInBackground(Void... voids) {
+            wsDashboard = new WSDashboard();
+            return wsDashboard.executeWebservice();
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<UserDetailModel> userDetailModels) {
+            super.onPostExecute(userDetailModels);
+            if (!isCancelled()) {
+                rippleBackground.stopRippleAnimation();
+                if (userDetailModels != null && userDetailModels.size() > 0) {
+                    tvNoData.setVisibility(View.GONE);
+                    rippleBackground.setVisibility(View.GONE);
+                    cardStack.setVisibility(View.VISIBLE);
+                    suggetionList = userDetailModels;
+                    suggetionAdapter = new SuggetionAdapter(getActivity(), suggetionList);
+                    cardStack.setAdapter(suggetionAdapter);
+                    cardStack.setStackGravity(cardStack.getStackGravity() == CardAnimator.TOP ? CardAnimator.BOTTOM : CardAnimator.TOP);
+                    cardStack.reset(true);
+                    cardStack.setListener(SuggestionFragment.this);
+                } else {
+                    tvNoData.setVisibility(View.VISIBLE);
+                    cardStack.setVisibility(View.GONE);
+                    rippleBackground.setVisibility(View.GONE);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (asyncGetSuggetion != null & asyncGetSuggetion.getStatus() == AsyncTask.Status.RUNNING) {
+            asyncGetSuggetion.cancel(true);
+        }
+    }
 }
 

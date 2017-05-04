@@ -1,6 +1,7 @@
 package com.chatapp.fragment;
 
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -117,7 +118,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
         swtMessage.setChecked(DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_MESSAGE, true));
         swtMessageLike.setChecked(DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_MESSAGE_LIKE, true));
         swtMessageSuperLike.setChecked(DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_MESSAGE_SUPER_LIKE, true));
-        if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_IS_CURRENT_LOCATION, false)) {
+        if (DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_IS_CURRENT_LOCATION,Constants.SHOW_CURRENT_LOCATION).equalsIgnoreCase(Constants.SHOW_CURRENT_LOCATION)) {
             chkCurrentLocation.setChecked(true);
             chkOtherLocation.setChecked(false);
         } else {
@@ -133,13 +134,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
             chkCurrentLocation.setVisibility(View.GONE);
         }
         tvOtherLocation.setText(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_PLACE_NAME, getString(R.string.default_selectlocation)));
-        if (DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_INTEREST, 0) == Constants.INTEREST_MEN) {
+        if (DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_INTEREST_IN, 0) == Constants.INTEREST_MEN) {
             swtMen.setChecked(true);
             swtWomen.setChecked(false);
-        } else if (DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_INTEREST, 0) == Constants.INTEREST_WOMEN) {
+        } else if (DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_INTEREST_IN, 0) == Constants.INTEREST_WOMEN) {
             swtMen.setChecked(false);
             swtWomen.setChecked(true);
-        } else if (DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_INTEREST, 0) == Constants.INTEREST_BOTH) {
+        } else if (DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_INTEREST_IN, 0) == Constants.INTEREST_BOTH) {
             swtMen.setChecked(true);
             swtWomen.setChecked(true);
         } else {
@@ -271,13 +272,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (buttonView == chkCurrentLocation) {
             if (isChecked) {
-                DatingApp.getsInstance().getSharedPreferences().edit().putBoolean(PREF.PREF_IS_CURRENT_LOCATION, true).commit();
+                DatingApp.getsInstance().getSharedPreferences().edit().putString(PREF.PREF_IS_CURRENT_LOCATION, Constants.SHOW_CURRENT_LOCATION).commit();
                 chkOtherLocation.setOnCheckedChangeListener(null);
                 llOtherLocation.setVisibility(View.GONE);
                 chkOtherLocation.setChecked(false);
                 chkOtherLocation.setOnCheckedChangeListener(this);
             } else {
-                DatingApp.getsInstance().getSharedPreferences().edit().putBoolean(PREF.PREF_IS_CURRENT_LOCATION, false).commit();
+                DatingApp.getsInstance().getSharedPreferences().edit().putString(PREF.PREF_IS_CURRENT_LOCATION, Constants.SHOW_OTHER_LOCATION).commit();
                 chkOtherLocation.setOnCheckedChangeListener(null);
                 llOtherLocation.setVisibility(View.VISIBLE);
                 chkOtherLocation.setChecked(true);
@@ -285,13 +286,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
             }
         } else if (buttonView == chkOtherLocation) {
             if (isChecked) {
-                DatingApp.getsInstance().getSharedPreferences().edit().putBoolean(PREF.PREF_IS_CURRENT_LOCATION, false).commit();
+                DatingApp.getsInstance().getSharedPreferences().edit().putString(PREF.PREF_IS_CURRENT_LOCATION, Constants.SHOW_OTHER_LOCATION).commit();
                 chkCurrentLocation.setOnCheckedChangeListener(null);
                 llOtherLocation.setVisibility(View.VISIBLE);
                 chkCurrentLocation.setChecked(false);
                 chkCurrentLocation.setOnCheckedChangeListener(this);
             } else {
-                DatingApp.getsInstance().getSharedPreferences().edit().putBoolean(PREF.PREF_IS_CURRENT_LOCATION, true).commit();
+                DatingApp.getsInstance().getSharedPreferences().edit().putString(PREF.PREF_IS_CURRENT_LOCATION, Constants.SHOW_CURRENT_LOCATION).commit();
                 chkCurrentLocation.setOnCheckedChangeListener(null);
                 llOtherLocation.setVisibility(View.GONE);
                 chkCurrentLocation.setChecked(true);
@@ -299,13 +300,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
             }
         } else if (buttonView == swtMen || buttonView == swtWomen) {
             if (swtMen.isChecked() && swtWomen.isChecked()) {
-                DatingApp.getsInstance().getSharedPreferences().edit().putInt(PREF.PREF_INTEREST, Constants.INTEREST_BOTH).commit();
+                DatingApp.getsInstance().getSharedPreferences().edit().putInt(PREF.PREF_INTEREST_IN, Constants.INTEREST_BOTH).commit();
             } else if (swtMen.isChecked() && !swtWomen.isChecked()) {
-                DatingApp.getsInstance().getSharedPreferences().edit().putInt(PREF.PREF_INTEREST, Constants.INTEREST_MEN).commit();
+                DatingApp.getsInstance().getSharedPreferences().edit().putInt(PREF.PREF_INTEREST_IN, Constants.INTEREST_MEN).commit();
             } else if (!swtMen.isChecked() && swtWomen.isChecked()) {
-                DatingApp.getsInstance().getSharedPreferences().edit().putInt(PREF.PREF_INTEREST, Constants.INTEREST_WOMEN).commit();
+                DatingApp.getsInstance().getSharedPreferences().edit().putInt(PREF.PREF_INTEREST_IN, Constants.INTEREST_WOMEN).commit();
             } else if (!swtMen.isChecked() && !swtWomen.isChecked()) {
-                DatingApp.getsInstance().getSharedPreferences().edit().putInt(PREF.PREF_INTEREST, Constants.INTEREST_NONE).commit();
+                DatingApp.getsInstance().getSharedPreferences().edit().putInt(PREF.PREF_INTEREST_IN, Constants.INTEREST_NONE).commit();
             }
         } else if (buttonView == swtNewMatch) {
             DatingApp.getsInstance().getSharedPreferences().edit().putBoolean(PREF.PREF_NEW_MATCH, isChecked).commit();
@@ -330,6 +331,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    private class AsyncSetting extends AsyncTask<Void,Void,Boolean>
+    {
 
     }
 }

@@ -30,6 +30,7 @@ import com.chatapp.placesautocomplete.DetailsCallback;
 import com.chatapp.placesautocomplete.OnPlaceSelectedListener;
 import com.chatapp.placesautocomplete.PlacesAutocompleteTextView;
 import com.chatapp.placesautocomplete.model.PlaceDetails;
+import com.chatapp.util.Constants;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
 import com.chatapp.view.HomeActivity;
@@ -155,7 +156,7 @@ public class SelectLocationFragment extends Fragment implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.getUiSettings().setMyLocationButtonEnabled(false);
-        if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_IS_CURRENT_LOCATION, true)) {
+        if (DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_IS_CURRENT_LOCATION, Constants.SHOW_CURRENT_LOCATION).equalsIgnoreCase(Constants.SHOW_CURRENT_LOCATION)) {
             crntLocationLatLng = new LatLng(DatingApp.getsInstance().getCurrentLocation().getLatitude(), DatingApp.getsInstance().getCurrentLocation().getLongitude());
         } else {
             Double lat = Double.parseDouble(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_PLACE_LAT, ""));

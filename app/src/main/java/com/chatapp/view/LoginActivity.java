@@ -310,29 +310,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 if (wsLogin.getSuccess() == Constants.RESPONSE_SUCCESS) {
                     SharedPreferences.Editor editor = DatingApp.getsInstance().getSharedPreferences().edit();
-                    editor.putString(PREF.PREF_USERID, example.getUid());
+                    editor.putString(PREF.PREF_USERID, example.getId());
                     editor.putString(PREF.PREF_USERNAME, example.getUsername());
                     editor.putBoolean(PREF.PREF_IS_LOGGED_IN, true);
                     if (isLoginwthFB) {
                         editor.putString(PREF.PREF_FB_ID, AccessToken.getCurrentAccessToken().getApplicationId());
                     }
-
+                    editor.putInt(PREF.PREF_INTEREST_IN, Integer.parseInt(example.getInterestedIn()));
                     editor.putString(PREF.PREF_PLACE_NAME, example.getLocation());
                     editor.putString(PREF.PREF_PLACE_LAT, example.getLat());
                     editor.putString(PREF.PREF_PLACE_LONG, example.getLong());
-                    if (example.getShowCurrentLocation().equalsIgnoreCase(Constants.ENABLE)) {
-                        editor.putBoolean(PREF.PREF_IS_CURRENT_LOCATION, true);
-                    } else {
-                        editor.putBoolean(PREF.PREF_IS_CURRENT_LOCATION, false);
-                    }
+                    editor.putString(PREF.PREF_IS_CURRENT_LOCATION, example.getShowCurrentLocation());
                     if (!TextUtils.isEmpty(example.getRadius()))
                         editor.putInt(PREF.PREF_MATCH_DISTANCE, Integer.parseInt(example.getRadius()));
                     if (!TextUtils.isEmpty(example.getMinage()))
                         editor.putInt(PREF.PREF_MIN_AGE, Integer.parseInt(example.getMinage()));
                     if (!TextUtils.isEmpty(example.getMaxage()))
                         editor.putInt(PREF.PREF_MAX_AGE, Integer.parseInt(example.getMaxage()));
-                    if (!TextUtils.isEmpty(example.getDistanceUnit()))
-                        editor.putString(PREF.PREF_DISTANCE_UNIT_KM, example.getMaxage());
+                    if (example.getDistanceUnit().equalsIgnoreCase(Constants.UNIT_KM)) {
+                        editor.putBoolean(PREF.PREF_DISTANCE_UNIT_KM, true);
+                    } else {
+                        editor.putBoolean(PREF.PREF_DISTANCE_UNIT_KM, false);
+                    }
 
                     if (example.getEnableNewMatch().equalsIgnoreCase(Constants.ENABLE)) {
                         editor.putBoolean(PREF.PREF_NEW_MATCH, true);
@@ -498,25 +497,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         customProgressDialog.dismiss();
                     }
                     SharedPreferences.Editor editor = DatingApp.getsInstance().getSharedPreferences().edit();
-                    editor.putString(PREF.PREF_USERID, example.getUid());
+                    editor.putString(PREF.PREF_USERID, example.getId());
                     editor.putString(PREF.PREF_USERNAME, example.getUsername());
+                    editor.putInt(PREF.PREF_INTEREST_IN, Integer.parseInt(example.getInterestedIn()));
                     editor.putBoolean(PREF.PREF_IS_LOGGED_IN, true);
                     editor.putString(PREF.PREF_PLACE_NAME, example.getLocation());
                     editor.putString(PREF.PREF_PLACE_LAT, example.getLat());
                     editor.putString(PREF.PREF_PLACE_LONG, example.getLong());
-                    if (example.getShowCurrentLocation().equalsIgnoreCase(Constants.ENABLE)) {
-                        editor.putBoolean(PREF.PREF_IS_CURRENT_LOCATION, true);
-                    } else {
-                        editor.putBoolean(PREF.PREF_IS_CURRENT_LOCATION, false);
-                    }
+                    editor.putString(PREF.PREF_IS_CURRENT_LOCATION, example.getShowCurrentLocation());
                     if (!TextUtils.isEmpty(example.getRadius()))
                         editor.putInt(PREF.PREF_MATCH_DISTANCE, Integer.parseInt(example.getRadius()));
                     if (!TextUtils.isEmpty(example.getMinage()))
                         editor.putInt(PREF.PREF_MIN_AGE, Integer.parseInt(example.getMinage()));
                     if (!TextUtils.isEmpty(example.getMaxage()))
                         editor.putInt(PREF.PREF_MAX_AGE, Integer.parseInt(example.getMaxage()));
-                    if (!TextUtils.isEmpty(example.getDistanceUnit()))
-                        editor.putString(PREF.PREF_DISTANCE_UNIT_KM, example.getMaxage());
+                    if (example.getDistanceUnit().equalsIgnoreCase(Constants.UNIT_KM)) {
+                        editor.putBoolean(PREF.PREF_DISTANCE_UNIT_KM, true);
+                    } else {
+                        editor.putBoolean(PREF.PREF_DISTANCE_UNIT_KM, false);
+                    }
 
                     if (example.getEnableNewMatch().equalsIgnoreCase(Constants.ENABLE)) {
                         editor.putBoolean(PREF.PREF_NEW_MATCH, true);
@@ -535,6 +534,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     } else {
                         editor.putBoolean(PREF.PREF_MESSAGE_SUPER_LIKE, false);
                     }
+
+                    editor.putInt(PREF.PREF_INTEREST_IN, Integer.parseInt(example.getInterestedIn()));
 
 
                     if (example.getEnableMessage().equalsIgnoreCase(Constants.ENABLE)) {

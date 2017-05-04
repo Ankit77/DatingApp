@@ -1,6 +1,7 @@
 package com.chatapp.view;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -23,6 +24,7 @@ import com.chatapp.DatingApp;
 import com.chatapp.R;
 import com.chatapp.dialog.CustomProgressDialog;
 import com.chatapp.model.UserBasicInfoModel;
+import com.chatapp.tutorial.activity.TutorialActivity;
 import com.chatapp.util.Constants;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
@@ -233,25 +235,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 if (wsRegister.getSuccess() == Constants.RESPONSE_SUCCESS) {
                     SharedPreferences.Editor editor = DatingApp.getsInstance().getSharedPreferences().edit();
-                    editor.putString(PREF.PREF_USERID, example.getUid());
+                    editor.putString(PREF.PREF_USERID, example.getId());
                     editor.putString(PREF.PREF_USERNAME, example.getUsername());
                     editor.putBoolean(PREF.PREF_IS_LOGGED_IN, true);
                     editor.putString(PREF.PREF_PLACE_NAME, example.getLocation());
                     editor.putString(PREF.PREF_PLACE_LAT, example.getLat());
                     editor.putString(PREF.PREF_PLACE_LONG, example.getLong());
-                    if (example.getShowCurrentLocation().equalsIgnoreCase(Constants.ENABLE)) {
-                        editor.putBoolean(PREF.PREF_IS_CURRENT_LOCATION, true);
-                    } else {
-                        editor.putBoolean(PREF.PREF_IS_CURRENT_LOCATION, false);
-                    }
+                    editor.putString(PREF.PREF_IS_CURRENT_LOCATION, example.getShowCurrentLocation());
                     if (!TextUtils.isEmpty(example.getRadius()))
                         editor.putInt(PREF.PREF_MATCH_DISTANCE, Integer.parseInt(example.getRadius()));
                     if (!TextUtils.isEmpty(example.getMinage()))
                         editor.putInt(PREF.PREF_MIN_AGE, Integer.parseInt(example.getMinage()));
                     if (!TextUtils.isEmpty(example.getMaxage()))
                         editor.putInt(PREF.PREF_MAX_AGE, Integer.parseInt(example.getMaxage()));
-                    if (!TextUtils.isEmpty(example.getDistanceUnit()))
-                        editor.putString(PREF.PREF_DISTANCE_UNIT_KM, example.getMaxage());
+                    if (example.getDistanceUnit().equalsIgnoreCase(Constants.UNIT_KM)) {
+                        editor.putBoolean(PREF.PREF_DISTANCE_UNIT_KM, true);
+                    } else {
+                        editor.putBoolean(PREF.PREF_DISTANCE_UNIT_KM, false);
+                    }
 
                     if (example.getEnableNewMatch().equalsIgnoreCase(Constants.ENABLE)) {
                         editor.putBoolean(PREF.PREF_NEW_MATCH, true);
@@ -270,7 +271,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     } else {
                         editor.putBoolean(PREF.PREF_MESSAGE_SUPER_LIKE, false);
                     }
-
+                    editor.putInt(PREF.PREF_INTEREST_IN, Integer.parseInt(example.getInterestedIn()));
 
                     if (example.getEnableMessage().equalsIgnoreCase(Constants.ENABLE)) {
                         editor.putBoolean(PREF.PREF_MESSAGE, true);
@@ -307,6 +308,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         editor.putString(PREF.PREF_PROFILE, example.getProfilePhoto());
 
                     editor.commit();
+                    Intent intent = null;
+                    if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_SHOW_TUTORIAL, true)) {
+                        intent = new Intent(RegisterActivity.this, TutorialActivity.class);
+
+                    } else {
+                        intent = new Intent(RegisterActivity.this, HomeActivity.class);
+
+                    }
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
+                    finish();
                 } else {
                     snackbar = Snackbar
                             .make(findViewById(R.id.layout_root), wsRegister.getMessage(), Snackbar.LENGTH_LONG)

@@ -1,6 +1,7 @@
 package com.chatapp.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.Util;
+import com.chatapp.DatingApp;
 import com.chatapp.R;
 import com.chatapp.model.SuggetionModel;
+import com.chatapp.model.dashboard.UserDetailModel;
 
 import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import jp.wasabeef.glide.transformations.internal.Utils;
 
 /**
  * Created by ANKIT on 4/1/2017.
@@ -22,10 +27,10 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class SuggetionAdapter extends BaseAdapter {
     Context context;
-    ArrayList<SuggetionModel> suggetionList;
+    ArrayList<UserDetailModel> suggetionList;
     private static LayoutInflater inflater = null;
 
-    public SuggetionAdapter(Context context, ArrayList<SuggetionModel> suggetionList) {
+    public SuggetionAdapter(Context context, ArrayList<UserDetailModel> suggetionList) {
         // TODO Auto-generated constructor stub
         this.suggetionList = suggetionList;
         this.context = context;
@@ -79,9 +84,20 @@ public class SuggetionAdapter extends BaseAdapter {
         }
         holder.tvName.setText(suggetionList.get(position).getName() + "," + suggetionList.get(position).getAge());
         holder.tvAddress.setText(suggetionList.get(position).getLocation());
-        holder.tvDistance.setText(suggetionList.get(position).getDistance());
-        holder.tvProfession.setText(suggetionList.get(position).getProfession());
-        Glide.with(context).load(suggetionList.get(position).getImageUrl()).placeholder(R.drawable.ic_placeholder).error(R.drawable.ic_placeholder)
+        String distance = com.chatapp.util.Utils.getDistanceinString(Double.parseDouble(suggetionList.get(position).getLat()), Double.parseDouble(suggetionList.get(position).getLong()), DatingApp.getsInstance().getCurrentLocation().getLatitude(), DatingApp.getsInstance().getCurrentLocation().getLongitude());
+        if (!TextUtils.isEmpty(distance)) {
+            holder.tvDistance.setText(distance);
+        }
+        if (TextUtils.isEmpty(suggetionList.get(position).getCurrentWork())) {
+            holder.tvProfession.setText("N/A");
+        } else {
+            holder.tvProfession.setText(suggetionList.get(position).getCurrentWork());
+        }
+//        if (suggetionList.get(position).getPhotos().size() > 0)
+//            Glide.with(context).load(suggetionList.get(position).getPhotos().get(0).getPhoto()).placeholder(R.drawable.ic_placeholder).error(R.drawable.ic_placeholder)
+//                    .bitmapTransform(new RoundedCornersTransformation(context, context.getResources().getDimensionPixelSize(R.dimen._2sdp), 0))
+//                    .into(holder.imgProfile);
+        Glide.with(context).load("https://lh6.googleusercontent.com/-55osAWw3x0Q/URquUtcFr5I/AAAAAAAAAbs/rWlj1RUKrYI/s1024/A%252520Photographer.jpg").placeholder(R.drawable.ic_placeholder).error(R.drawable.ic_placeholder)
                 .bitmapTransform(new RoundedCornersTransformation(context, context.getResources().getDimensionPixelSize(R.dimen._2sdp), 0))
                 .into(holder.imgProfile);
         return convertView;

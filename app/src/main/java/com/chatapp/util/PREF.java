@@ -18,7 +18,7 @@ public class PREF {
     public static final String PREF_PLACE_LONG = "PREF_PLACE_LONG";
     public static final String PREF_SHOW_TUTORIAL = "PREF_SHOW_TUTORIAL";
     public static final String PREF_IS_CURRENT_LOCATION = "PREF_IS_CURRENT_LOCATION";
-    public static final String PREF_INTEREST = "PREF_INTEREST";
+    public static final String PREF_INTEREST_IN = "PREF_INTEREST_IN";
     public static final String PREF_MATCH_DISTANCE = "PREF_MATCH_DISTANCE";
     public static final String PREF_MIN_AGE = "PREF_MIN_AGE";
     public static final String PREF_MAX_AGE = "PREF_MAX_AGE";

@@ -36,6 +36,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chatapp.DatingApp;
 import com.chatapp.R;
 
 import org.json.JSONObject;
@@ -957,5 +958,30 @@ public class Utils {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public static String getDistanceinString(double src_lat, double src_long, double dest_lat, double dest_long) {
+        try {
+            Location locationA = new Location("point A");
+
+            locationA.setLatitude(src_lat);
+            locationA.setLongitude(src_long);
+
+            Location locationB = new Location("point B");
+
+            locationB.setLatitude(dest_lat);
+            locationB.setLongitude(dest_long);
+
+            float distance = locationA.distanceTo(locationB);
+            if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_DISTANCE_UNIT_KM, true)) {
+                return "" + distance / 1000 + " km";
+            } else {
+                return "" + (float) ((distance / 1000) * 0.000621371192) + " mi";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

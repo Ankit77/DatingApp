@@ -9,6 +9,9 @@ public class Constants {
     public static final int RESPONSE_SUCCESS = 1;
     public static final int RESPONSE_FAIL = 0;
 
+    public static final String SHOW_CURRENT_LOCATION = "1";
+    public static final String SHOW_OTHER_LOCATION = "2";
+
     public static final String ENABLE = "1";
     public static final String DISABLE = "0";
     public static final String USER_EXIST = "USER_EXIST";

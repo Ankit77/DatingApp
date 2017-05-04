@@ -128,9 +128,9 @@ public class UserDetailModel {
     @SerializedName("location")
     @Expose
     private String location;
-    @SerializedName("photos")
-    @Expose
-    private List<Photo> photos = null;
+//    @SerializedName("photos")
+//    @Expose
+//    private List<Photo> photos = null;
 
     public String getId() {
         return id;
@@ -452,12 +452,12 @@ public class UserDetailModel {
         this.location = location;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
+//    public List<Photo> getPhotos() {
+//        return photos;
+//    }
+//
+//    public void setPhotos(List<Photo> photos) {
+//        this.photos = photos;
+//    }
 
 }

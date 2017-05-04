@@ -37,4 +37,15 @@
         app:card_gravity="top"
         app:card_stack_size="4" />
 
+    <com.chatapp.common.CustomTextView
+        android:id="@+id/fragment_suggetion_tv_nodata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="No More Suggetion available"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/_18sdp"
+        app:font="@string/font_OpenSans_Bold"
+        android:visibility="gone"/>
+
 </com.chatapp.common.SlidingFrameLayout>
