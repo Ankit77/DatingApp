@@ -1,6 +1,9 @@
 package com.chatapp.fragment;
 
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -22,10 +25,12 @@ import android.widget.TextView;
 
 import com.chatapp.DatingApp;
 import com.chatapp.R;
+import com.chatapp.dialog.CustomProgressDialog;
 import com.chatapp.util.Constants;
 import com.chatapp.util.PREF;
 import com.chatapp.util.Utils;
 import com.chatapp.view.HomeActivity;
+import com.chatapp.webservice.WSSetting;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarFinalValueListener;
@@ -59,6 +64,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
     private Button btnLogout;
     private Button btnDeleteAccount;
     private boolean isBackEnable;
+    private CustomProgressDialog customProgressDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,6 +123,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
         swtMessage.setChecked(DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_MESSAGE, true));
         swtMessageLike.setChecked(DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_MESSAGE_LIKE, true));
         swtMessageSuperLike.setChecked(DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_MESSAGE_SUPER_LIKE, true));
+
         if (DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_IS_CURRENT_LOCATION,Constants.SHOW_CURRENT_LOCATION).equalsIgnoreCase(Constants.SHOW_CURRENT_LOCATION)) {
             chkCurrentLocation.setChecked(true);
             chkOtherLocation.setChecked(false);
@@ -132,7 +139,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
             llOtherLocationview.setVisibility(View.GONE);
             chkCurrentLocation.setVisibility(View.GONE);
         }
+
         tvOtherLocation.setText(DatingApp.getsInstance().getSharedPreferences().getString(PREF.PREF_PLACE_NAME, getString(R.string.default_selectlocation)));
+
         if (DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_INTEREST_IN, 0) == Constants.INTEREST_MEN) {
             swtMen.setChecked(true);
             swtWomen.setChecked(false);
@@ -146,11 +155,13 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
             swtMen.setChecked(false);
             swtWomen.setChecked(false);
         }
+
         if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_DISTANCE_UNIT_KM, false)) {
             tvMatchDistance.setText(String.valueOf(DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_MATCH_DISTANCE, Constants.DEFULT_DISTANCE)) + " " + Constants.UNIT_KM);
         } else {
             tvMatchDistance.setText(String.valueOf(DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_MATCH_DISTANCE, Constants.DEFULT_DISTANCE)) + " " + Constants.UNIT_MI);
         }
+
         //set min max value of seekbar
         sbDistance.setMinValue(Constants.MIN_DISTANCE).apply();
         if (DatingApp.getsInstance().getSharedPreferences().getBoolean(PREF.PREF_DISTANCE_UNIT_KM, false)) {
@@ -158,6 +169,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
         } else {
             sbDistance.setMaxValue(Constants.MAX_DISTANCE_MI).apply();
         }
+
         sbDistance.setOnSeekbarFinalValueListener(new OnSeekbarFinalValueListener() {
             @Override
             public void finalValue(Number value) {
@@ -169,6 +181,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
                 DatingApp.getsInstance().getSharedPreferences().edit().putInt(PREF.PREF_MATCH_DISTANCE, value.intValue()).commit();
             }
         });
+
         sbDistance.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
             @Override
             public void valueChanged(Number value) {
@@ -179,7 +192,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
                 }
             }
         });
+
         sbDistance.setMinStartValue(DatingApp.getsInstance().getSharedPreferences().getInt(PREF.PREF_MATCH_DISTANCE, Constants.DEFULT_DISTANCE)).apply();
+
         rgDistanceUnit.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -334,4 +349,34 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
     }
 
 
+    private class AsyncSetting extends AsyncTask<String,Void,Boolean>
+    {
+        private WSSetting wsSetting;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            customProgressDialog=new CustomProgressDialog(getActivity());
+            customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            customProgressDialog.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+
+            wsSetting=new WSSetting();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if(!isCancelled())
+            {
+                if(customProgressDialog!=null && customProgressDialog.isShowing())
+                {
+
+                }
+            }
+        }
+    }
 }

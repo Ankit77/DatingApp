@@ -379,7 +379,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         editor.putString(PREF.PREF_NAME, example.getName());
 
                     if (!TextUtils.isEmpty(example.getLocation()))
-                        editor.putString(PREF.PREF_LOCATION, example.getLocation());
+                        editor.putString(PREF.PREF_USER_CURRENT_LOCATION, example.getLocation());
 
                     if (!TextUtils.isEmpty(example.getAge()))
                         editor.putString(PREF.PREF_AGE, example.getAge());
@@ -565,7 +565,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         editor.putString(PREF.PREF_NAME, example.getName());
 
                     if (!TextUtils.isEmpty(example.getLocation()))
-                        editor.putString(PREF.PREF_LOCATION, example.getLocation());
+                        editor.putString(PREF.PREF_USER_CURRENT_LOCATION, example.getLocation());
 
                     if (!TextUtils.isEmpty(example.getAge()))
                         editor.putString(PREF.PREF_AGE, example.getAge());

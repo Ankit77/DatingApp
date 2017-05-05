@@ -5,7 +5,8 @@ public class PREF {
     public static final String PREF_USERID = "PREF_USERID";
     public static final String PREF_USERNAME = "username";
     public static final String PREF_NAME = "PREF_NAME";
-    public static final String PREF_LOCATION = "PREF_LOCATION";
+    public static final String PREF_USER_SEARCH_LOCATION = "PREF_USER_SEARCH_LOCATION";
+    public static final String PREF_USER_CURRENT_LOCATION = "PREF_USER_CURRENT_LOCATION";
     public static final String PREF_AGE = "PREF_AGE";
     public static final String PREF_PASSWORD = "password";
     public static final String PREF_PROFILE = "profile";
