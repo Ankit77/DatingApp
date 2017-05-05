@@ -228,9 +228,8 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
             overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
             finish();
 
-//            new AsyncLogin().execute("adkhatri12@gmail.com", "ankit11112");
+
         }
     };
-
 
 }

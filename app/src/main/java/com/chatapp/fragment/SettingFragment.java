@@ -1,7 +1,6 @@
 package com.chatapp.fragment;
 
 import android.app.Fragment;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -334,8 +333,5 @@ public class SettingFragment extends Fragment implements View.OnClickListener, C
 
     }
 
-    private class AsyncSetting extends AsyncTask<Void,Void,Boolean>
-    {
 
-    }
 }
